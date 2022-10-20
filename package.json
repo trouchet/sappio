@@ -2,7 +2,7 @@
   "name": "sappio",
   "type": "module",
   "version": "1.0.0",
-  "description": "A logging app with router, swagger and cleaning tools",
+  "description": "A minimal node app with logging.",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -16,15 +16,13 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/web-thread/sappio/issues"
-  },
+  }, 
   "homepage": "https://github.com/web-thread/sappio#readme",
   "scripts": {
-    "initial-setup": "npm install",
-    "report": "journalctl -u sappio.service",
-    "restart": "systemctl restart sappio.service",
-    "deploy": "systemctl restart sappio.service",
-    "update": "bash ./utils/sscripts/update.sh",
+    "docker:build-up": "sudo docker build -t sappio .&& sudo docker run -p 8080:8080 -d sappio",
+    "docker:watch": "./utils/scripts/docker-watch.sh $1",
     "start": "nodemon ./src/index.js",
+    "update": "bash ./utils/sscripts/update.sh",
     "test": "jest --coverage",
     "test:watch": "jest --watchAll --coverage",
     "test:ci": "jest --ci --reporters='default' --reporters='./github-actions-reporter'",
@@ -33,9 +31,6 @@
     "fixable-nibble": "npx eslint-nibble --fixable-only ."
   },
   "devDependencies": {
-    "@babel/eslint-parser": "7.19.1",
-    "@babel/plugin-transform-runtime": "7.19.6",
-    "@babel/preset-env": "7.19.4",
     "@types/jest": "28.1.8",
     "@typescript-eslint/eslint-plugin": "5.40.1",
     "@typescript-eslint/parser": "5.40.1",
@@ -58,6 +53,7 @@
     "npm": ">=6.9.0"
   },
   "dependencies": {
-    "dot-quiver": "^6.0.1"
+    "helmet": "^6.0.0",
+    "quivero-api": "^6.0.4"
   }
 }
