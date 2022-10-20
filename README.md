@@ -6,9 +6,7 @@ A logging app with router, swagger and cleaning tools
 ## Table of contents
 
 1. [How to run](#how-to-run)
-2. [Featured](#featured)
-3. [Backlog](#backlog)
-4. [Prelude](#prelude)
+2. [Backlog](#backlog)
 
 ## How to run
 
