@@ -2,11 +2,9 @@ import express from 'express';
 
 import { 
   morganMiddleware,
+  agentMorganReporter,
+  log_message,
 } from 'quivero-api/utils/logging/logger.js';
-
-import { 
-  statusMW,
-} from './middlewares/status.js';
 
 import helmet from "helmet";
 
@@ -33,6 +31,6 @@ app.use(helmet());
 const APP_PORT = process.env.PORT || 8080;
 
 app.listen(APP_PORT, () => {
-  console.log(`Listening on port: ${APP_PORT}`);
+  log_message(agentMorganReporter, 'info', `Listening on port: ${APP_PORT}`);
 });
 
