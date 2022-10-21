@@ -1,14 +1,21 @@
 #!/bin/bash
 
 if [[ $# -eq 0 ]];
-	then echo "[docker-watch] Docker container ID not supplied" 
+	then echo "Container image name not supplied" 
 elif docker ps -a | grep -qw "$1"; then
-	if [[ ${#1} -eq 12 ]]; then
-		sudo docker logs --follow $1
+	
+	if [[ $(docker ps -a | grep -w $1 | wc -l) -eq 1  ]]; then
+		container_id=$(docker ps -a | grep -w $1 | head -n1 | awk '{print $1;}');
+		
+		echo "Container image $IMAGE_NAME with ID $container_id exists!"
+		docker logs --follow $container_id
 	else
-		echo "[docker-watch] No such container $1" 
+		echo "We found more than one container with name $IMAGE_NAME."
+		echo $(docker ps -a | grep -w $1)
+		echo "We recommend you to watch it manually with command: "
+		echo "./utils/scripts/docker-watch.sh IMAGE_NAME"
 	fi;
 
 else
-	echo "[docker-watch] No such container $1" 
+	echo " No such container $1" 
 fi;
