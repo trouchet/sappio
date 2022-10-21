@@ -13,7 +13,7 @@ A logging app with logging
 
 You may utilize some cloud service to host the app, like AWS EC2, Azure or GCloud, but also we might run locally. 
 
-We use the docker for build and run the application with ```npm run``` command below:
+We use [Docker](https://docs.docker.com/) for build and run the application with ```npm run``` command below:
     
 ```>>> npm run docker:deploy IMAGE-NAME```
 
