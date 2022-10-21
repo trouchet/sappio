@@ -6,8 +6,8 @@ A logging app with logging
 ## Table of contents
 
 1. [How to run](#how-to-run)
-2. [Backlog](#backlog)
-3. [How to stop/remove](#how-to-stop/remove-service)
+2. [How to stop/remove](#how-to-stop/remove-service)
+3. [Backlog](#backlog)
 
 ## How to run
 
