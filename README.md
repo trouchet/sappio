@@ -1,36 +1,37 @@
 # sappio - a minimal node app with logging
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 
-A logging app with router, swagger and cleaning tools
+A logging app with logging
 
 ## Table of contents
 
 1. [How to run](#how-to-run)
 2. [Backlog](#backlog)
+3. [## How to stop/remove service](#how-to-stop/remove-service)
 
 ## How to run
 
-You may utilize some cloud service to host the app, like AWS, Azure or GCloud, but in this case you might run locally. You can use the docker file by building and running the application with commands below
+You may utilize some cloud service to host the app, like AWS EC2, Azure or GCloud, but also we might run locally. 
+
+We use the docker for build and run the application with ```npm run``` command below:
     
 ```>>> npm run docker:deploy IMAGE-NAME```
 
-To host it locally, you must follow the instructions below:
+## How to stop/remove service
 
-1) Clone the repository typing on terminal `git clone git@github.com:dot-quiver/dot-quiver-api.git`;
-2) Run the commands:
-    
-    2.1. `npm install`: install local dependencies;
-    
-    2.2. `npm start`: run the server locally;
+You must follow the instructions below to stop and remove the service on docker deamon:
 
-3) Open a browser;
-4) Type `localhost:8080` on the URL field;
+1) Run the command ```docker ps -a```;
+2) Identify container id for deployed ```IMAGE-NAME```. We call it here CONTAINER-ID
+3) Run command ```docker stop CONTAINER-ID && docker rm CONTAINER-ID```; 
+
+We will not see the deployed app by command run ```docker ps -a```. 
 
 ## Backlog
 
 I plan to:
 
-1. add some other routes for educational purposes;
+1. Add some other routes for educational purposes;
 2. Provide automatic route explanations, also called a `swagger`.
 
 
