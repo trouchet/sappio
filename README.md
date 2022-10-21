@@ -17,8 +17,8 @@ You may utilize some cloud service to host the app, like AWS EC2, Azure or GClou
 We use [Docker](https://docs.docker.com/) for build and run the application with ```npm run``` command below:
 
 ```
-	>>> npm run docker:clean --tag=IMAGE-NAME
-	>>> npm run docker:deploy --tag=IMAGE-NAME --from=8080 --to=8080
+>>> npm run docker:clean --tag=IMAGE-NAME
+>>> npm run docker:deploy --tag=IMAGE-NAME --from=8080 --to=8080
 ```
 
 
