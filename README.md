@@ -1,7 +1,7 @@
 # sappio - a minimal node app with logging
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 
-A logging app with logging
+A simple logging app.
 
 ## Table of contents
 
@@ -15,18 +15,16 @@ A logging app with logging
 You may utilize some cloud service to host the app, like AWS EC2, Azure or GCloud, but also we might run locally. 
 
 We use [Docker](https://docs.docker.com/) for build and run the application with ```npm run``` command below:
-    
-```>>> npm run docker:deploy --tag=IMAGE-NAME --from=8080 --to=8080```
 
-## How to stop/remove service
+```>>> npm run docker:clean --tag=IMAGE-NAME && npm run docker:deploy --tag=IMAGE-NAME --from=8080 --to=8080```
+
+## How to stop/remove
 
 You must follow the instructions below to stop and remove the service on docker daemon:
 
-1) Run the command ```docker ps -a```;
-2) Identify container id for deployed ```IMAGE-NAME```. We call it here ```CONTAINER-ID```
-3) Run command ```docker stop CONTAINER-ID && docker rm CONTAINER-ID```; 
+```>>> npm run docker:clean --tag=IMAGE-NAME```
 
-We will not see the deployed app by command run ```docker ps -a```. 
+After command run, we will not see the deployed app by command run ```docker ps -a``` anymore. 
 
 ## Logging
 
