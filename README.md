@@ -12,7 +12,7 @@ A logging app with router, swagger and cleaning tools
 
 You may utilize some cloud service to host the app, like AWS, Azure or GCloud, but in this case you might run locally. You can use the docker file by building and running the application with commands below
     
-    ```>>> npm run docker:deploy IMAGE-NAME```
+```>>> npm run docker:deploy IMAGE-NAME```
 
 To host it locally, you must follow the instructions below:
 
