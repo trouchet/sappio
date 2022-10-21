@@ -4,7 +4,7 @@ ADD . ./
 
 RUN npm install --quiet
 
-RUN npm audit fixx --force
+RUN npm audit fix --force
 
 WORKDIR /usr/app
 

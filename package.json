@@ -16,10 +16,11 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/web-thread/sappio/issues"
-  }, 
+  },
   "homepage": "https://github.com/web-thread/sappio#readme",
   "scripts": {
-    "docker:build-up": "sudo docker build -t sappio .&& sudo docker run -p 8080:8080 -d sappio",
+    "echo": "echo \"$npm_config_text\"",
+    "docker:build": "sudo docker build -t $npm_config_tag .",
     "docker:watch": "./utils/scripts/docker-watch.sh $1",
     "start": "nodemon ./src/index.js",
     "update": "bash ./utils/sscripts/update.sh",
@@ -53,6 +54,8 @@
     "npm": ">=6.9.0"
   },
   "dependencies": {
+    "@logtail/node": "^0.1.12",
+    "@logtail/winston": "^0.1.13",
     "helmet": "^6.0.0",
     "quivero-api": "^6.0.4"
   }
