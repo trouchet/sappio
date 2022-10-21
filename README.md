@@ -7,7 +7,8 @@ A logging app with logging
 
 1. [How to run](#how-to-run)
 2. [How to stop/remove](#how-to-stop/remove-service)
-3. [Backlog](#backlog)
+3. [Logging](#logging)
+4. [Backlog](#backlog)
 
 ## How to run
 
@@ -26,6 +27,10 @@ You must follow the instructions below to stop and remove the service on docker 
 3) Run command ```docker stop CONTAINER-ID && docker rm CONTAINER-ID```; 
 
 We will not see the deployed app by command run ```docker ps -a```. 
+
+## Logging
+
+At first, we direct logs to console. The full logging experience happens by sign-up to [LogTail](https://betterstack.com/logtail) and adequate environment variable ```.env``` fill up with row ```LOGTAIL_TOKEN=XXXXX```. The string ```XXXXX``` refers to respective provided token string.
 
 ## Backlog
 
