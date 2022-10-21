@@ -19,9 +19,9 @@
   },
   "homepage": "https://github.com/web-thread/sappio#readme",
   "scripts": {
-    "docker:watch": "./utils/scripts/docker-watch.sh $npm_config_containerid",
     "docker:clean": "./utils/scripts/docker-clean.sh $npm_config_tag",
     "docker:deploy": "./utils/scripts/docker-deploy.sh $npm_config_tag $npm_config_from $npm_config_to",
+    "docker:watch": "./utils/scripts/docker-watch.sh $npm_config_containerid",
     "start": "nodemon ./src/index.js",
     "nibble": "npx eslint-nibble .",
     "fixable-nibble": "npx eslint-nibble --fixable-only ."
