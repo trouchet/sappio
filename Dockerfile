@@ -4,8 +4,6 @@ ADD . ./
 
 RUN npm install --quiet
 
-RUN npm audit fix --force
-
 WORKDIR /usr/app
 
 COPY package.json .
