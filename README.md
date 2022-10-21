@@ -11,8 +11,8 @@ A logging app with router, swagger and cleaning tools
 ## How to run
 
 You may utilize some cloud service to host the app, like AWS, Azure or GCloud, but in this case you might run locally. You can use the docker file by building and running the application with commands below
-
-```>>> npm run docker:build-up```
+    
+    ```>>> npm run docker:deploy IMAGE-NAME```
 
 To host it locally, you must follow the instructions below:
 
@@ -28,6 +28,9 @@ To host it locally, you must follow the instructions below:
 
 ## Backlog
 
-I plan to add some other routes for educational purposes and its explanations, also called a `swagger`.
+I plan to:
+
+1. add some other routes for educational purposes;
+2. Provide automatic route explanations, also called a `swagger`.
 
 
