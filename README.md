@@ -7,7 +7,7 @@ A logging app with logging
 
 1. [How to run](#how-to-run)
 2. [Backlog](#backlog)
-3. [## How to stop/remove service](#how-to-stop/remove-service)
+3. [How to stop/remove](#how-to-stop/remove-service)
 
 ## How to run
 
