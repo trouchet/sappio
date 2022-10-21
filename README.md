@@ -18,7 +18,7 @@ We use [Docker](https://docs.docker.com/) for build and run the application with
 
 ```
 	>>> npm run docker:clean --tag=IMAGE-NAME
-	>>>  npm run docker:deploy --tag=IMAGE-NAME --from=8080 --to=8080
+	>>> npm run docker:deploy --tag=IMAGE-NAME --from=8080 --to=8080
 ```
 
 
