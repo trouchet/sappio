@@ -19,7 +19,7 @@ We use [Docker](https://docs.docker.com/) for build and run the application with
 
 ## How to stop/remove service
 
-You must follow the instructions below to stop and remove the service on docker deamon:
+You must follow the instructions below to stop and remove the service on docker daemon:
 
 1) Run the command ```docker ps -a```;
 2) Identify container id for deployed ```IMAGE-NAME```. We call it here ```CONTAINER-ID```
