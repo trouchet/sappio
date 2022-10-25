@@ -19,12 +19,18 @@
   },
   "homepage": "https://github.com/web-thread/sappio#readme",
   "scripts": {
-    "docker:clean": "./utils/scripts/docker-clean.sh $npm_config_tag",
+    "build": "npm run node:build && npm run docker:build", 
+    "migrations": "knex --env ${KNEX_ENV} --knexfile knexfile.js migrate:latest",
+    "migrations:local": "export KNEX_ENV=test && npm run migrations",
+    "node:build": "./utils/scripts/node-build.sh",
+    "docker:build": "./utils/scripts/docker-build.sh",
     "docker:deploy": "./utils/scripts/docker-deploy.sh $npm_config_tag $npm_config_from $npm_config_to",
-    "docker:watch": "./utils/scripts/docker-watch.sh $npm_config_tag",
+    "docker:watch": "./utils/scripts/docker-deploy.sh $npm_config_tag",
+    "update": "bash ./utils/scripts/update.sh",
     "start": "nodemon ./src/index.js",
     "nibble": "npx eslint-nibble .",
-    "fixable-nibble": "npx eslint-nibble --fixable-only ."
+    "fixable-nibble": "npx eslint-nibble --fixable-only .",
+    "get-version": "echo $npm_package_version"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "5.40.1",
