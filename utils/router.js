@@ -1,27 +1,21 @@
 import express from 'express';
 import helmet from 'helmet';
 
-import * as dotenv from 'dotenv';
-
-import {
-  morganMiddleware,
-  agentMorganReporter,
-  log_message,
-} from 'quivero-api/utils/logging/logger.js';
-
 import { Logtail } from '@logtail/node';
 import { LogtailTransport } from '@logtail/winston';
 
-dotenv.config();
+import {
+  morganMiddleware,
+  log_message,
+} from 'quivero-api/utils/logging/logger.js';
 
-// Use winston agent to report for Logtail
-if (process.env.LOGTAIL_TOKEN) {
-  const logtail = new Logtail(process.env.LOGTAIL_TOKEN);
+import {
+  errorsMiddleware
+} from './middlewares.js';
 
-  agentMorganReporter.add(
-    new LogtailTransport(logtail),
-  );
-}
+import {
+  logger
+} from './logger.js';
 
 export const app = express();
 
@@ -43,11 +37,11 @@ app.use(helmet());
 // [END logger]
 
 // Listen to the App Engine-specified port, or 8080 otherwise
-const APP_PORT = process.env.PORT || 8080;
+const APP_PORT = process.env.APP_PORT || 8080;
 
 app.listen(
   APP_PORT,
   () => {
-    log_message(agentMorganReporter, 'info', `Listening on port: ${APP_PORT}`);
+    log_message(logger, 'info', `Listening on port: ${APP_PORT}`);
   },
 );
