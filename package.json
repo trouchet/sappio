@@ -50,8 +50,11 @@
   "dependencies": {
     "@logtail/node": "^0.1.12",
     "@logtail/winston": "^0.1.13",
+    "express-rate-limit": "^6.6.0",
+    "express-title": "^0.1.0",
     "helmet": "^6.0.0",
     "lodash": "^4.17.21",
-    "quivero-api": "^6.0.4"
+    "quivero-api": "^6.0.4",
+    "serve-favicon": "^2.5.0"
   }
 }
