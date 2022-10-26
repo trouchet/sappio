@@ -1,7 +1,22 @@
 version: '3'
 
 services:
-  sappio:
-    build: .
+  app:
+    image: node:16.15
+    environment:
+      KNEX_ENV: docker
+    restart: on-failure:10 # necessary due to possibility of postgres not being ready when service runs
+    command: bash -c " npm install && npm run migrations"
     ports:
       - 8080:8080
+
+  postgres:
+    image: postgres:14.5
+    container_name: sappio_db
+    restart: always
+    environment:
+      POSTGRES_USER: docker_username
+      POSTGRES_PASSWORD: docker_password
+      POSTGRES_DB: sappio_db
+    ports:
+      - 5432:5432
