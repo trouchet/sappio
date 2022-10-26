@@ -3,7 +3,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import path from 'path'
-const BASE_PATH = process.cwd()+"db";
+
+const BASE_PATH = process.cwd()+"/"+"db";
 
 const docker_connection = {
   connection: {
@@ -45,7 +46,7 @@ const base_knex_env_config = {
   }
 }
 
-const knex_config = {
+export const knex_config = {
   docker: {
             ...base_knex_env_config, 
             connection: docker_connection
