@@ -1,6 +1,7 @@
 import {
   morganMiddleware,
   agentMorganReporter,
+  log_message
 } from 'quivero-api/utils/logging/logger.js';
 
 import { Logtail } from '@logtail/node';
@@ -19,5 +20,7 @@ if (process.env.LOGTAIL_TOKEN) {
   agentMorganReporter.add(new LogtailTransport(logtail));
 }
 
+
 export const logger = agentMorganReporter
 
+export const log = (type, msg) => log_message(logger, type, msg);

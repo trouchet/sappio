@@ -1,10 +1,8 @@
-import { logger } from './logger.js'
+import { log, logger } from './logger.js'
 import { log_message, } from 'quivero-api/utils/logging/logger.js';
 
 const timeHierarchy = ['second', 'minute', 'hour', 'day', 'week', 'month', 'year']
 const timeScaler = [60, 60, 24, 7, 30, 12]
-
-const log = (type, msg) => log_message(logger, type, msg);
 
 export const convertTimeDouble = (value, from, to) => {
 	const fromIndex = timeHierarchy.indexOf(from);
