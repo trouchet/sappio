@@ -1,7 +1,5 @@
-# sappio - a minimal NodeJS app with logging
+# ![sappio3](https://user-images.githubusercontent.com/13961685/198164606-233134d5-37d0-4a55-a920-165816966f3b.png) sappio
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
-
-![sappio3](https://user-images.githubusercontent.com/13961685/198163370-0f238418-71aa-44e8-86fe-bc689161b444.png)
 
 A simple logging app.
 
@@ -41,6 +39,6 @@ At first, we direct logs to console. The full logging experience happens by sign
 I plan to:
 
 1. Add some other routes for educational purposes;
-2. Provide automatic route explanations, also called a `swagger`.
+2. 
 
 
