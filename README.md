@@ -1,7 +1,7 @@
 # sappio - a minimal NodeJS app with logging
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 
-![sappio3](https://user-images.githubusercontent.com/13961685/198163290-464c98f8-5aa6-4844-ba98-4ffe9cf7350f.png)
+![sappio3](https://user-images.githubusercontent.com/13961685/198163370-0f238418-71aa-44e8-86fe-bc689161b444.png)
 
 A simple logging app.
 
