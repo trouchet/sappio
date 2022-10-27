@@ -1,8 +1,3 @@
 // [START app]
-import { app } from './utils/router.js';
+import { app } from './core/server.js';
 
-app.get('/', (req, res) => {
-  res.send('Hi! :)');
-});
-
-// [END app]

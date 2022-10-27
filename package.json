@@ -19,29 +19,32 @@
   },
   "homepage": "https://github.com/web-thread/sappio#readme",
   "scripts": {
+    "start": "nodemon ./index.js",
     "build": "npm run node:build && npm run docker:build",
+    "update": "bash ./scripts/update.sh",
     "migrations": "knex --env ${KNEX_ENV} --knexfile knexfile.js migrate:latest",
     "migrations:local": "export KNEX_ENV=test && npm run migrations",
-    "node:build": "./utils/scripts/node-build.sh",
-    "docker:build": "./utils/scripts/docker-build.sh",
-    "docker:deploy": "./utils/scripts/docker-deploy.sh $npm_config_tag $npm_config_from $npm_config_to",
-    "docker:watch": "./utils/scripts/docker-deploy.sh $npm_config_tag",
-    "update": "bash ./utils/scripts/update.sh",
-    "start": "nodemon ./src/index.js",
+    "node:build": "./scripts/node-build.sh",
+    "docker:build": "./scripts/docker-build.sh",
+    "docker:deploy": "./scripts/docker-deploy.sh $npm_config_tag $npm_config_from $npm_config_to",
+    "docker:watch": "./scripts/docker-deploy.sh $npm_config_tag",
+    "swagger-autogen": "node ./utils/index.js",
     "nibble": "npx eslint-nibble .",
     "fixable-nibble": "npx eslint-nibble --fixable-only .",
     "get-version": "echo $npm_package_version"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "5.40.1",
-    "@typescript-eslint/parser": "5.40.1",
-    "eslint": "8.25.0",
+    "@typescript-eslint/eslint-plugin": "5.41.0",
+    "@typescript-eslint/parser": "5.41.0",
+    "eslint": "8.26.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-google": "0.14.0",
     "eslint-nibble": "^8.1.0",
     "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-jest": "27.1.1",
-    "eslint-scope": "7.1.1"
+    "eslint-plugin-jest": "27.1.3",
+    "eslint-scope": "7.1.1",
+    "swagger-autogen": "^2.22.0",
+    "swagger-jsdoc": "^6.2.5"
   },
   "engines": {
     "node": " >=16.0.0",
@@ -55,6 +58,7 @@
     "helmet": "^6.0.0",
     "lodash": "^4.17.21",
     "quivero-api": "^6.0.4",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "swagger-ui-express": "^4.5.0"
   }
 }
