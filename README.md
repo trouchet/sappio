@@ -1,4 +1,4 @@
-# ![sappio3](https://user-images.githubusercontent.com/13961685/198164606-233134d5-37d0-4a55-a920-165816966f3b.png) sappio
+# <a>![sappio3](https://user-images.githubusercontent.com/13961685/198164606-233134d5-37d0-4a55-a920-165816966f3b.png)<\a> sappio
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 
 A simple logging app.
