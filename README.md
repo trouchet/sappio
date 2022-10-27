@@ -39,6 +39,5 @@ At first, we direct logs to console. The full logging experience happens by sign
 I plan to:
 
 1. Add some other routes for educational purposes;
-2. 
 
 
