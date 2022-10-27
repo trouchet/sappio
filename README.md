@@ -1,4 +1,5 @@
-# ![sappio3](https://user-images.githubusercontent.com/13961685/198164606-233134d5-37d0-4a55-a920-165816966f3b.png) sappio
+# ![sappio_title](https://user-images.githubusercontent.com/13961685/198166716-c03d22bd-220e-42d4-a036-95fa9e21407f.png)
+
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 
 A simple logging app.
@@ -20,7 +21,10 @@ We use [Docker](https://docs.docker.com/) for build and run the application with
 >>> npm run docker:clean --tag=IMAGE-NAME
 >>> npm run docker:deploy --tag=IMAGE-NAME --from=8080 --to=8080
 ```
+## How to define routes
 
+We utilize library [swagger-jsdoc](https://www.npmjs.com/package/swagger-jsdoc) to interpret the comments near to routes. However, the documentation on library
+[swagger-autogen](https://www.npmjs.com/package/swagger-autogen#schema-and-definitions) is useful for route extension. We define the swagger route on ```$host/api-docs```
 
 ## How to stop/remove
 
