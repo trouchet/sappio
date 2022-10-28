@@ -9,6 +9,12 @@ import { middlewares } from './middlewares/bundler.js'
 
 const app = express();
 
+app.set("views", process.cwd()+"/core/views");
+app.set("view engine", "pug");
+app.use(
+  express.static(process.cwd()+"/public")
+);
+
 // Swagger middleware
 router.use(
   '/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec)
