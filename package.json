@@ -25,6 +25,7 @@
     "migrations": "knex --env ${KNEX_ENV} --knexfile knexfile.js migrate:latest",
     "migrations:local": "export KNEX_ENV=test && npm run migrations",
     "node:build": "./scripts/node-build.sh",
+    "docker:clean": "./scripts/docker-clean.sh $npm_config_tag",
     "docker:build": "./scripts/docker-build.sh",
     "docker:deploy": "./scripts/docker-deploy.sh $npm_config_tag $npm_config_from $npm_config_to",
     "docker:watch": "./scripts/docker-deploy.sh $npm_config_tag",
