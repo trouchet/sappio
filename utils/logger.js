@@ -38,13 +38,6 @@ const {
   };
 */
 
-// Use winston agent to report for Logtail
-if (process.env.LOGTAIL_TOKEN) {
-  const logtail = new Logtail(process.env.LOGTAIL_TOKEN);
-
-  agentMorganReporter.add(new LogtailTransport(logtail));
-}
-
 /**
  * @abstract Log to defined transports
  *
@@ -82,6 +75,13 @@ export const log_message = (logger__, level, message) => {
 };
 
 export const agentMorganReporter = logging('morgan');
+
+// Use winston agent to report for Logtail
+if (process.env.LOGTAIL_TOKEN) {
+  const logtail = new Logtail(process.env.LOGTAIL_TOKEN);
+
+  agentMorganReporter.add(new LogtailTransport(logtail));
+}
 
 const morgan_format = json(
   ':method :url :status :res[content-length] bytes :response-time ms'
