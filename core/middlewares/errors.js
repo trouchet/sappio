@@ -1,3 +1,5 @@
+import { log } from '../../utils/logger.js';
+
 // Error handling Middleware functions
 const errorLogger = (error, req, res, next) => {
   log('error', `error ${error.message}`) 
@@ -14,13 +16,7 @@ const errorResponder = (error, req, res, next) => {
   log('error', error.message)
 }
 
-const invalidRouteHandler = (req, res, next) => {
-  res.status(400)
-  res.send(`Invalid route ${req.url}`)
-}
-
-export default const errors_MWs = [
+export const errors_MWs = [
     errorLogger,
-    errorResponder,
-    invalidRouteHandler
+    errorResponder
   ]; 
