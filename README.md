@@ -6,20 +6,28 @@ A simple logging app.
 
 ## Table of contents
 
-1. [How to run](#how-to-run)
-2. [How to define routes](#how-to-define-routes)
-3. [How to stop/remove](#how-to-stop/remove-service)
-4. [Logging](#logging)
-5. [Backlog](#backlog)
+1. [How to build](#how-to-build)
+2. [How to run](#how-to-run/deploy)
+3. [How to define routes](#how-to-define-routes)
+4. [How to stop/remove](#how-to-stop/remove-service)
+5. [Logging](#logging)
+6. [Backlog](#backlog)
 
-## How to run
+## How to build
+
+We must install firstly the required libraries to run and host the app, local or remotely. Therefore, we run the command below.
+
+```
+>>> npm run build
+```
+
+## How to run/deploy
 
 You may utilize some cloud service to host the app, like AWS EC2, Azure or GCloud, but also we might run locally. 
 
 We use [Docker](https://docs.docker.com/) for build and run the application with ```npm run``` command below:
 
 ```
->>> npm run docker:clean --tag=IMAGE-NAME
 >>> npm run docker:deploy --tag=IMAGE-NAME --from=8080 --to=8080
 ```
 ## How to define routes
