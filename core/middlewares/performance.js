@@ -9,7 +9,7 @@ const obsvWindow_min = 1;
 // Limit each IP to maxRequestCount requests per obsvWindow_min
 const maxRequestCount = 5;
 
-const msg_1 = "Too many accounts created from this IP!" 
+const msg_1 = "Too many requests from this source!"
 const msg_2 = "Please, try again after "+obsvWindow_min+" minutes"
 
 const limiter = rateLimit(
