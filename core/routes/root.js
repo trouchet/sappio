@@ -8,22 +8,6 @@ import { routerRoutes } from '../../utils/router.js';
 
 /**
  * @openapi
- * /*:
- *   get:
- *     description: Default page in case 
- *     responses:
- *       200:
- *         description: Returns a smile face.
- */
-router.get(
-  '/all', 
-  function (req, res) {
-    res.send(routerRoutes(router));
-  }
-)
-
-/**
- * @openapi
  * /:
  *   get:
  *     description: Welcome to sappio, your simple app!
@@ -34,9 +18,25 @@ router.get(
 router.get(
   '/', 
   (req, res) => {
-    res.send(':)');
+    res.render("index", { title: "Home" });
   }
 );
+
+/**
+ * @openapi
+ * /all:
+ *   get:
+ *     description: available routes 
+ *     responses:
+ *       200:
+ *         description: Returns the available routes.
+ */
+router.get(
+  '/all', 
+  function (req, res) {
+    res.send(routerRoutes(router).concat(['swagger', 'status']));
+  }
+)
 
 /**
  * @openapi
