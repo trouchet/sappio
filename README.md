@@ -2,6 +2,6 @@
 
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 
-A simple logging NodeJS app.
+A simple logging NodeJS template app.
 
 You may access the [wiki](https://github.com/web-needle/sappio/wiki/How-to-sappio) to learn about it.
