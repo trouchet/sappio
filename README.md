@@ -7,9 +7,10 @@ A simple logging app.
 ## Table of contents
 
 1. [How to run](#how-to-run)
-2. [How to stop/remove](#how-to-stop/remove-service)
-3. [Logging](#logging)
-4. [Backlog](#backlog)
+2. [How to define routes](#how-to-define-routes)
+3. [How to stop/remove](#how-to-stop/remove-service)
+4. [Logging](#logging)
+5. [Backlog](#backlog)
 
 ## How to run
 
@@ -43,5 +44,6 @@ At first, we direct logs to console. The full logging experience happens by sign
 I plan to:
 
 1. Add some other routes for educational purposes;
-
+2. Authenticate route;
+3. Extend to update a PostgreSQL database.
 
