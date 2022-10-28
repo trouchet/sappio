@@ -1,4 +1,3 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+import { require } from '../utils/commonjs.js'
 
 export const pkg = require('../package.json');

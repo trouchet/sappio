@@ -1,5 +1,3 @@
-import dotenv from 'dotenv'
+import { env } from './dotenv.js'
 
-dotenv.config('./.env');
-
-export const jwt_secret = process.env.JWT_KEY || '1234';
+export const jwt_secret = env.JWT_KEY || '1234';
