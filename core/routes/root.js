@@ -5,6 +5,7 @@ export const router = express.Router();
 import { getToken } from '../controllers/token.js';
 import { healthCheck } from '../controllers/healthcheck.js';
 import { routerRoutes } from '../../utils/router.js';
+import { log } from '../../utils/logger.js';
 
 /**
  * @openapi
