@@ -10,6 +10,6 @@ COPY package.json .
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE $APP_PORT
 
 CMD [ "node", "index.js" ]
