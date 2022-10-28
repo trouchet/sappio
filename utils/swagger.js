@@ -1,9 +1,6 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-
-const pkg = require('../package.json');
+import { pkg } from '../config/app_info.js';
 
  // Configuration to  
 const options = {
@@ -14,7 +11,8 @@ const options = {
       version: pkg.version,
     },
   },
-  apis: ['./core/routes.js'],
+  apis: ['./core/routes/*.js'],
 };
  
 export const swaggerSpec = swaggerJSDoc(options);
+
