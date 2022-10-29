@@ -6,6 +6,7 @@ import { router } from './routes/root.js';
 import swaggerUi from 'swagger-ui-express'
 import { swaggerSpec } from '../utils/swagger.js'
 import { middlewares } from './middlewares/bundler.js'
+import { errors_MWs } from './middlewares/errors.js';
 
 const app = express();
 
@@ -25,6 +26,13 @@ for(const middleware of middlewares) {
 }
 
 app.use(router);
+
+/**
+ * Any error handler middleware MUST be added after we define our routes.
+ */
+for(const error_middleware of errors_MWs) {
+    app.use(error_middleware)
+}
 
 // Listen to the App Engine-specified port, otherwise 8080
 const APP_PORT = process.env.APP_PORT || 8080;
