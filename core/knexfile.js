@@ -46,7 +46,7 @@ const base_knex_env_config = {
   },
 };
 
-export const knex_config = {
+export default knex_config = {
   docker: {
     ...base_knex_env_config,
     connection: docker_connection,
