@@ -1,13 +1,20 @@
-export default {
-  // Automatically clear mock calls, instances, contexts and results before every test
-  clearMocks: true,
-
+module.exports = {
   // The bail config option can be used here to have Jest stop running tests after
   // the first failure.
   bail: false,
 
   // Indicates whether each individual test should be reported during the run.
   verbose: false,
+
+  preset: "ts-jest",
+
+  transform: {
+    "^.+\\.(ts|tsx)?$": "ts-jest",
+    "^.+\\.(js|jsx)$": "babel-jest",
+  },
+
+  testEnvironment: "jsdom",
+  coverageProvider: "v8",
 
   // Indicates whether the coverage information should be collected while executing the test
   collectCoverage: true,
