@@ -1,12 +1,9 @@
-import helmet from 'helmet';
-import cors from 'cors'
+import helmet from "helmet";
+import cors from "cors";
 
-import { convertTimeDouble } from '../../utils/time.js';
+import { convertTimeDouble } from "../../utils/time.js";
 
-export const security_MWs = [ 
-	helmet(), 
-	cors()
-];
+export const security_MWs = [helmet(), cors()];
 
 /*
 TODO: Define 

@@ -1,24 +1,17 @@
-import * as winston from 'winston';
-import morgan from 'morgan';
-import json from 'morgan-json';
+import * as winston from "winston";
+import morgan from "morgan";
+import json from "morgan-json";
 
-import { Logtail } from '@logtail/node';
-import { LogtailTransport } from '@logtail/winston';
+import { Logtail } from "@logtail/node";
+import { LogtailTransport } from "@logtail/winston";
 
-import { env } from '../config/dotenv.js'
+import { env } from "../config/dotenv.js";
 
-import { getTimestampTimezone } from './date.js' 
+import { getTimestampTimezone } from "./date.js";
 
-const {
-  createLogger,
-  format,
-  transports,
-  config,
-} = winston;
+const { createLogger, format, transports, config } = winston;
 
-const {
-  combine, timestamp, label, printf,
-} = format;
+const { combine, timestamp, label, printf } = format;
 
 /*
   We may define our own logging level. The default are given below
@@ -39,31 +32,28 @@ const {
  *
  * @param {String} label_msg
  */
-export const logging = (label_msg = 'default') => {
+export const logging = (label_msg = "default") => {
   const log_info_parser = (info) => {
     const time_prefix = `[${info.timestamp} - ${label_msg}]`;
     const info_suffix = `${info.level}: ${info.message}`;
 
-    return `${time_prefix} - ${info_suffix}`
-  } 
-
+    return `${time_prefix} - ${info_suffix}`;
+  };
 
   const logger_setup = {
     format: format.combine(
       label({ label: label_msg }),
-      format.timestamp({ format: 'DD/MM/YYYY HH:mm:ss.ss' }),
+      format.timestamp({ format: "DD/MM/YYYY HH:mm:ss.ss" }),
       format.colorize(),
-      format.printf(log_info_parser),
-    ), transports: [
-      new transports.Console()
-    ],
+      format.printf(log_info_parser)
+    ),
+    transports: [new transports.Console()],
     exceptionHandlers: [
       new transports.Console({
         format: format.errors(),
       }),
-    ], rejectionHandlers: [
-      new transports.Console()
     ],
+    rejectionHandlers: [new transports.Console()],
   };
 
   const logger_ = createLogger(logger_setup);
@@ -78,7 +68,7 @@ export const log_message = (logger__, level, message) => {
   });
 };
 
-export const agentMorganReporter = logging('morgan');
+export const agentMorganReporter = logging("morgan");
 
 // Use winston agent to report for Logtail
 if (env.LOGTAIL_TOKEN) {
@@ -87,26 +77,26 @@ if (env.LOGTAIL_TOKEN) {
   agentMorganReporter.add(new LogtailTransport(logtail));
 }
 
-morgan.token('type', function (req, res) { return req.headers['content-type'] })
+morgan.token("type", function (req, res) {
+  return req.headers["content-type"];
+});
 
 const morgan_format = json(
-  ':type :method :status :url :res[content-length] bytes :total-time ms :response-time ms'
+  ":type :method :status :url :res[content-length] bytes :total-time ms :response-time ms"
 );
 
-const stream_channels  = {
-    stream: {
-      // Configure Morgan to use our custom logger with custom severity
-      write: (message) => agentMorganReporter.log('info', message),
-    },
-  };
+const stream_channels = {
+  stream: {
+    // Configure Morgan to use our custom logger with custom severity
+    write: (message) => agentMorganReporter.log("info", message),
+  },
+};
 
 /**
  * @abstract Morgan middleware to log app access
  *
  */
-export const morganMiddleware = morgan(
-    morgan_format, 
-    stream_channels);
+export const morganMiddleware = morgan(morgan_format, stream_channels);
 
-export const logger = agentMorganReporter
+export const logger = agentMorganReporter;
 export const log = (type, msg) => log_message(logger, type, msg);

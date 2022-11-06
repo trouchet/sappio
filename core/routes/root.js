@@ -1,14 +1,14 @@
-import express from 'express';
+import express from "express";
 
 export const router = express.Router();
 
-import { getToken } from '../controllers/token.js';
-import { healthCheck } from '../controllers/healthcheck.js';
-import { routerRoutes } from '../../utils/router.js';
-import { log } from '../../utils/logger.js';
+import { getToken } from "../controllers/token.js";
+import { healthCheck } from "../controllers/healthcheck.js";
+import { routerRoutes } from "../../utils/router.js";
+import { log } from "../../utils/logger.js";
 
-// TAKE NOTE: Utilize this to provide created error likeso: next(error) 
-import createHttpError from 'http-errors'
+// TAKE NOTE: Utilize this to provide created error likeso: next(error)
+import createHttpError from "http-errors";
 
 /**
  * @openapi
@@ -19,56 +19,44 @@ import createHttpError from 'http-errors'
  *       200:
  *         description: Returns a smile face.
  */
-router.get(
-  '/', 
-  (req, res) => {
-    res.render("index", { title: "Home" });
-  }
-);
+router.get("/", (req, res) => {
+  res.render("index", { title: "Home" });
+});
 
 /**
  * @openapi
  * /all:
  *   get:
- *     description: available routes 
+ *     description: available routes
  *     responses:
  *       200:
  *         description: Returns the available routes.
  */
-router.get(
-  '/all', 
-  function (req, res) {
-    res.send(routerRoutes(router).concat(['/swagger', '/status']));
-  }
-)
+router.get("/all", function (req, res) {
+  res.send(routerRoutes(router).concat(["/swagger", "/status"]));
+});
 
 /**
  * @openapi
  * /token:
  *   get:
- *     description: Generates a valid JWT token  
+ *     description: Generates a valid JWT token
  *     responses:
  *       200:
  *         description: Returns a smile face.
  */
-router.get(
-  '/token', 
-  getToken
-);
+router.get("/token", getToken);
 
 /**
  * @openapi
  * /healthcheck:
  *   get:
- *     description: Generates a health object   
+ *     description: Generates a health object
  *     responses:
  *       200:
- *         description: Returns an object a message and package version 
+ *         description: Returns an object a message and package version
  */
-router.get(
-  '/healthcheck', 
-  healthCheck
-);
+router.get("/healthcheck", healthCheck);
 
 /**
  * import { Validator } from "express-json-validator-middleware";

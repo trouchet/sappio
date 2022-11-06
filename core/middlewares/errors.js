@@ -1,30 +1,30 @@
-import { log } from '../../utils/logger.js';
-import { env } from '../../config/dotenv.js';
-import { 
-  getErrorMessage, 
+import { log } from "../../utils/logger.js";
+import { env } from "../../config/dotenv.js";
+import {
+  getErrorMessage,
   getHttpStatusCode,
-  logErrorMessage
-} from '../../utils/error-handler.js'
+  logErrorMessage,
+} from "../../utils/error-handler.js";
 
 const NODE_ENVIRONMENT = env.NODE_ENV || "test";
 
 // Error handling Middleware functions
 const errorLogger = (error, req, res, next) => {
-  log('error', `error ${error.message}`) 
-  
+  log("error", `error ${error.message}`);
+
   // call next middleware
-  next(error)
-}
+  next(error);
+};
 
 const errorResponder = (error, req, res, next) => {
-  log('error', error.message)
+  log("error", error.message);
 
-  res.header("Content-Type", 'application/json')
-  
-  const status = error.status || 500
-  
-  res.status(status).send(error.message)
-}
+  res.header("Content-Type", "application/json");
+
+  const status = error.status || 500;
+
+  res.status(status).send(error.message);
+};
 
 /**
  * Generic Express error handler middleware.
@@ -49,7 +49,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
 
   const errorResponse = {
     statusCode: getHttpStatusCode({ error, response }),
-    body: undefined
+    body: undefined,
   };
 
   /**
@@ -108,11 +108,6 @@ const errorHandlerMiddleware = (error, request, response, next) => {
    * Ensure any remaining middleware are run.
    */
   next();
-}
+};
 
-export const errors_MWs = [
-    errorHandlerMiddleware,
-    errorLogger,
-    errorResponder
-  ]; 
-
+export const errors_MWs = [errorHandlerMiddleware, errorLogger, errorResponder];

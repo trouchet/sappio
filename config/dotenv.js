@@ -1,3 +1,3 @@
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 
-export const env = dotenv.config('./.env');
+export const env = dotenv.config("./.env");

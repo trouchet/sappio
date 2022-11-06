@@ -1,18 +1,17 @@
-import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerJSDoc from "swagger-jsdoc";
 
-import { pkg } from '../config/app_info.js';
+import { pkg } from "../config/app_info.js";
 
- // Configuration to  
+// Configuration to
 const options = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
       title: pkg.name,
       version: pkg.version,
     },
   },
-  apis: ['./core/routes/*.js'],
+  apis: ["./core/routes/*.js"],
 };
- 
-export const swaggerSpec = swaggerJSDoc(options);
 
+export const swaggerSpec = swaggerJSDoc(options);

@@ -1,3 +1,2 @@
 // [START app]
-import app from './core/server.js';
-
+import app from "./core/server.js";
