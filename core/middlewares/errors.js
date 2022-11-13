@@ -5,6 +5,8 @@ import {
   getHttpStatusCode,
   logErrorMessage,
 } from "../../utils/error-handler.js";
+import { errorReporter } from "express-youch";
+import { Merror, MerrorMiddleware } from "express-merror";
 
 const NODE_ENVIRONMENT = env.NODE_ENV || "test";
 
@@ -110,4 +112,10 @@ const errorHandlerMiddleware = (error, request, response, next) => {
   next();
 };
 
-export const errors_MWs = [errorHandlerMiddleware, errorLogger, errorResponder];
+export const errors_MWs = [
+  errorHandlerMiddleware,
+  errorLogger,
+  errorResponder,
+  errorReporter(),
+  MerrorMiddleware(),
+];
