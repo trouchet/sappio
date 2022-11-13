@@ -57,24 +57,3 @@ router.get("/token", getToken);
  *         description: Returns an object a message and package version
  */
 router.get("/healthcheck", healthCheck);
-
-/**
- * import { Validator } from "express-json-validator-middleware";
- * const { validate } = new Validator();
-
-/**
- * The `validate` method accepts an object which maps request
- * properties to the JSON schema you want them to be validated
- * against e.g.
- *
- * { requestPropertyToValidate: jsonSchemaObject }
- *
- * Validate `request.body` against `addressSchema`.
- */
-/**
-app.post("/address", validate({ body: addressSchema }), (request, response) => {
-  // Route handler logic to run when `request.body` has been validated.
-   
-  response.send({});
-});
-**/
