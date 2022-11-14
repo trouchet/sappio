@@ -1,4 +1,4 @@
-  {
+{
   "name": "sappio",
   "description": "A minimal node app with logging.",
   "version": "1.0.0",
@@ -85,5 +85,8 @@
     "serve-favicon": "^2.5.0",
     "swagger-stats": "^0.99.2",
     "swagger-ui-express": "^4.5.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }
