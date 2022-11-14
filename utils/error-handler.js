@@ -88,3 +88,7 @@ export const getHttpStatusCode = ({ error, response }) => {
    */
   return 500;
 };
+
+export const reportMerror = (code, message, properties) => {
+  return new Merror(code, message, properties);
+};
