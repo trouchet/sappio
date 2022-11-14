@@ -64,11 +64,4 @@ app.get("/all", function (req, res) {
   res.send(parseExpressApp(app));
 });
 
-// Listen to the App Engine-specified port, otherwise 8080
-const APP_PORT = process.env.APP_PORT || 8080;
-
-app.listen(APP_PORT, () => {
-  log("info", `Listening on port: ${APP_PORT}`);
-});
-
 export default app;
