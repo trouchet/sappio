@@ -27,7 +27,19 @@ app.use(
     }
   ));
 
-router.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/swagger", swaggerUi.serve);
+
+/**
+ * @openapi
+ * /swagger:
+ *   get:
+ *     description: routes description
+ *     responses:
+ *       200:
+ *         description: Returns the swagger of available routes.
+ */
+router.get("/swagger", swaggerUi.setup(swaggerSpec))
+
 
 for (const middleware of middlewares) {
   app.use(middleware);
@@ -54,6 +66,8 @@ for (const error_middleware of errors_MWs) {
 app.get("/all", function (req, res) {
   res.send(parseExpressApp(app));
 });
+
+
 
 // Listen to the App Engine-specified port, otherwise 8080
 const APP_PORT = process.env.APP_PORT || 8080;
