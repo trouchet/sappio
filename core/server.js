@@ -9,6 +9,9 @@ import { swaggerSpec } from "../utils/swagger.js";
 import { middlewares } from "./middlewares/bundler.js";
 import { errors_MWs } from "./middlewares/errors.js";
 
+import { parseExpressApp } from 'express-route-parser';
+
+
 const app = express();
 
 app.set("views", process.cwd() + "/core/views");
