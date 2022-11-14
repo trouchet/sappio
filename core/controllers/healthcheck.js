@@ -6,7 +6,7 @@ export const healthCheck = async (req, res, next) => {
 
   const healthcheck = {
       uptime: process.uptime(),
-      message: 'Sappio server running',
+      message: 'Sappio server is running!',
       timestamp: Date.now(),
       version: pkg.version,
   };
