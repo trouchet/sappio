@@ -1,4 +1,4 @@
-{
+  {
   "name": "sappio",
   "description": "A minimal node app with logging.",
   "version": "1.0.0",
@@ -24,8 +24,6 @@
     "start:prod": "npx knex migrate:latest && nodemon ./index.js",
     "build": "npm run node:build && npm run docker:build",
     "update": "bash ./scripts/update.sh",
-    "knex": "node -r esm node_modules/.bin/knex",
-    "knex:seeds": "npx knex seed:run",
     "node:build": "./scripts/node-build.sh",
     "docker:clean": "./scripts/docker-clean.sh $npm_config_tag",
     "docker:build": "./scripts/docker-build.sh",
@@ -68,6 +66,7 @@
     "express-merror": "^1.0.0",
     "express-pino-logger": "^7.0.0",
     "express-rate-limit": "^6.6.0",
+    "express-route-parser": "^1.0.5",
     "express-routes-catalogue": "^1.1.0",
     "express-sslify": "^1.2.0",
     "express-status-monitor": "^1.3.4",
@@ -84,8 +83,10 @@
     "morgan-json": "^1.1.0",
     "nodemon": "^2.0.20",
     "pg": "^8.8.0",
+    "prom-client": "^12.0.0",
     "pug": "^3.0.2",
     "serve-favicon": "^2.5.0",
+    "swagger-stats": "^0.99.2",
     "swagger-ui-express": "^4.5.0"
   }
 }
