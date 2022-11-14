@@ -11,7 +11,7 @@ const options = {
       version: pkg.version,
     },
   },
-  apis: ["./core/routes/*.js", "./core/server.js"],
+  apis: ["./core/routes/*.js", "./core/app.js"],
 };
 
 export const swaggerSpec = swaggerJSDoc(options);
