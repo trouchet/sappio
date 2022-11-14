@@ -8,7 +8,7 @@ import {
 import { errorReporter } from "express-youch";
 import { Merror, MerrorMiddleware } from "express-merror";
 
-const NODE_ENVIRONMENT = env.NODE_ENV || "test";
+const NODE_ENVIRONMENT = env.NODE_ENV || "development";
 
 // Error handling Middleware functions
 const errorLogger = (error, req, res, next) => {
