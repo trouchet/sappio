@@ -4,7 +4,6 @@ export const router = express.Router();
 
 import { getToken } from "../controllers/token.js";
 import { healthCheck } from "../controllers/healthcheck.js";
-import { routerRoutes } from "../../utils/router.js";
 import { log } from "../../utils/logger.js";
 
 // TAKE NOTE: Utilize this to provide created error likeso: next(error)
@@ -21,19 +20,6 @@ import createHttpError from "http-errors";
  */
 router.get("/", (req, res) => {
   res.render("index", { title: "Home" });
-});
-
-/**
- * @openapi
- * /all:
- *   get:
- *     description: available routes
- *     responses:
- *       200:
- *         description: Returns the available routes.
- */
-router.get("/all", function (req, res) {
-  res.send(routerRoutes(router).concat(["/swagger", "/status"]));
 });
 
 /**
