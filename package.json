@@ -39,7 +39,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "5.42.1",
     "@typescript-eslint/parser": "5.42.1",
-    "eslint": "8.26.0",
+    "eslint": "8.27.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-google": "0.14.0",
     "eslint-nibble": "^8.1.0",
