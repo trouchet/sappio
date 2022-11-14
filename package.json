@@ -21,6 +21,7 @@
   "scripts": {
     "start": "nodemon ./index.js",
     "build": "npm run node:build && npm run docker:build",
+    "test:run": "jest --collect-coverage --coverage",
     "update": "bash ./scripts/update.sh",
     "node:build": "./scripts/node-build.sh",
     "docker:clean": "./scripts/docker-clean.sh $npm_config_tag",
@@ -51,7 +52,8 @@
     "superagent": "^8.0.3",
     "supertest": "^6.3.1",
     "swagger-autogen": "^2.22.0",
-    "swagger-jsdoc": "^6.2.5"
+    "swagger-jsdoc": "^6.2.5",
+    "ts-jest": "^29.0.3"
   },
   "engines": {
     "node": " >=16.0.0",
