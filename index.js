@@ -1,5 +1,5 @@
 // [START app]
-import app from "./core/server.js";
+import app from "./core/app.js";
 
 import { log } from "./utils/logger.js";
 
