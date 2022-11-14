@@ -1,4 +1,4 @@
-import { log, log_message  } from "./logger.js";
+import { log, log_message } from "./logger.js";
 
 const timeHierarchy = [
   "second",

@@ -5,16 +5,16 @@ export const healthCheck = async (req, res, next) => {
   log("debug", "healthCheck controller called");
 
   const healthcheck = {
-      uptime: process.uptime(),
-      message: 'Sappio server is running!',
-      timestamp: Date.now(),
-      version: pkg.version,
+    uptime: process.uptime(),
+    message: "Sappio server is running!",
+    timestamp: Date.now(),
+    version: pkg.version,
   };
-  
+
   try {
-      res.send(healthcheck);
+    res.send(healthcheck);
   } catch (error) {
-      healthcheck.message = error;
-      res.status(503).send();
+    healthcheck.message = error;
+    res.status(503).send();
   }
 };

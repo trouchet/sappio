@@ -58,4 +58,4 @@ export const validationErrorMiddleware = (error, request, response, next) => {
   next();
 };
 
-export const validation_MWs = [ validationErrorMiddleware ];
+export const validation_MWs = [validationErrorMiddleware];

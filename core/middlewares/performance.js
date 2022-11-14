@@ -18,9 +18,6 @@ const limiter_options = {
   message: msg_1 + msg_2,
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-}
+};
 
-export const performance_MWs = [
-                                rateLimit(limiter_options), 
-                                compression()
-                               ];
+export const performance_MWs = [rateLimit(limiter_options), compression()];
