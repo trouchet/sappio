@@ -12,12 +12,15 @@ const maxRequestCount = 5;
 const msg_1 = "Too many requests from this source!";
 const msg_2 = "Please, try again after " + obsvWindow_min + " minutes";
 
-const limiter = rateLimit({
+const limiter_options = {
   windowMs: convertTimeDouble(obsvWindow_min, "minute", "second") * 1000,
   max: maxRequestCount,
   message: msg_1 + msg_2,
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-});
+}
 
-export const performance_MWs = [limiter, compression()];
+export const performance_MWs = [
+                                rateLimit(limiter_options), 
+                                compression()
+                               ];
