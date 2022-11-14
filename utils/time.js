@@ -1,5 +1,4 @@
-import { log, logger } from "./logger.js";
-import { log_message } from "quivero-api/utils/logging/logger.js";
+import { log, log_message  } from "./logger.js";
 
 const timeHierarchy = [
   "second",
