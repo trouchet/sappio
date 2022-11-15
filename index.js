@@ -1,21 +1,21 @@
 // [START app]
-import apps from "./core/servers.js";
+import app from "./core/app.js";
+
 import { log } from "./utils/logger.js";
+import { env } from "./config/dotenv.js";
 
 // Listen to the App Engine-specified port, otherwise 3000
-let curr_port = process.env.APP_INIT_PORT || 3000;
+const NUM_APPS = parseInt(env.NUM_PORTS) || 1;
+let curr_port = parseInt(env.APP_INIT_PORT) || 3000;
 
-let app = {};
-
-for(const app_index in apps) {
-  	app = apps[app_index];
-	
-	app.listen(curr_port, (err) => {
-		err ?
-		log("info", `Failed to listen on PORT ${curr_port}`):
-		log("info", `Application server listening on PORT ${curr_port}`)
-	});
-
-	curr_port+=1;
+for(let i = 0; i < NUM_APPS; i++) {	
+	app.listen(
+		curr_port+i , 
+		(err) => {
+			err ?
+			log("error", `Failed to listen on PORT ${curr_port+i}`):
+			log("info", `Application server listening on PORT ${curr_port+i}`)
+		}
+	);
 }
 
