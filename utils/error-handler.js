@@ -1,4 +1,5 @@
 import { log } from "./logger.js";
+import { Merror } from "express-merror";
 
 /**
  * Extract an error stack or error message from an Error object.
@@ -14,15 +15,16 @@ export const getErrorMessage = (error) => {
    * contains the most detail about an error:
    * an error message and a function call stack.
    */
+  const error_msg = {"message": "", "stack": ""};
   if (error.stack) {
-    return error.stack;
+    error_msg[stack] = error.stack;
   }
 
   if (typeof error.toString === "function") {
-    return error.toString();
+    error_msg[message] = error.toString();
   }
 
-  return "";
+  return error_msg;
 };
 
 /**

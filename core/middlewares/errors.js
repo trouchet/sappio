@@ -6,27 +6,8 @@ import {
   logErrorMessage,
 } from "../../utils/error-handler.js";
 import { errorReporter } from "express-youch";
-import { Merror, MerrorMiddleware } from "express-merror";
 
 const NODE_ENVIRONMENT = env.NODE_ENV || "development";
-
-// Error handling Middleware functions
-const errorLogger = (error, req, res, next) => {
-  log("error", `error ${error.message}`);
-
-  // call next middleware
-  next(error);
-};
-
-const errorResponder = (error, req, res, next) => {
-  log("error", error.message);
-
-  res.header("Content-Type", "application/json");
-
-  const status = error.status || 500;
-
-  res.status(status).send(error.message);
-};
 
 /**
  * Generic Express error handler middleware.
@@ -38,7 +19,7 @@ const errorResponder = (error, req, res, next) => {
  */
 const errorHandlerMiddleware = (error, request, response, next) => {
   const errorMessage = getErrorMessage(error);
-
+  
   logErrorMessage(errorMessage);
 
   /**
@@ -114,8 +95,5 @@ const errorHandlerMiddleware = (error, request, response, next) => {
 
 export const errors_MWs = [
   errorHandlerMiddleware,
-  errorLogger,
-  errorResponder,
   errorReporter(),
-  MerrorMiddleware(),
 ];
