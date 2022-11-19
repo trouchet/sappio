@@ -3,6 +3,7 @@ FROM node:19-alpine
 ADD . ./
 
 RUN npm install --quiet
+RUN npm install pm2 -g
 
 WORKDIR /usr/app
 
@@ -12,4 +13,4 @@ COPY . .
 
 EXPOSE $APP_PORT
 
-CMD [ "node", "index.js" ]
+CMD [ "pm2-runtime", "index.js" ]
