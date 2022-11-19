@@ -53,7 +53,7 @@ export const prepareApp = (app) => {
   return app
 }
 
-const routeApp = (app, routers) => {
+export const routeApp = (app, routers) => {
   for (let router of routers) {
     app.use(router);
   }
