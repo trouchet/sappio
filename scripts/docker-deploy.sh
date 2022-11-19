@@ -9,9 +9,9 @@ if [[ $# -eq 0 ]]; then
 
 elif docker ps -a | grep -qw "$1"; then
 	container_id=$(docker ps -a | grep -w $1 | head -n1 | awk '{print $1;}');
-		
+	
 	echo "Container image $IMAGE_NAME with ID $container_id already exists! Watch it below."
-	npm run docker:watch --tag=$container_id
+	bash "$(pwd)/scripts/docker-watch.sh" $container_id
 
 else
 	echo "No such container image $1 yet" 

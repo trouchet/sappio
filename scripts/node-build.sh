@@ -22,3 +22,4 @@ echo NodeJS version: $(node -v)
 # Add node binaries to OS path
 export PATH=$PATH:$(npm bin -g)
 
+npm install -g pm2
