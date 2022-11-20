@@ -14,7 +14,7 @@ export default {
       increment_var : 'PORT',
       merge_logs    : true,
       cron_restart  : '0 0 * * *',
-      exp_backoff_restart_delay: 100
+      exp_backoff_restart_delay: 100,
       env           : {
           PORT: 3000,
           NODE_ENV: "development"
