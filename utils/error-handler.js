@@ -15,7 +15,7 @@ export const getErrorMessage = (error) => {
    * contains the most detail about an error:
    * an error message and a function call stack.
    */
-  const error_msg = {"message": "", "stack": ""};
+  const error_msg = { message: "", stack: "" };
   if (error.stack) {
     error_msg[stack] = error.stack;
   }

@@ -1,7 +1,7 @@
-import { env } from './dotenv.js'
-import path from 'path'
+import { env } from "./dotenv.js";
+import path from "path";
 
-const BASE_PATH = process.cwd()+"/"+"db";
+const BASE_PATH = process.cwd() + "/" + "db";
 
 const base_knex_env_config = {
   client: "pg",
@@ -14,8 +14,8 @@ const base_knex_env_config = {
   },
   seeds: {
     directory: path.join(BASE_PATH, "seeds"),
-  }
-}
+  },
+};
 
 const test_connection = {
   connection: {
@@ -23,8 +23,8 @@ const test_connection = {
     database: "sappio",
     user: "postgres",
     password: "postgres",
-  }
-}
+  },
+};
 
 const prod_connection = {
   host: process.env.DB_HOST,
@@ -32,7 +32,7 @@ const prod_connection = {
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
-}
+};
 
 let knex_config = {};
 
@@ -41,12 +41,11 @@ let knex_config = {};
  */
 export default knex_config = {
   development: {
-          ...base_knex_env_config, 
-          connection: test_connection
-        },
+    ...base_knex_env_config,
+    connection: test_connection,
+  },
   production: {
-          ...base_knex_env_config, 
-          connection: prod_connection
-        },
+    ...base_knex_env_config,
+    connection: prod_connection,
+  },
 };
-

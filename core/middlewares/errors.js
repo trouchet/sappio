@@ -19,7 +19,7 @@ const NODE_ENVIRONMENT = env.NODE_ENV || "development";
  */
 const errorHandlerMiddleware = (error, request, response, next) => {
   const errorMessage = getErrorMessage(error);
-  
+
   logErrorMessage(errorMessage);
 
   /**
@@ -93,7 +93,4 @@ const errorHandlerMiddleware = (error, request, response, next) => {
   next();
 };
 
-export const errors_MWs = [
-  errorHandlerMiddleware,
-  errorReporter(),
-];
+export const errors_MWs = [errorHandlerMiddleware, errorReporter()];

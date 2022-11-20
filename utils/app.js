@@ -11,7 +11,7 @@ import { errors_MWs } from "../core//middlewares/errors.js";
 export const prepareApp = (app) => {
   const swaggerMW = swStats.getMiddleware({
     swaggerSpec: swaggerSpec,
-  })
+  });
 
   app.set("views", process.cwd() + "/core/views");
   app.set("view engine", "pug");
@@ -50,16 +50,16 @@ export const prepareApp = (app) => {
     app.use(middleware);
   }
 
-  return app
-}
+  return app;
+};
 
 export const routeApp = (app, routers) => {
   for (let router of routers) {
     app.use(router);
   }
 
-  return app
-}
+  return app;
+};
 
 export const pospareApp = (app) => {
   /**
@@ -69,15 +69,13 @@ export const pospareApp = (app) => {
     app.use(error_middleware);
   }
 
-  return app
-}
+  return app;
+};
 
 export const buildApp = (app, routers) => {
   app = prepareApp(app);
   app = routeApp(app, routers);
   app = pospareApp(app);
 
-  return app
-}
-
-
+  return app;
+};

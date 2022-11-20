@@ -54,7 +54,7 @@ router.get("/healthcheck", healthCheck);
  *         description: Returns a json file with current server status.
  */
 
- /**
+/**
  * @openapi
  * /info:
  *   get:
@@ -64,7 +64,7 @@ router.get("/healthcheck", healthCheck);
  *         description: Returns a json file with current server info.
  */
 
- /**
+/**
  * @openapi
  * /swagger-stats:
  *   get:
