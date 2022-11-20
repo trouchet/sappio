@@ -45,7 +45,6 @@
     "@babel/preset-env": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.4.2",
-    "@babel/preset-env": "^7.0.0",
     "eslint": "8.28.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-google": "0.14.0",
@@ -69,7 +68,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.20.2",
-    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-env": "^7.0.0",
     "@logtail/node": "^0.1.12",
     "@logtail/winston": "^0.1.13",
     "axios": "^1.1.3",
