@@ -64,6 +64,8 @@
     "npm": ">=6.9.0"
   },
   "dependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
     "@logtail/node": "^0.1.12",
     "@logtail/winston": "^0.1.13",
     "axios": "^1.1.3",
