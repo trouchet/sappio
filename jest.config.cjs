@@ -10,7 +10,7 @@ module.exports = {
 
   transform: {
     "^.+\\.(ts|tsx)?$": "ts-jest",
-    "^.+\\.(js|jsx)$": "babel-jest",
+    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
   },
 
   testEnvironment: "jsdom",
@@ -37,6 +37,8 @@ module.exports = {
   testEnvironmentOptions: {
     url: "http://localhost/",
   },
+
+  testEnvironment: "jest-environment-jsdom",
 
   // @see: https://jestjs.io/docs/en/configuration#coveragethreshold-object
   coverageThreshold: {
