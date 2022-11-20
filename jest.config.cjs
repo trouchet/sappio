@@ -47,4 +47,6 @@ module.exports = {
       lines: 95,
     },
   },
+
+  runner: "jest-light-runner"
 };
