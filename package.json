@@ -24,7 +24,7 @@
     "build": "npm run node:build && npm run docker:build",
     "node:build": "./scripts/node-build.sh",
     "docker:build": "./scripts/docker-build.sh",
-    "test:run": "jest --collect-coverage --coverage",
+    "test": "jest --collect-coverage --coverage",
     "update": "bash ./scripts/update.sh",
     "docker:clean": "./scripts/docker-clean.sh $npm_config_tag",
     "docker:deploy": "./scripts/docker-deploy.sh $npm_config_tag $npm_config_from $npm_config_to",
