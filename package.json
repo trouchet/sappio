@@ -78,6 +78,8 @@
     "compression": "^1.7.4",
     "concurrently": "^7.5.0",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "express-actuator": "^1.8.2",
     "express-json-validator-middleware": "^3.0.1",
@@ -103,7 +105,8 @@
     "serve-favicon": "^2.5.0",
     "swagger-stats": "^0.99.2",
     "swagger-ui-express": "^4.5.0",
-    "tx2": "^1.0.5"
+    "tx2": "^1.0.5",
+    "uuid": "^9.0.0"
   },
   "optionalDependencies": {
     "fsevents": "^2.3.2"
