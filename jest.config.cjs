@@ -13,7 +13,7 @@ module.exports = {
     "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
   },
 
-  testEnvironment: "jsdom",
+  testEnvironment: "jest-environment-jsdom",
   coverageProvider: "v8",
 
   // Indicates whether the coverage information should be collected while executing the test
@@ -24,6 +24,9 @@ module.exports = {
 
   // If the test path matches any of the patterns, it will be skipped.
   testPathIgnorePatterns: ["<rootDir>/node_modules/"],
+
+  // The pattern Jest uses to detect test files.
+  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$",
 
   // If the file path matches any of the patterns, coverage information will be skipped.
   coveragePathIgnorePatterns: ["<rootDir>/node_modules/"],
@@ -37,8 +40,6 @@ module.exports = {
   testEnvironmentOptions: {
     url: "http://localhost/",
   },
-
-  testEnvironment: "jest-environment-jsdom",
 
   // @see: https://jestjs.io/docs/en/configuration#coveragethreshold-object
   coverageThreshold: {
