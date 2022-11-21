@@ -17,7 +17,7 @@ const base_knex_env_config = {
   },
 };
 
-const test_connection = {
+const dev_connection = {
   connection: {
     host: "localhost",
     database: "sappio",
@@ -42,7 +42,7 @@ let knex_config = {};
 export default knex_config = {
   development: {
     ...base_knex_env_config,
-    connection: test_connection,
+    connection: dev_connection,
   },
   production: {
     ...base_knex_env_config,
