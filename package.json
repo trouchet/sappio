@@ -21,6 +21,7 @@
   "scripts": {
     "start": "nodemon ./index.js",
     "start:pm2": "pm2 start ./config/pm2_configs.js --attach --watch --time --wait-ready",
+    "prepare": "husky install",
     "build": "npm run node:build && npm run docker:build",
     "node:build": "./scripts/node-build.sh",
     "docker:build": "./scripts/docker-build.sh",
