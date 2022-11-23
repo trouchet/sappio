@@ -51,5 +51,13 @@ module.exports = {
     },
   },
 
+  notify: true,
+
+  reporters: [
+    ['jest-slow-test-reporter', {"numTests": 8, "warnOnSlowerThan": 300, "color": true}],
+    'jest-progress-bar-reporter',
+    '@matteoh2o1999/github-actions-jest-reporter'
+  ],
+  
   runner: "jest-light-runner"
 };
