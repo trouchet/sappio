@@ -1,4 +1,5 @@
 import { log, log_message } from "./logger.js";
+import _ from 'lodash'
 
 const timeHierarchy = [
   "second",
@@ -9,11 +10,12 @@ const timeHierarchy = [
   "month",
   "year",
 ];
-const timeScaler = [60, 60, 24, 7, 30, 12];
+
+export const timeScaler = [60, 60, 24, 7, 30, 12];
 
 export const convertTimeDouble = (value, from, to) => {
-  const fromIndex = timeHierarchy.indexOf(from);
-  const toIndex = timeHierarchy.indexOf(to);
+  let fromIndex = timeHierarchy.indexOf(from);
+  let toIndex = timeHierarchy.indexOf(to);
   const errorMsg = "Item _ITEM_ must belong to list [" + timeHierarchy + "]";
 
   if (fromIndex === -1) {
@@ -31,7 +33,19 @@ export const convertTimeDouble = (value, from, to) => {
     reduce_fun = (a, b) => a / b;
   }
 
-  return timeScaler.slice(fromIndex, toIndex).reduce(reduce_fun, value);
+  let scalers = [];
+  if(toIndex > fromIndex) {
+    scalers = timeScaler.slice(fromIndex, toIndex);
+  } else if(toIndex < fromIndex) { 
+    toIndex = timeScaler.length-toIndex
+    fromIndex = timeScaler.length-fromIndex
+
+    scalers = _.reverse(timeScaler).slice(fromIndex, toIndex)
+  } else {
+    return value
+  }
+  
+  return scalers.reduce(reduce_fun, value);
 };
 
 export const getTimestampTimezone = (timestamp) => {
