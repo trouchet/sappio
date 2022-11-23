@@ -7,7 +7,7 @@ import { LogtailTransport } from "@logtail/winston";
 
 import { env } from "../config/dotenv.js";
 
-import { getTimestampTimezone } from "./date.js";
+import { getTimestampTimezone } from "./time.js";
 
 const { createLogger, format, transports, config } = winston;
 
