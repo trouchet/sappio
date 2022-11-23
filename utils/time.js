@@ -33,3 +33,7 @@ export const convertTimeDouble = (value, from, to) => {
 
   return timeScaler.slice(fromIndex, toIndex).reduce(reduce_fun, value);
 };
+
+export const getTimestampTimezone = (timestamp) => {
+  return new Date(timestamp).getTimezoneOffset();
+};
