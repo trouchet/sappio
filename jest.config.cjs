@@ -54,9 +54,9 @@ module.exports = {
   notify: true,
 
   reporters: [
-    ['jest-slow-test-reporter', {"numTests": 8, "color": true}],
-    'jest-progress-bar-reporter',
+    ["jest-slow-test-reporter", { numTests: 8, color: true }],
+    "jest-progress-bar-reporter",
   ],
-  
-  runner: "jest-light-runner"
+
+  runner: "jest-light-runner",
 };

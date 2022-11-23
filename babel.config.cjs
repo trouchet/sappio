@@ -10,5 +10,5 @@ module.exports = {
       },
     ],
   ],
-  "plugins": ["babel-plugin-istanbul"]
+  plugins: ["babel-plugin-istanbul"],
 };
