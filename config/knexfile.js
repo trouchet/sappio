@@ -58,6 +58,10 @@ export default knex_config = {
     ...base_knex_env_config,
     connection: dev_connection,
   },
+  docker: {
+    ...base_knex_env_config,
+    connection: docker_connection
+  }
   production: {
     ...base_knex_env_config,
     connection: prod_connection,
