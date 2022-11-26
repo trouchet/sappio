@@ -4,7 +4,7 @@ export default {
   bail: false,
 
   // Indicates whether each individual test should be reported during the run.
-  verbose: false,
+  verbose: true,
 
   preset: "ts-jest",
 
@@ -23,7 +23,7 @@ export default {
   coverageDirectory: "./coverage/",
 
   // If the test path matches any of the patterns, it will be skipped.
-  testPathIgnorePatterns: ["<rootDir>/node_modules/"],
+  testPathIgnorePatterns: ["node_modules/"],
 
   // The pattern Jest uses to detect test files.
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$",
@@ -53,10 +53,9 @@ export default {
 
   notify: true,
 
-  reporters: [
-    ["jest-slow-test-reporter", { numTests: 8, color: true }],
-    "jest-progress-bar-reporter",
-  ],
+  //reporters: [
+  //  ["jest-slow-test-reporter", { numTests: 8, color: true }],
+  //],
 
   runner: "jest-light-runner",
 };
