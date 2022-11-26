@@ -18,7 +18,7 @@ export default {
 
   // Indicates whether the coverage information should be collected while executing the test
   collectCoverage: true,
-  
+
   // The directory where Jest should output its coverage files.
   coverageDirectory: "./coverage/",
 
@@ -29,7 +29,7 @@ export default {
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$",
 
   // If the file path matches any of the patterns, coverage information will be skipped.
-  coveragePathIgnorePatterns: ["<rootDir>/node_modules/"],
+  coveragePathIgnorePatterns: ["node_modules/", "src/config/"],
 
   // The pattern Jest uses to detect test files.
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$",
