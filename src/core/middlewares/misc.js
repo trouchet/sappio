@@ -1,5 +1,5 @@
 import favicon from "serve-favicon";
 
 export const misc_MWs = [
-  favicon(process.cwd() + "/" + "public" + "/" + "favicon.ico"),
+  favicon(process.cwd() + "/" + "src" + "/" + "public" + "/" + "favicon.ico"),
 ];
