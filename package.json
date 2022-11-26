@@ -38,7 +38,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "get-version": "echo $npm_package_version"
-  }, 
+  },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.20.2",
@@ -96,6 +96,7 @@
     "http-errors": "^2.0.0",
     "jest-light-runner": "^0.4.1",
     "jsrsasign": "^10.6.1",
+    "jsrsasign-util": "^1.0.5",
     "knex": "^2.3.0",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
