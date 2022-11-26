@@ -7,7 +7,9 @@ const base_knex_env_config = {
   client: "pg",
   pool: {
     min: 2,
-    max: 10,
+    max: 40,
+    acquireTimeoutMillis: 60000,
+    idleTimeoutMillis: 600000,
   },
   migrations: {
     directory: path.join(BASE_PATH, "migrations"),
@@ -20,18 +22,30 @@ const base_knex_env_config = {
 const dev_connection = {
   connection: {
     host: "localhost",
-    database: "sappio",
-    user: "postgres",
-    password: "postgres",
+    database: "sappio_db",
+    user: process.env.POSTGRES_USER || "postgres",
+    password: process.env.POSTGRES_PASSWORD || "postgres",
+    port: 5432
+  },
+};
+
+const docker_connection = {
+  connection: {
+    host: "localhost",
+    database: "sappio_db",
+    user: process.env.POSTGRES_USER || "postgres",
+    password: process.env.POSTGRES_PASSWORD || "postgres",
+    port: 5432
   },
 };
 
 const prod_connection = {
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  host: process.env.POSTGRES_HOST,
+  database: process.env.POSTGRES_DATABASE,
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  port: process.env.POSTGRES_PORT,
+  port: 5432
 };
 
 let knex_config = {};
