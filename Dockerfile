@@ -5,11 +5,9 @@ ADD . ./
 RUN npm install --quiet
 RUN npm install pm2 -g
 
+RUN mkdir /usr/app
 WORKDIR /usr/app
-
-COPY package.json .
-
-COPY . .
+COPY . /usr/app
 
 EXPOSE $APP_PORT
 
