@@ -31,7 +31,7 @@ const dev_connection = {
 
 const docker_connection = {
   connection: {
-    host: "localhost",
+    host: process.env.POSTGRES_HOST || "localhost",
     database: "sappio_db",
     user: process.env.POSTGRES_USER || "postgres",
     password: process.env.POSTGRES_PASSWORD || "postgres",
@@ -61,7 +61,7 @@ export default knex_config = {
   docker: {
     ...base_knex_env_config,
     connection: docker_connection
-  }
+  },
   production: {
     ...base_knex_env_config,
     connection: prod_connection,
