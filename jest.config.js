@@ -51,8 +51,6 @@ export default {
     },
   },
 
-  notify: true,
-
   //reporters: [
   //  ["jest-slow-test-reporter", { numTests: 8, color: true }],
   //],
