@@ -10,12 +10,10 @@ export const getToken = (req, res, next) => {
   const jwtToken = createJWTToken(req.body, secret, duration);
 
   res.status = 200;
-  res.send(
-    {
-      jwtToken,
-      payload: body,
-    }
-  );
+  res.send({
+    jwtToken,
+    payload: body,
+  });
 
   return next();
 };

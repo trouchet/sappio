@@ -1,5 +1,5 @@
 import { log, log_message } from "./logger.js";
-import _ from 'lodash'
+import _ from "lodash";
 
 const timeHierarchy = [
   "second",
@@ -34,17 +34,17 @@ export const convertTimeDouble = (value, from, to) => {
   }
 
   let scalers = [];
-  if(toIndex > fromIndex) {
+  if (toIndex > fromIndex) {
     scalers = timeScaler.slice(fromIndex, toIndex);
-  } else if(toIndex < fromIndex) { 
-    toIndex = timeScaler.length-toIndex
-    fromIndex = timeScaler.length-fromIndex
+  } else if (toIndex < fromIndex) {
+    toIndex = timeScaler.length - toIndex;
+    fromIndex = timeScaler.length - fromIndex;
 
-    scalers = _.reverse(timeScaler).slice(fromIndex, toIndex)
+    scalers = _.reverse(timeScaler).slice(fromIndex, toIndex);
   } else {
-    return value
+    return value;
   }
-  
+
   return scalers.reduce(reduce_fun, value);
 };
 

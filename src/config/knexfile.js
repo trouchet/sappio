@@ -25,7 +25,7 @@ const dev_connection = {
     database: "sappio_db",
     user: process.env.POSTGRES_USER || "postgres",
     password: process.env.POSTGRES_PASSWORD || "postgres",
-    port: 5432
+    port: 5432,
   },
 };
 
@@ -35,7 +35,7 @@ const docker_connection = {
     database: "sappio_db",
     user: process.env.POSTGRES_USER || "postgres",
     password: process.env.POSTGRES_PASSWORD || "postgres",
-    port: 5432
+    port: 5432,
   },
 };
 
@@ -45,7 +45,7 @@ const prod_connection = {
   user: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   port: process.env.POSTGRES_PORT,
-  port: 5432
+  port: 5432,
 };
 
 let knex_config = {};
@@ -60,7 +60,7 @@ export default knex_config = {
   },
   docker: {
     ...base_knex_env_config,
-    connection: docker_connection
+    connection: docker_connection,
   },
   production: {
     ...base_knex_env_config,

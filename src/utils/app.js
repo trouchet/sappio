@@ -13,10 +13,10 @@ export const prepareApp = (app) => {
     swaggerSpec: swaggerSpec,
   });
 
-  app.set("views", process.cwd() + "/core/views");
+  app.set("views", process.cwd() + "src/core/views");
   app.set("view engine", "pug");
 
-  app.use(express.static(process.cwd() + "/public"));
+  app.use(express.static(process.cwd() + "src/public"));
 
   // Swagger middleware
   app.use(swaggerMW);

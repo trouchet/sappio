@@ -9,14 +9,14 @@ services:
       - ./.env.docker
     ports:
       - 5432:5432
-  
+
   sappio_app:
     image: node:16.18.1
     env_file:
       - ./.env.docker
     container_name: sappio_app
     # necessary due to possibility of postgres not being ready when service runs
-    restart: on-failure:10 
+    restart: on-failure:10
     depends_on:
       - sappio_db
     ports:
