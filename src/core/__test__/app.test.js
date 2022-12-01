@@ -3,7 +3,9 @@ import { app } from "../app.js";
 
 describe("app", () => {
   it("test route /", () => {
-    request(app)
+    expect.assertions(1);
+
+    await request(app)
       .get("/")
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)

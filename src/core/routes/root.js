@@ -25,13 +25,13 @@ router.get("/", (req, res) => {
 /**
  * @openapi
  * /token:
- *   get:
+ *   post:
  *     description: Generates a valid JWT token
  *     responses:
  *       200:
  *         description: Returns a smile face.
  */
-router.get("/token", getToken);
+router.post("/token", getToken);
 
 /**
  * @openapi
