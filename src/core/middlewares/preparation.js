@@ -1,5 +1,4 @@
 import favicon from "serve-favicon";
-import bodyParser from "body-parser";
 import express from "express";
 
 const favicon_MW = favicon(
@@ -8,8 +7,8 @@ const favicon_MW = favicon(
 
 export const preparation_MWs = [
   favicon_MW, 
-  bodyParser.urlencoded({ extended: false }),
-  bodyParser.json(),
+  express.urlencoded({ extended: false }),
+  express.json(),
   express.static(
     process.cwd() + "/src/public"
   )
