@@ -1,5 +1,5 @@
 import express from "express";
-import { buildApp } from "../utils/app.js";
+import { buildApp } from "./utils/app.js";
 import { router } from "./routes/root.js";
 import { log } from "../utils/logger.js";
 
