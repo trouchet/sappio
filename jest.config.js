@@ -36,9 +36,6 @@ export default {
   // If the file path matches any of the patterns, coverage information will be skipped.
   coveragePathIgnorePatterns: ["node_modules/", "src/config/"],
 
-  // The pattern Jest uses to detect test files.
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$",
-
   // This option sets the URL for the jsdom environment.
   // It is reflected in properties such as location.href.
   // @see: https://github.com/facebook/jest/issues/6769
@@ -46,21 +43,21 @@ export default {
     url: "http://localhost/",
   },
 
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js']
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 
   // @see: https://jestjs.io/docs/en/configuration#coveragethreshold-object
   coverageThreshold: {
     "global": {
-      "branches": 0,
-      "functions": 0,
-      "lines": 0,
-      "statements": 0
+      "branches": 95,
+      "functions": 95,
+      "lines": 95,
+      "statements": 95
     }
   },
 
-  //reporters: [
-  //  ["jest-slow-test-reporter", { numTests: 8, color: true }],
-  //],
+  reporters: [
+    ["jest-slow-test-reporter", { numTests: 8, color: true }],
+  ],
 
   runner: "jest-light-runner"
 };
