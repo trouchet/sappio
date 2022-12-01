@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
  *     description: Generates a valid JWT token
  *     responses:
  *       200:
- *         description: Returns a smile face.
+ *         description: Returns an object.
  */
 router.post("/token", getToken);
 
