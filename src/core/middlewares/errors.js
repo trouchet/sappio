@@ -4,7 +4,7 @@ import {
   getErrorMessage,
   getHttpStatusCode,
   logErrorMessage,
-} from "../../utils/error-handler.js";
+} from "../utils/error-handler.js";
 import { errorReporter } from "express-youch";
 
 const NODE_ENVIRONMENT = env.NODE_ENV || "development";
