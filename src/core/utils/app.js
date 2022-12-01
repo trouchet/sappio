@@ -1,4 +1,3 @@
-import express from "express";
 import swStats from "swagger-stats";
 import swaggerUi from "swagger-ui-express";
 import { parseExpressApp } from "express-route-parser";
@@ -14,9 +13,7 @@ export const prepareApp = (app) => {
 
   app.set("views", process.cwd() + "/src/core/views");
   app.set("view engine", "pug");
-
-  app.use(express.static(process.cwd() + "/src/public"));
-
+  
   // Swagger middleware
   app.use(swaggerMW);
   app.use("/swagger", swaggerUi.serve);
