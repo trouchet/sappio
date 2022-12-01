@@ -3,10 +3,9 @@ import swStats from "swagger-stats";
 import swaggerUi from "swagger-ui-express";
 import { parseExpressApp } from "express-route-parser";
 
-import { log } from "../utils/logger.js";
 import { swaggerSpec } from "./swagger.js";
-import { middlewares } from "../core/middlewares/bundler.js";
-import { errors_MWs } from "../core//middlewares/errors.js";
+import { middlewares } from "../middlewares/bundler.js";
+import { errors_MWs } from "../middlewares/errors.js";
 
 export const prepareApp = (app) => {
   const swaggerMW = swStats.getMiddleware({
@@ -21,7 +20,7 @@ export const prepareApp = (app) => {
   // Swagger middleware
   app.use(swaggerMW);
   app.use("/swagger", swaggerUi.serve);
-
+  
   /**
    * @openapi
    * /swagger:

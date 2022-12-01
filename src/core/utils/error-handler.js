@@ -1,4 +1,4 @@
-import { log } from "./logger.js";
+import { log } from "../../utils/logger.js";
 import { Merror } from "express-merror";
 
 /**

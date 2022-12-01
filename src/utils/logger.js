@@ -7,11 +7,9 @@ import { LogtailTransport } from "@logtail/winston";
 
 import { env } from "../config/dotenv.js";
 
-import { getTimestampTimezone } from "./time.js";
+const { createLogger, format, transports } = winston;
 
-const { createLogger, format, transports, config } = winston;
-
-const { combine, timestamp, label, printf } = format;
+const { label } = format;
 
 /*
   We may define our own logging level. The default are given below
