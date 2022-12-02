@@ -44,6 +44,10 @@ export default {
     url: "http://localhost/",
   },
 
+  reporters: [
+    ['jest-slow-test-reporter', {"numTests": 8, "color": true}],
+  ]
+
   coverageThreshold: {
     global: {
           statements: 25,
