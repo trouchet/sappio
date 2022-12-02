@@ -18,7 +18,7 @@ export const getErrorMessage = (error) => {
 
   const error_msg = { message: "", stack: "" };
   if (error?.stack) {
-    console.log(error)
+    console.log(error);
     error_msg[stack] = error.stack;
   }
 

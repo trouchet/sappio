@@ -16,16 +16,15 @@ export const timeScaler = [60, 60, 24, 7, 30, 12];
 const errorMsg = "Item _ITEM_ must belong to list [" + timeHierarchy + "]";
 
 export const convertTimeDouble = (value, from_unit_str, to_unit_str) => {
-  if(typeof value !== 'number' || value < 0) {
-    log("error", 'Value must be a positive number!');
+  if (typeof value !== "number" || value < 0) {
+    log("error", "Value must be a positive number!");
     return;
   }
 
-  if(typeof from_unit_str !== 'string' || typeof to_unit_str !== 'string') {
+  if (typeof from_unit_str !== "string" || typeof to_unit_str !== "string") {
     log(
-      "error", 
-      'From and to unit strings must belong to list [' + 
-      timeHierarchy + ']'
+      "error",
+      "From and to unit strings must belong to list [" + timeHierarchy + "]"
     );
     return;
   }
@@ -52,7 +51,7 @@ export const convertTimeDouble = (value, from_unit_str, to_unit_str) => {
       scalers = timeScaler.slice(fromIndex, toIndex);
     } else if (toIndex < fromIndex) {
       let reversedtimeScaler = _.reverse([...timeScaler]);
-      
+
       toIndex = timeScaler.length - toIndex;
       fromIndex = timeScaler.length - fromIndex;
 
@@ -60,7 +59,7 @@ export const convertTimeDouble = (value, from_unit_str, to_unit_str) => {
     } else {
       return value;
     }
-    
+
     return scalers.reduce(reduce_fun, value);
   }
 };

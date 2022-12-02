@@ -13,11 +13,11 @@ export const prepareApp = (app) => {
 
   app.set("views", process.cwd() + "/src/core/views");
   app.set("view engine", "pug");
-  
+
   // Swagger middleware
   app.use(swaggerMW);
   app.use("/swagger", swaggerUi.serve);
-  
+
   /**
    * @openapi
    * /swagger:
