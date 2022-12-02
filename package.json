@@ -94,7 +94,6 @@
     "express-youch": "^1.0.1",
     "helmet": "^6.0.0",
     "http-errors": "^2.0.0",
-    "jest-light-runner": "^0.4.1",
     "jsrsasign": "^10.6.1",
     "jsrsasign-util": "^1.0.5",
     "knex": "^2.3.0",
