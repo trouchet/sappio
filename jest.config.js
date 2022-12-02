@@ -18,6 +18,10 @@ export default {
     "<rootDir>"
   ],
 
+  collectCoverageFrom: [
+    "src/**/*.{js,jsx}"
+  ],
+  
   testEnvironment: "jest-environment-jsdom",
   coverageProvider: "v8",
 
