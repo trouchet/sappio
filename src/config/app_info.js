@@ -1,3 +1,3 @@
-import { require } from "../utils/commonjs.js";
+import * as pkg from "../../package.json"
 
-export const pkg = require("../../package.json");
+export default pkg;
