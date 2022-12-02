@@ -15,18 +15,16 @@ export default {
   ],
 
   roots: [
-    "<rootDir>"
+  "<rootDir>"
   ],
 
   collectCoverageFrom: [
     "src/**/*.{js,jsx}"
   ],
-  
-  testEnvironment: "jest-environment-jsdom",
-  coverageProvider: "v8",
 
   // Indicates whether the coverage information should be collected while executing the test
   collectCoverage: true,
+  coverageReporters: ['text', 'cobertura'],
 
   // The directory where Jest should output its coverage files.
   coverageDirectory: "<rootDir>/coverage/",
@@ -38,7 +36,14 @@ export default {
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$",
 
   // If the file path matches any of the patterns, coverage information will be skipped.
-  coveragePathIgnorePatterns: ["node_modules/", "src/config/"],
+  coveragePathIgnorePatterns: [
+    "node_modules/", 
+    "src/config/", 
+    "src/utils/logger.js",
+    "src/utils/interceptor.js"
+  ],
+
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 
   // This option sets the URL for the jsdom environment.
   // It is reflected in properties such as location.href.
@@ -47,21 +52,12 @@ export default {
     url: "http://localhost/",
   },
 
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-
-  // @see: https://jestjs.io/docs/en/configuration#coveragethreshold-object
   coverageThreshold: {
-    "global": {
-      "branches": 95,
-      "functions": 95,
-      "lines": 95,
-      "statements": 95
-    }
+  global: {
+        statements: 95,
+        branches: 90,
+        functions: 95,
+        lines: 95,
+      },
   },
-
-  reporters: [
-    ["jest-slow-test-reporter", { numTests: 8, color: true }],
-  ],
-
-  runner: "jest-light-runner"
-};
+}
