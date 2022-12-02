@@ -1,27 +1,106 @@
-import { timeScaler, convertTimeDouble } from "../time.js";
+import { 
+  convertTimeDouble, 
+} from "../time.js";
 import { log } from "../logger.js";
 
-const scaler_ = 60 * 60 * 24 * 7 * 30 * 12;
+const max_scaler = 60 * 60 * 24 * 7 * 30 * 12;
 
-afterEach(() => {
-  // restore the spy created with spyOn
-  jest.restoreAllMocks();
-});
+jest.mock("../logger.js");
 
 describe("time", () => {
-  it("should convert minute to second", () => {
-    const value = convertTimeDouble(1, "minute", "second");
+  afterEach(() => {
+    // restore the spy created with spyOn
+    jest.restoreAllMocks();
+  });
 
-    expect(value).toBe(60);
+  it("should call mocked log for invalid from scaler", () => {
+    convertTimeDouble(1, "minuteS", "second");
+
+    expect(log).toHaveBeenCalled();
+  });
+
+  it("should call mocked log for invalid to scaler", () => {
+    convertTimeDouble(1, "minute", "secondS");
+
+    expect(log).toHaveBeenCalled();
+  });
+
+  it("should call mocked log for string value", () => {
+    convertTimeDouble('42', "minute", "second");
+
+    expect(log).toHaveBeenCalled();
+  });
+
+  it("should call mocked log for negative nummeric value", () => {
+    convertTimeDouble(-42, "minute", "second");
+
+    expect(log).toHaveBeenCalled();
+  });
+
+  it("should call mocked log for nummeric from", () => {
+    convertTimeDouble(1, 42, "second");
+
+    expect(log).toHaveBeenCalled();
+  });
+
+  it("should call mocked log for nummeric to", () => {
+    convertTimeDouble(1, "minute", 42);
+
+    expect(log).toHaveBeenCalled();
+  });
+
+  it("should convert minute to second", () => {
+    const value = 1;
+    const expected_value = 60;
+    const from_unit = "minute";
+    const to_unit = "second";
+
+    const converted_value = convertTimeDouble(1, from_unit, to_unit);
+
+    expect(converted_value).toBe(expected_value);
+  });
+  
+  it("should convert seconds to minutes", () => {
+    const value = 60;
+    const expected_value = 1;
+    const from_unit = "second";
+    const to_unit = "minute";
+
+    const converted_value = convertTimeDouble(value, from_unit, to_unit);
+    
+    expect(converted_value).toBe(expected_value);
   });
 
   it("should convert year to second", () => {
-    const value = convertTimeDouble(1, "year", "second");
-    expect(value).toBe(scaler_);
+    const value = 1;
+    const expected_value = max_scaler;
+    const from_unit = "year";
+    const to_unit = "second";
+
+    const converted_value = convertTimeDouble(value, from_unit, to_unit);
+    
+    expect(converted_value).toBe(expected_value);
   });
 
   it("should convert second to year", () => {
-    const value = convertTimeDouble(1, "second", "year");
-    expect(value).toBeCloseTo(1 / scaler_);
+    const value = 1;
+    const expected_value = 1 / max_scaler;
+    const from_unit = "second";
+    const to_unit = "year";
+
+    const converted_value = convertTimeDouble(value, from_unit, to_unit);
+    
+    expect(converted_value).toBe(expected_value);
+  });
+  
+  it("should convert second to second", () => {
+    const value = 1;
+    const expected_value = value;
+    const from_unit = "second"
+    const to_unit = "second";
+
+    const converted_value = convertTimeDouble(value, from_unit, to_unit);
+    
+    expect(converted_value).toBe(expected_value);
   });
 });
