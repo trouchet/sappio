@@ -80,7 +80,7 @@ morgan.token("type", function (req, res) {
 });
 
 const morgan_format = json(
-  ":type :method :status :url :res[content-length] bytes :total-time ms :response-time ms"
+  ":type :method :status :url :res[content-length] bytes :response-time ms :total-time ms"
 );
 
 const stream_channels = {

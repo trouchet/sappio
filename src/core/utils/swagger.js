@@ -1,6 +1,6 @@
 import swaggerJSDoc from "swagger-jsdoc";
 
-import { pkg } from "../../config/app_info.js";
+import pkg from "../../config/app_info.js";
 
 // Configuration to
 const options = {

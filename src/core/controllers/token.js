@@ -6,8 +6,7 @@ const JWT_TOKEN_DURATION = 3600;
 
 export const getToken = (req, res, next) => {
   log("debug", "getToken controller called");
-  
-  console.log(req)
+
   const body = req?.body===undefined ? {} : req.body;
   
   const secret = res.get("x-secret") || jwt_secret;
