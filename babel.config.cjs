@@ -1,14 +1,13 @@
 module.exports = {
+  ignore: [/\/core-js/],
+  sourceType: "module",
   presets: [
-    "@babel/preset-env",
     [
-      "es2015",
+      "@babel/preset-env",
       {
-        targets: {
-          node: "current",
-        },
+        useBuiltIns: "entry",
+        corejs: "3.22",
       },
     ],
   ],
-  plugins: ["babel-plugin-istanbul"],
 };

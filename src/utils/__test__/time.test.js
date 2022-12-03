@@ -1,5 +1,7 @@
-import { 
-  convertTimeDouble, 
+import {
+  timeScaler,
+  convertTimeDouble,
+  getTimestampTimezone,
 } from "../time.js";
 import { log } from "../logger.js";
 
@@ -26,7 +28,7 @@ describe("time", () => {
   });
 
   it("should call mocked log for string value", () => {
-    convertTimeDouble('42', "minute", "second");
+    convertTimeDouble("42", "minute", "second");
 
     expect(log).toHaveBeenCalled();
   });
@@ -59,7 +61,7 @@ describe("time", () => {
 
     expect(converted_value).toBe(expected_value);
   });
-  
+
   it("should convert seconds to minutes", () => {
     const value = 60;
     const expected_value = 1;
@@ -67,7 +69,7 @@ describe("time", () => {
     const to_unit = "minute";
 
     const converted_value = convertTimeDouble(value, from_unit, to_unit);
-    
+
     expect(converted_value).toBe(expected_value);
   });
 
@@ -78,7 +80,7 @@ describe("time", () => {
     const to_unit = "second";
 
     const converted_value = convertTimeDouble(value, from_unit, to_unit);
-    
+
     expect(converted_value).toBe(expected_value);
   });
 
@@ -89,18 +91,18 @@ describe("time", () => {
     const to_unit = "year";
 
     const converted_value = convertTimeDouble(value, from_unit, to_unit);
-    
+
     expect(converted_value).toBe(expected_value);
   });
-  
+
   it("should convert second to second", () => {
     const value = 1;
     const expected_value = value;
-    const from_unit = "second"
+    const from_unit = "second";
     const to_unit = "second";
 
     const converted_value = convertTimeDouble(value, from_unit, to_unit);
-    
+
     expect(converted_value).toBe(expected_value);
   });
 });

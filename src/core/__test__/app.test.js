@@ -1,16 +1,53 @@
 import request from "supertest";
-import { app } from "../app.js";
+import app from "../app.js";
+
+/**
+ * Mocked Express Request object.
+ */
+let req;
+
+/**
+ * Mocked Express Response object.
+ */
+let res;
+
+/**
+ * Mocked Express Next function.
+ */
+const next = jest.fn();
 
 describe("app", () => {
-  it("test route /", () => {
-    expect.assertions(1);
+  /**
+   * Reset the `req` and `res` object before each test is ran.
+   */
+  beforeEach(() => {
+    req = {
+      params: {},
+      body: {},
+    };
 
-    await request(app)
-      .get("/")
-      .expect("Content-Type", "text/html; charset=utf-8")
-      .expect(200)
-      .end((err, res) => {
-        if (err) throw err;
-      });
+    res = {
+      data: null,
+      code: null,
+      status(status) {
+        this.code = status;
+        return this;
+      },
+      send(payload) {
+        this.data = payload;
+      },
+    };
+
+    next.mockClear();
+  });
+
+  it("test route /", async () => {
+    const expectedStatus = 200;
+    const expectedContentType = "text/html; charset=utf-8";
+
+    const response = await request(app).get("/");
+
+    expect(response.statusCode).toBe(expectedStatus);
+    expect(response["header"]["content-type"]).toEqual(expectedContentType);
   });
 });
