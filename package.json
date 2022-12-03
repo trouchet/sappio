@@ -27,7 +27,6 @@
     "deploy": "pm2 start ./src/config/pm2_configs.js --attach --watch --time --wait-ready",
     "test": "jest --collect-coverage --coverage --forceExit",
     "test:watch": "jest --watchAll --collect-coverage --coverage --detectOpenHandles ",
-    "test:ci": "jest --ci --collect-coverage --coverage",
     "seeds": "knex --env ${KNEX_ENV} --knexfile ./src/config/knexfile.js seed:run",
     "seeds:local": "knex --env dockerLocal --knexfile ./src/config/knexfile.js seed:run",
     "migrations": "knex --env ${KNEX_ENV} --knexfile ./src/config/knexfile.js migrate:latest",
