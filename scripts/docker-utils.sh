@@ -198,7 +198,11 @@ do_docker_install() {
 					fi
 
 					if version_gte "18.09"; then
-							search_command="apt-cache madison 'docker-ce-cli' | grep '$pkg_pattern' | head -1 | awk '{\$1=\$1};1' | cut -d' ' -f 3"
+							search_command="apt-cache madison 'docker-ce-cli' | \
+											grep '$pkg_pattern' | \
+											head -1 | \
+											awk '{\$1=\$1};1' | \
+											cut -d' ' -f 3"
 							echo "INFO: $search_command"
 							cli_pkg_version="=$($sh_c "$search_command")"
 					fi
