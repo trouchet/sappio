@@ -12,8 +12,6 @@ function jsonKeys() {
 }
 
 keys=( 'dependencies' 'devDependencies' )
-grepignore_fname='.grepignore'
-rm "$grepignore_fname"
 
 grepignore_tokens=( 
         'node_modules' 
@@ -21,11 +19,6 @@ grepignore_tokens=(
         'package-lock'
         'codecov'
     )
-
-touch "$grepignore_fname"
-for grepignore_token in "${grepignore_tokens[@]}"; do
-    echo "$grepignore_token" >> "$grepignore_fname"
-done
 
 dependency_grep=''
 dependency_count=0
@@ -44,5 +37,3 @@ for key in "${keys[@]}"; do
         echo "------------------------------------------------"
     done
 done
-
-rm "$grepignore_fname"
