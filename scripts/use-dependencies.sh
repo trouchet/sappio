@@ -20,7 +20,7 @@ grepignore_tokens=(
         'codecov'
     )
 
-dependency_grep=''
+dependency_ocurrences=''
 dependency_count=0
 
 for key in "${keys[@]}"; do
@@ -28,12 +28,18 @@ for key in "${keys[@]}"; do
     while read dependency; do
         grep_command="grep -rnw . -e "$dependency" | \
                       grep -v -f <(printf '%s\n' "${grepignore_tokens[@]}")"
-        dependency_grep="$(eval "$grep_command")"
+        dependency_ocurrences="$(eval "$grep_command")"
+        dependency_ocurrences_filenames="$(eval "$grep_command" | \
+                                           awk '{ print $1 }' FS=":")"
         dependency_count="$(eval "$grep_command" | wc -l)"
         
-        echo "------------------------------------------------"
+        echo "=========================================================="
         echo "Dependency \"$dependency\": count $dependency_count"
-        echo "$dependency_grep"
-        echo "------------------------------------------------"
+        echo "----------------------------------------------------------"
+        echo "Filenames: "
+        echo "$dependency_ocurrences_filenames"
+        echo "----------------------------------------------------------"
+        echo "Ocurrences: "
+        echo "$dependency_ocurrences"
     done
 done
