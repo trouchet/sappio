@@ -11,6 +11,7 @@ function jsonKeys() {
     perl -lne 'print $2 while m{(["'\''])((?:\\.|(?!\1).)*+)\1}g'
 }
 
+dependency_json="package.json"
 keys=( 'dependencies' 'devDependencies' )
 
 grepignore_tokens=( 
@@ -24,7 +25,7 @@ dependency_ocurrences=''
 dependency_count=0
 
 for key in "${keys[@]}"; do
-    jsonKeys "$(jsonValue "$(cat $1)" "$key")" | \
+    jsonKeys "$(jsonValue "$(cat $dependency_json)" "$key")" | \
     while read dependency; do
         grep_command="grep -rnw . -e "$dependency" | \
                       grep -v -f <(printf '%s\n' "${grepignore_tokens[@]}")"
@@ -32,7 +33,7 @@ for key in "${keys[@]}"; do
         
         dependency_ocurrences_filenames="$(eval "$grep_command" | \
                                            awk '{ print $1 }' FS=":" | \
-                                           sort -u)"
+                                           uniq -c)"
         
         dependency_count="$(eval "$grep_command" | wc -l)"
         
