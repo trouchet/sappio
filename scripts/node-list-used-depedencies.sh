@@ -29,17 +29,20 @@ for key in "${keys[@]}"; do
         grep_command="grep -rnw . -e "$dependency" | \
                       grep -v -f <(printf '%s\n' "${grepignore_tokens[@]}")"
         dependency_ocurrences="$(eval "$grep_command")"
+        
         dependency_ocurrences_filenames="$(eval "$grep_command" | \
-                                           awk '{ print $1 }' FS=":")"
+                                           awk '{ print $1 }' FS=":" | \
+                                           sort -u)"
+        
         dependency_count="$(eval "$grep_command" | wc -l)"
         
-        echo "=========================================================="
-        echo "Dependency \"$dependency\": count $dependency_count"
-        echo "----------------------------------------------------------"
+        echo "================================================================================="
+        echo "Dependency \"$dependency\": "
+        echo "---------------------------------------------------------------------------------"
         echo "Filenames: "
         echo "$dependency_ocurrences_filenames"
-        echo "----------------------------------------------------------"
-        echo "Ocurrences: "
+        echo "---------------------------------------------------------------------------------"
+        echo "Ocurrences: count $dependency_count"
         echo "$dependency_ocurrences"
     done
 done
