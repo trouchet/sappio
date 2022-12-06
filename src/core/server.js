@@ -8,23 +8,5 @@ export let startServer = (port) => {
     err
       ? log("error", `Failed to listen on PORT ${port}`)
       : log("info", `Application server listening on PORT ${port}`);
-
-    process.send("ready");
   });
 };
-
-process.on("message", (msg) => {
-  if (msg == "shutdown") {
-    log(
-      "info",
-      "Closing all connections in " +
-        String(FINISH_CONNECTION_TIMEOUT) +
-        " seconds..."
-    );
-
-    setTimeout(() => {
-      log("Finished closing connections");
-      process.exit(0);
-    }, FINISH_CONNECTION_TIMEOUT);
-  }
-});
