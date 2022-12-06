@@ -27,7 +27,7 @@
     "build": "npm run node:build && npm run docker:build",
     "pm2:deploy": "pm2 start ./src/config/pm2_configs.js --attach --watch --time --wait-ready",
     "test": "jest --detectOpenHandles --collect-coverage --coverage --forceExit",
-    "test:watch": "jest --detectOpenHandles --watchAll --collect-coverage --coverage --detectOpenHandles ",
+    "test:watch": "jest --detectOpenHandles --watchAll --collect-coverage --coverage",
     "db:seeds": "knex --env ${KNEX_ENV} --knexfile ./src/config/knexfile.js seed:run",
     "db:seeds:local": "knex --env dockerLocal --knexfile ./src/config/knexfile.js seed:run",
     "db:migrations": "knex --env ${KNEX_ENV} --knexfile ./src/config/knexfile.js migrate:latest",
