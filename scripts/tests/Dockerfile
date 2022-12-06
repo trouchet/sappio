@@ -1,2 +1,2 @@
 FROM scratch
-WORKDIR /
+WORKDIR /   
