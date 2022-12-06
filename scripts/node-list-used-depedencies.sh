@@ -11,7 +11,9 @@ function jsonKeys() {
     perl -lne 'print $2 while m{(["'\''])((?:\\.|(?!\1).)*+)\1}g'
 }
 
-dependency_json="package.json"
+ROOT_PROJECT_PATH="$1"
+
+dependency_json="$ROOT_PROJECT_PATH/package.json"
 keys=( 'dependencies' 'devDependencies' )
 
 grepignore_tokens=( 
@@ -19,6 +21,7 @@ grepignore_tokens=(
         '.git' 
         'package-lock'
         'codecov'
+        'scripts'
     )
 
 dependency_ocurrences=''
@@ -27,8 +30,9 @@ dependency_count=0
 for key in "${keys[@]}"; do
     jsonKeys "$(jsonValue "$(cat $dependency_json)" "$key")" | \
     while read dependency; do
-        grep_command="grep -rnw . -e "$dependency" | \
+        grep_command="grep -rnw "$ROOT_PROJECT_PATH" -e "$dependency" | \
                       grep -v -f <(printf '%s\n' "${grepignore_tokens[@]}")"
+        
         dependency_ocurrences="$(eval "$grep_command")"
         
         dependency_ocurrences_filenames="$(eval "$grep_command" | \
