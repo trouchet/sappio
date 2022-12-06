@@ -35,14 +35,14 @@ export default {
     "src/utils/interceptor.js",
   ],
 
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
-
   // This option sets the URL for the jsdom environment.
   // It is reflected in properties such as location.href.
   // @see: https://github.com/facebook/jest/issues/6769
-  testEnvironmentOptions: {
-    url: "http://localhost/",
-  },
+  //testEnvironmentOptions: {
+  //  url: "http://localhost/",
+  //},
+
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
 
   reporters: [
     ['jest-slow-test-reporter', {"numTests": 8, "color": true}],
@@ -50,10 +50,10 @@ export default {
 
   coverageThreshold: {
     global: {
-          statements: 4.2,
-          branches: 4.2,
-          functions: 4.2,
-          lines: 4.2,
+          statements: 0,
+          branches: 0,
+          functions: 0,
+          lines: 0,
         },
   },
 };

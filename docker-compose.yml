@@ -31,7 +31,7 @@ services:
     depends_on:
       - sappio_db
     ports:
-      - 3000:80
+      - ${APP_PORT}:80
     command: bash -c "npm run docker:init"
     stop_grace_period: 1s
 
