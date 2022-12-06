@@ -154,7 +154,7 @@ do_docker_install() {
 	lsb_dist=$( get_distribution )
 	dist_version=$( get_dist_version )
 
-	case "$lsb_dist" in
+	case "$lsb_dist" in 
 		ubuntu|debian|raspbian)
 
 			pre_reqs="apt-transport-https ca-certificates curl"
