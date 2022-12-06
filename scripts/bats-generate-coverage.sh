@@ -1,6 +1,9 @@
 #!/bin/bash
 
-kcov --clean \
+rm -rf $2
+
+kcov --report-only \
+     --clean \
      --bash-dont-parse-binary-dir \
      --include-pattern=.sh \
      --exclude-pattern=tests \
