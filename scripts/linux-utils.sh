@@ -72,6 +72,24 @@ get_distribution() {
 	echo "$lsb_dist"
 }
 
+get_debian_version() {
+	dist_version="$(sed 's/\/.*//' /etc/debian_version | sed 's/\..*//')"
+	case "$dist_version" in
+		11)
+			echo "bullseye"
+		;;
+		10)
+			echo "buster"
+		;;
+		9)
+			echo "stretch"
+		;;
+		8)
+			echo "jessie"
+		;;
+	esac
+}
+
 # Check if this is a forked Linux distro
 check_forked() {
 
@@ -107,21 +125,8 @@ check_forked() {
 					# We're Debian and don't even know it!
 					lsb_dist=debian
 				fi
-				dist_version="$(sed 's/\/.*//' /etc/debian_version | sed 's/\..*//')"
-				case "$dist_version" in
-					11)
-						dist_version="bullseye"
-					;;
-					10)
-						dist_version="buster"
-					;;
-					9)
-						dist_version="stretch"
-					;;
-					8)
-						dist_version="jessie"
-					;;
-				esac
+				
+				dist_version="$( get_debian_version )"
 			fi
 		fi
 	fi
@@ -157,21 +162,7 @@ get_dist_version() {
 		;;
 
 		debian|raspbian)
-			dist_version="$(sed 's/\/.*//' /etc/debian_version | sed 's/\..*//')"
-			case "$dist_version" in
-				11)
-					dist_version="bullseye"
-				;;
-				10)
-					dist_version="buster"
-				;;
-				9)
-					dist_version="stretch"
-				;;
-				8)
-					dist_version="jessie"
-				;;
-			esac
+			dist_version="$( get_debian_version )"
 		;;
 
 		centos|rhel|sles)
@@ -217,26 +208,74 @@ check_dist_deprecation() {
 	# Print deprecation warnings for distro versions that recently reached EOL,
 	# but may still be commonly used (especially LTS versions).
 	case "$lsb_dist.$dist_version" in
-		debian.stretch|debian.jessie)
+		debian.stretch|debian.jessie|raspbian.stretch|raspbian.jessie|ubuntu.xenial|ubuntu.trusty|fedora.*)
 			dist_deprecation_notice "$lsb_dist" "$dist_version"
-			;;
-		raspbian.stretch|raspbian.jessie)
-			dist_deprecation_notice "$lsb_dist" "$dist_version"
-			;;
-		ubuntu.xenial|ubuntu.trusty)
-			dist_deprecation_notice "$lsb_dist" "$dist_version"
-			;;
-		fedora.*)
-			if [ "$dist_version" -lt 33 ]; then
-				dist_deprecation_notice "$lsb_dist" "$dist_version"
-			fi
 			;;
 	esac
 }
 
+get_pkg_manager() {
+	# Verifies if command runs as sudo
+	lsb_dist=$( get_distribution )
+	dist_version=$( get_dist_version )
+
+	case "$lsb_dist" in 
+		ubuntu|debian|raspbian)
+			pkg_manager="apt-get"
+
+			echo "$pkg_manager"
+			exit 0
+			;;
+
+		centos|fedora|rhel)
+			if [ "$(uname -m)" != "s390x" ] && [ "$lsb_dist" = "rhel" ]; then
+				echo "Packages for RHEL are currently only available for s390x."
+				exit 1
+			fi
+			if [ "$lsb_dist" = "fedora" ]; then
+				pkg_manager="dnf"
+			else
+				pkg_manager="yum"
+			fi
+
+			echo "$pkg_manager"
+			exit 0
+			;;
+
+		sles)
+			if [ "$(uname -m)" != "s390x" ]; then
+				echo "Packages for SLES are currently only available for s390x"
+				exit 1
+			fi
+			
+			pkg_manager="zypper"
+
+			echo "$pkg_manager"
+			exit 0
+			;;
+
+		*)
+			if [ -z "$lsb_dist" ]; then
+				if is_darwin; then
+					echo
+					echo "ERROR: Unsupported operating system 'macOS'"
+					echo "Please get Docker Desktop from https://www.docker.com/products/docker-desktop"
+					echo
+					exit 1
+				fi
+			fi
+			echo
+			echo "ERROR: Unsupported distribution '$lsb_dist'"
+			echo
+			exit 1
+			;;
+			
+	esac
+}
 
 lsb_dist=$( get_distribution )
 dist_version=$( get_dist_version )
+pkg_manager=$( get_pkg_manager )
 
 if is_wsl; then
 	echo
@@ -265,4 +304,4 @@ fi
 check_forked
 check_dist_deprecation
 
-echo "Operating system $lsb_dist, distribution $dist_version DETECTED."
+echo "$lsb_dist:$dist_version:$pkg_manager"
