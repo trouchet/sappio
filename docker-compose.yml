@@ -3,7 +3,7 @@ version: "3.9"
 
 services:
   sappio_db:
-    image: postgres:14.5
+    image: postgres:15.1
     networks:
       - backend
     restart: always
@@ -12,13 +12,11 @@ services:
     environment:
       POSTGRESQL_PASSWORD: ${DB_PASSWORD}
       POSTGRESQL_USER: ${DB_USER}
-      POSTGRESQL_DB: ${DB_NAME}
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
       - ${DB_PORT}:${DB_PORT}
     stop_grace_period: 1s
-    
 
   sappio_app:
     image: node:16.18.1
@@ -31,8 +29,8 @@ services:
     depends_on:
       - sappio_db
     ports:
-      - ${APP_PORT}:80
-    command: bash -c "npm run docker:init"
+      - ${APP_PORT}:8080
+    command: bash -c "npm run docker:init --tag=sappio --from=${APP_PORT} --to=8080"
     stop_grace_period: 1s
 
 networks:
