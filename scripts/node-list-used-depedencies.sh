@@ -27,6 +27,8 @@ grepignore_tokens=(
 dependency_ocurrences=''
 dependency_count=0
 
+touch unused_dependencies.txt
+
 for key in "${keys[@]}"; do
     jsonKeys "$(jsonValue "$(cat $dependency_json)" "$key")" | \
     while read dependency; do
@@ -41,8 +43,15 @@ for key in "${keys[@]}"; do
         
         dependency_count="$(eval "$grep_command" | wc -l)"
         
+        if [[ $dependency_count -eq 1 ]]; then
+            echo "$dependency" >> unused_dependencies.txt
+            dependency="\033[91;1m$dependency\033[0m"
+        else
+            dependency="\033[0;32m$dependency\033[0m"
+        fi
+
         echo "================================================================================="
-        echo "Dependency \"$dependency\": "
+        printf "Dependency \"$dependency\": \n"
         echo "---------------------------------------------------------------------------------"
         echo "Filenames: "
         echo "$dependency_ocurrences_filenames"
