@@ -1,4 +1,4 @@
-# This workflow will: 
+# This workflow will:
 # - clean installation of node dependencies;
 # - cache/restore them;
 # - build the source code;
@@ -34,7 +34,6 @@ jobs:
           cache: "npm"
       - run: npm install --force
 
-  
   test-codecov:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -60,4 +59,3 @@ jobs:
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
-  
