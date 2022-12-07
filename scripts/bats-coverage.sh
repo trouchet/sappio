@@ -2,9 +2,8 @@
 # Get keys from json dictionary
 # 
 # examples:
-# 	>> bats-coverage . ./coverage/ ./tests
-#   a
-#   b
+# 	>> bats-coverage . ./coverage/ ./tests 
+#    # coverage content from folder . on folder ./coverage 
 
 rm -rf $2
 
