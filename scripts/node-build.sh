@@ -17,16 +17,20 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Install node
-curl https://rpm.nodesource.com/setup_16.x | sudo bash -
-$os_install_repo install nodejs –y
+curl https://deb.nodesource.com/setup_16.x | sudo bash -
+$os_install_repo install -y nodejs
 
 # Install nvm
 nvm install lts/*
+
+echo "=================================================================="
 
 # Echo library versions
 echo NPM version: $(npm -v)
 echo NVM version: $(nvm --version)
 echo NodeJS version: $(node -v)
+
+echo "=================================================================="
 
 # Add node binaries to OS path
 export PATH=$PATH:$(npm bin -g)
