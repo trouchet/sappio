@@ -23,7 +23,7 @@
     "hooks:prepare": "husky install",
     "start": "nodemon --trace-warnings  ./src/index.js",
     "node:build": "./scripts/node-build.sh",
-    "docker:build": "./scripts/docker-build.sh",
+    "docker:build": "./scripts/docker-install.sh && bash ./scripts/docker-build.sh",
     "build": "npm run node:build && npm run docker:build",
     "pm2:deploy": "pm2 start ./src/config/pm2_configs.js --attach --watch --time --wait-ready",
     "test": "jest --collect-coverage --coverage",
