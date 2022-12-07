@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/web-thread/sappio#readme",
   "scripts": {
-    "echo": "echo $npm_config_msg",
     "init": "npm run hooks:prepare && npm install && npm run build && npm audit fix && npm run db:prepare",
     "hooks:prepare": "husky install",
     "start": "nodemon --trace-warnings  ./src/index.js",
