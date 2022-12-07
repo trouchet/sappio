@@ -1,10 +1,20 @@
 #!/bin/bash
 
+# Get value from json dictionary
+# 
+# examples:
+# 	>> jsonValue "{"a": 1, "b": 2}" "a"
+#   1
 function jsonValue() {
-    echo "$1" | \
-    jq -r ".$2"
+    echo "$1" | jq -r ".$2"
 }
 
+# Get keys from json dictionary
+# 
+# examples:
+# 	>> jsonKeys "{"a": 1, "b": 2}"
+#   a
+#   b
 function jsonKeys() {
     echo "$1" | \
     jq 'keys' | \
