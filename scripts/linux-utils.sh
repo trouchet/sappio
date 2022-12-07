@@ -272,26 +272,15 @@ get_pkg_manager() {
 			
 	esac
 }
+ 
+os_info() {
+	lsb_dist=$( get_distribution )
+	dist_version=$( get_dist_version )
+	pkg_manager=$( get_pkg_manager )
 
-lsb_dist=$( get_distribution )
-dist_version=$( get_dist_version )
-pkg_manager=$( get_pkg_manager )
-
-if is_wsl; then
-	echo
-	echo "Operating system WSL DETECTED."
-	echo
-	exit 1
-	cat >&2 <<-'EOF'
-
-	EOF
-	( set -x; sleep 20 )
-fi
-
-if [ -z "$lsb_dist" ]; then
-	if is_darwin; then
+	if is_wsl; then
 		echo
-		echo "Operating system 'macOS' DETECTED."
+		echo "Operating system WSL DETECTED."
 		echo
 		exit 1
 		cat >&2 <<-'EOF'
@@ -299,9 +288,22 @@ if [ -z "$lsb_dist" ]; then
 		EOF
 		( set -x; sleep 20 )
 	fi
-fi
 
-check_forked
-check_dist_deprecation
+	if [ -z "$lsb_dist" ]; then
+		if is_darwin; then
+			echo
+			echo "Operating system 'macOS' DETECTED."
+			echo
+			exit 1
+			cat >&2 <<-'EOF'
 
-echo "$lsb_dist:$dist_version:$pkg_manager"
+			EOF
+			( set -x; sleep 20 )
+		fi
+	fi
+
+	check_forked
+	check_dist_deprecation
+
+	echo "$lsb_dist:$dist_version:$pkg_manager"
+}
