@@ -1,23 +1,38 @@
 #!/bin/bash
 
+# This files requires source activation by below bash command run:
+# >> source ./linux-utils.sh
+
 set -e
 
 # strip "v" prefix if present
 VERSION="${VERSION#v}"
 
+# Checks command existence 
+#
+# examples:
+# 	>> command_exists echo # 0 (success)
 command_exists() {
 	command -v "$@" > /dev/null 2>&1
 }
 
-# calver_compare compares two CalVer (YY.MM) version strings. returns 0 (success)
-# if version A is newer or equal than version B, or 1 (fail) otherwise. Patch
-# releases and pre-release (-alpha/-beta) are not taken into account
+# Checks command existence 
+# 	returns 0 (success)
 #
 # examples:
+# 	>> command_exists echo # 0 (success)
+listPIDsAttachedToPort () {
+	echo "$(lsof -i ":$1" | awk '{ print $2 }' | awk 'NR>1')"  | uniq -u
+}
+
+# Compares two CalVer (YY.MM) version strings. 
+# 	if version A is newer or equal than version B, or 1 (fail) otherwise. Patch
+# releases and pre-release (-alpha/-beta) are not taken into account
 #
-# calver_compare 20.10 19.03 // 0 (success)
-# calver_compare 20.10 20.10 // 0 (success)
-# calver_compare 19.03 20.10 // 1 (fail)
+# examples: 
+# 	>> calver_compare 20.10 19.03 # 0 (success)
+# 	>> calver_compare 20.10 20.10 # 0 (success)
+# 	>> calver_compare 19.03 20.10 # 1 (fail)
 calver_compare() (
 	set +x
 
@@ -38,17 +53,18 @@ calver_compare() (
 	return 0
 )
 
-# version_gte checks if the version specified in $VERSION is at least
-# the given CalVer (YY.MM) version. returns 0 (success) if $VERSION is either
-# unset (=latest) or newer or equal than the specified version. Returns 1 (fail)
+# Checks if the version specified in $VERSION is at least
+# the given CalVer (YY.MM) version. 
+# returns 0 (success) if $VERSION is either unset (=latest) 
+# or newer or equal than the specified version. Returns 1 (fail)
 # otherwise.
-#
+# 
 # examples:
 #
-# VERSION=20.10
-# version_gte 20.10 // 0 (success)
-# version_gte 19.03 // 0 (success)
-# version_gte 21.10 // 1 (fail)
+# >> VERSION=20.10
+# >> version_gte 20.10 # 0 (success)
+# >> version_gte 19.03 # 0 (success)
+# >> version_gte 21.10 # 1 (fail)
 version_gte() {
 	if [ -z "$VERSION" ]; then
 			return 0
@@ -56,6 +72,11 @@ version_gte() {
 	eval calver_compare "$VERSION" "$1"
 }
 
+# Gets Linux distribution 
+#
+# examples:
+# 	>> get_distribution 
+# 	ubuntu
 get_distribution() {
 	lsb_dist=""
 
@@ -72,6 +93,11 @@ get_distribution() {
 	echo "$lsb_dist"
 }
 
+# Gets Debian version
+#
+# examples:
+# 	>> get_debian_version 
+# 	bullseye
 get_debian_version() {
 	dist_version="$(sed 's/\/.*//' /etc/debian_version | sed 's/\..*//')"
 	case "$dist_version" in
@@ -91,7 +117,10 @@ get_debian_version() {
 }
 
 # Check if this is a forked Linux distro
-check_forked() {
+#
+# examples:
+# 	>> check_forked # 1 (fail)
+check_forked_dist() {
 
 	# Check for lsb_release command existence, it usually exists in forked distros
 	if command_exists lsb_release; then
@@ -132,6 +161,11 @@ check_forked() {
 	fi
 }
 
+# Check if this is a forked Linux distro
+#
+# examples:
+# 	>> dist_deprecation_notice() {s
+ # 1 (fail)
 dist_deprecation_notice() {
 
 	distro=$1
@@ -148,6 +182,10 @@ dist_deprecation_notice() {
 	sleep 10
 }
 
+# Check if this is a forked Linux distro
+#
+# examples:
+# 	>> get_dist_version # 1 (fail)
 get_dist_version() {
 
 	lsb_dist=$( get_distribution )
@@ -184,6 +222,10 @@ get_dist_version() {
 	echo $dist_version
 }
 
+# Check if it is a macOS  
+#
+# examples:
+# 	>> is_darwin # 1 (fail)
 is_darwin() {
 	case "$(uname -s)" in
 	*darwin* ) true ;;
@@ -192,6 +234,10 @@ is_darwin() {
 	esac
 }
 
+# Check if it is Windows OS
+#
+# examples:
+# 	>> is_wsl # 1 (fail)
 is_wsl() {
 
 	case "$(uname -r)" in
@@ -201,6 +247,10 @@ is_wsl() {
 	esac
 }
 
+# Check linux distribution deprecation
+#
+# examples:
+# 	>> check_dist_deprecation
 check_dist_deprecation() {
 	lsb_dist=$( get_distribution )
 	dist_version=$( get_dist_version ) 
@@ -214,6 +264,10 @@ check_dist_deprecation() {
 	esac
 }
 
+# Get package manager on Linux distributions
+#
+# examples:
+# 	>> get_pkg_manager
 get_pkg_manager() {
 	# Verifies if command runs as sudo
 	lsb_dist=$( get_distribution )
@@ -272,7 +326,11 @@ get_pkg_manager() {
 			
 	esac
 }
- 
+
+# Get OS information in pattern "lsb_dist:dist_version:pkg_manager"
+#
+# examples:
+# 	>> get_pkg_manager 
 os_info() {
 	lsb_dist=$( get_distribution )
 	dist_version=$( get_dist_version )
@@ -302,8 +360,43 @@ os_info() {
 		fi
 	fi
 
-	check_forked
+	check_forked_dist
 	check_dist_deprecation
 
 	echo "$lsb_dist:$dist_version:$pkg_manager"
 }
+
+get_if_root() {
+	sh_c='sh -c'
+	if [ "$user" != 'root' ]; then
+		if command_exists sudo; then
+			sh_c='sudo -E sh -c'
+		elif command_exists su; then
+			sh_c='su -c'
+		else
+			cat >&2 <<-'EOF'
+			Error: this installer needs the ability to run commands as root.
+			We are unable to find either "sudo" or "su" available to make this happen.
+			EOF
+			exit 1
+		fi
+	fi
+
+	echo $sh_c
+}
+
+export -f command_exists
+export -f listPIDsAttachedToPort
+export -f calver_compare
+export -f version_gte
+export -f get_distribution
+export -f get_debian_version
+export -f check_forked_dist
+export -f dist_deprecation_notice
+export -f get_dist_version
+export -f is_darwin
+export -f is_wsl
+export -f check_dist_deprecation
+export -f get_pkg_manager
+export -f os_info
+export -f get_if_root
