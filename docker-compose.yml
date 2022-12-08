@@ -1,28 +1,40 @@
-version: "3"
+# Reference URL: https://docs.docker.com/compose
+version: "3.9"
 
 services:
   sappio_db:
-    image: postgres:14.5
-    container_name: sappio_db
+    image: postgres:15.1
+    networks:
+      - backend
     restart: always
     env_file:
       - ./.env.docker
+    environment:
+      POSTGRESQL_PASSWORD: ${DB_PASSWORD}
+      POSTGRESQL_USER: ${DB_USER}
+    volumes:
+      - db-data:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - ${DB_PORT}:${DB_PORT}
+    stop_grace_period: 1s
 
   sappio_app:
     image: node:16.18.1
+    networks:
+      - backend
+    container_name: sappio_app
     env_file:
       - ./.env.docker
-    container_name: sappio_app
-    # necessary due to possibility of postgres not being ready when service runs
     restart: on-failure:10
     depends_on:
       - sappio_db
     ports:
-      - 3000:3000
-    volumes:
-      - .:/usr/app
-      - /usr/app/node_modules
-    working_dir: /usr/app
-    command: bash -c " npm install && npm audit fix && npm run migrations && npm run seeds && npm run deploy "
+      - ${APP_PORT}:8080
+    command: bash -c "npm run docker:init --tag=sappio --from=${APP_PORT} --to=8080"
+    stop_grace_period: 1s
+
+networks:
+  backend:
+
+volumes:
+  db-data:

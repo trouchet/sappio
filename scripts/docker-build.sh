@@ -8,6 +8,9 @@
 #   $ sh get-docker.sh
 set -e
 
+BASEDIR=$(dirname $0)
+source "${BASEDIR}/linux-utils.sh"
+
 # strip "v" prefix if present
 VERSION="${VERSION#v}"
 
@@ -52,6 +55,42 @@ is_dry_run() {
 	fi
 }
 
+echo_docker_as_nonroot() {
+	if is_dry_run; then
+		return
+	fi
+	if command_exists docker && [ -e /var/run/docker.sock ]; then
+		(
+			set -x
+			$sh_c 'docker version'
+		) || true
+	fi
+
+	# intentionally mixed spaces and tabs here -- tabs are stripped by "<<-EOF", spaces are kept in the output
+	echo
+	echo "================================================================================"
+	echo
+	if version_gte "20.10"; then
+		echo "To run Docker as a non-privileged user, consider setting up the"
+		echo "Docker daemon in rootless mode for your user:"
+		echo
+		echo "    dockerd-rootless-setuptool.sh install"
+		echo
+		echo "Visit https://docs.docker.com/go/rootless/ to learn about rootless mode."
+		echo
+	fi
+	echo
+	echo "To run the Docker daemon as a fully privileged service, but granting non-root"
+	echo "users access, refer to https://docs.docker.com/go/daemon-access/"
+	echo
+	echo "WARNING: Access to the remote API on a privileged Docker daemon is equivalent"
+	echo "         to root access on the host. Refer to the 'Docker daemon attack surface'"
+	echo "         documentation for details: https://docs.docker.com/go/attack-surface/"
+	echo
+	echo "================================================================================"
+	echo
+}
+
 docker_installation_pre_warning () {
 	if command_exists docker; then
 		cat >&2 <<-'EOF'
@@ -66,95 +105,22 @@ docker_installation_pre_warning () {
 
 			You may press Ctrl+C now to abort this script.
 		EOF
-		( set -x; sleep 20 )
+		( set -x; sleep  1)
 	fi
 }
 
-check_forked_dist() {
-
-	# Check for lsb_release command existence, it usually exists in forked distros
-	if command_exists lsb_release; then
-		# Check if the `-u` option is supported
-		set +e
-		lsb_release -a -u > /dev/null 2>&1
-		lsb_release_exit_code=$?
-		set -e
-
-		# Check if the command has exited successfully, it means we're in a forked distro
-		if [ "$lsb_release_exit_code" = "0" ]; then
-			# Print info about current distro
-			cat <<-EOF
-			You're using '$lsb_dist' version '$dist_version'.
-			EOF
-
-			# Get the upstream release info
-			lsb_dist=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'id' | cut -d ':' -f 2 | tr -d '[:space:]')
-			dist_version=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'codename' | cut -d ':' -f 2 | tr -d '[:space:]')
-
-			# Print info about upstream distro
-			cat <<-EOF
-			Upstream release is '$lsb_dist' version '$dist_version'.
-			EOF
-		else
-			if [ -r /etc/debian_version ] && [ "$lsb_dist" != "ubuntu" ] && [ "$lsb_dist" != "raspbian" ]; then
-				if [ "$lsb_dist" = "osmc" ]; then
-					# OSMC runs Raspbian
-					lsb_dist=raspbian
-				else
-					# We're Debian and don't even know it!
-					lsb_dist=debian
-				fi
-				dist_version="$(sed 's/\/.*//' /etc/debian_version | sed 's/\..*//')"
-				case "$dist_version" in
-					11)
-						dist_version="bullseye"
-					;;
-					10)
-						dist_version="buster"
-					;;
-					9)
-						dist_version="stretch"
-					;;
-					8)
-						dist_version="jessie"
-					;;
-				esac
-			fi
-		fi
-	fi
-}
-
-get_if_root() {
-	sh_c='sh -c'
-	if [ "$user" != 'root' ]; then
-		if command_exists sudo; then
-			sh_c='sudo -E sh -c'
-		elif command_exists su; then
-			sh_c='su -c'
-		else
-			cat >&2 <<-'EOF'
-			Error: this installer needs the ability to run commands as root.
-			We are unable to find either "sudo" or "su" available to make this happen.
-			EOF
-			exit 1
-		fi
-	fi
+do_docker_install() {
+	# Verifies if command runs as sudo
+	sh_c=$( get_if_root )
 
 	if is_dry_run; then
 		sh_c="echo"
 	fi
 
-	echo $sh_c
-}
-
-do_docker_install() {
-	# Verifies if command runs as sudo
-	sh_c=$( get_if_root  )
-
 	lsb_dist=$( get_distribution )
 	dist_version=$( get_dist_version )
 
-	case "$lsb_dist" in
+	case "$lsb_dist" in 
 		ubuntu|debian|raspbian)
 
 			pre_reqs="apt-transport-https ca-certificates curl"
@@ -162,13 +128,18 @@ do_docker_install() {
 				pre_reqs="$pre_reqs gnupg"
 			fi
 			
-			apt_repo="deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] $DOWNLOAD_URL/linux/$lsb_dist $dist_version $CHANNEL"
+			dist_URL="$DOWNLOAD_URL/linux/$lsb_dist"
+			signed_route="/etc/apt/keyrings/docker.gpg"
+			architecture="$(dpkg --print-architecture)"
+			apt_repo="deb [arch=$architecture signed-by=$signed_route] $dist_URL $dist_version $CHANNEL"
+			
+			echo "================================================================================"
 			(
 				if ! is_dry_run; then
 					set -x
 				fi
 
-				$sh_c 'apt-get update -qq >/dev/null'
+				$sh_c "apt-get update -qq >/dev/null"
 				$sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq $pre_reqs >/dev/null"
 				$sh_c 'mkdir -p /etc/apt/keyrings && chmod -R 0755 /etc/apt/keyrings'
 				$sh_c "curl -fsSL \"$DOWNLOAD_URL/linux/$lsb_dist/gpg\" | gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg"
@@ -198,7 +169,11 @@ do_docker_install() {
 					fi
 
 					if version_gte "18.09"; then
-							search_command="apt-cache madison 'docker-ce-cli' | grep '$pkg_pattern' | head -1 | awk '{\$1=\$1};1' | cut -d' ' -f 3"
+							search_command="apt-cache madison 'docker-ce-cli' | \
+											grep '$pkg_pattern' | \
+											head -1 | \
+											awk '{\$1=\$1};1' | \
+											cut -d' ' -f 3"
 							echo "INFO: $search_command"
 							cli_pkg_version="=$($sh_c "$search_command")"
 					fi
@@ -232,6 +207,7 @@ do_docker_install() {
 					$sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq docker-ce-rootless-extras${pkg_version%=} >/dev/null"
 				fi
 			)
+			echo "================================================================================"
 
 			echo_docker_as_nonroot
 			
@@ -259,7 +235,6 @@ do_docker_install() {
 				pkg_suffix="el"
 			fi
 			repo_file_url="$DOWNLOAD_URL/linux/$lsb_dist/$REPO_FILE"
-			)
 
 			pkg_version=""
 			if [ -n "$VERSION" ]; then
@@ -441,4 +416,7 @@ do_install() {
 	do_docker_install
 }
 
-do_install()
+do_install
+
+systemctl start docker.service
+systemctl enable docker.service 

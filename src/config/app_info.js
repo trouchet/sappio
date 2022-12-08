@@ -1,3 +1,3 @@
-import * as pkg from "../../package.json";
+import * as pkg from "../../package.json" assert { type: "json" };
 
 export default pkg;
