@@ -366,6 +366,11 @@ os_info() {
 	echo "$lsb_dist:$dist_version:$pkg_manager"
 }
 
+# Get root command
+#
+# examples:
+# 	>> echo "$( get_if_root )"
+#	sudo -E sh -c
 get_if_root() {
 	sh_c='sh -c'
 	if [ "$user" != 'root' ]; then
@@ -375,14 +380,21 @@ get_if_root() {
 			sh_c='su -c'
 		else
 			cat >&2 <<-'EOF'
-			Error: this installer needs the ability to run commands as root.
-			We are unable to find either "sudo" or "su" available to make this happen.
+			Error: We require either "sudo" or "su" commands for root mode.
 			EOF
 			exit 1
 		fi
 	fi
 
 	echo $sh_c
+}
+
+# Get filtered list of files
+# 
+# examples:
+# 	>> get_pkg_manager
+filtered_ls () {
+	ls "$1" | grep "$2"
 }
 
 export -f command_exists
@@ -400,3 +412,4 @@ export -f check_dist_deprecation
 export -f get_pkg_manager
 export -f os_info
 export -f get_if_root
+export -f filtered_ls
