@@ -2,7 +2,7 @@ FROM node:19-alpine
 
 ADD . ./
 
-RUN npm install --quiet
+RUN npm ci --quiet
 RUN npm install pm2 -g
 
 RUN mkdir /usr/app

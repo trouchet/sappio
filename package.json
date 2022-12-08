@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/trouchet/sappio#readme",
   "scripts": {
-    "init": "npm run hooks:prepare && npm install && npm run build && npm audit fix && npm run db:init",
+    "init": "npm run hooks:prepare && npm ci && npm run build && npm audit fix && npm run db:init",
     "db:init": "npm run migrations && npm run seeds",
     "hooks:prepare": "husky install",
     "start": "nodemon --trace-warnings  ./src/index.js",
