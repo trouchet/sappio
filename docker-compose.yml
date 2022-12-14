@@ -19,7 +19,7 @@ services:
     stop_grace_period: 1s
 
   sappio_app:
-    image: node:16.18.1
+    image: node:16.19.0
     networks:
       - backend
     container_name: sappio_app
