@@ -1,11 +1,11 @@
-import * as winston from "winston";
-import morgan from "morgan";
-import json from "morgan-json";
+import * as winston from 'winston';
+import morgan from 'morgan';
+import json from 'morgan-json';
 
-import { Logtail } from "@logtail/node";
-import { LogtailTransport } from "@logtail/winston";
+import { Logtail } from '@logtail/node';
+import { LogtailTransport } from '@logtail/winston';
 
-import { env } from "../config/dotenv.js";
+import env from '../config/dotenv';
 
 const { createLogger, format, transports } = winston;
 
@@ -30,7 +30,7 @@ const { label } = format;
  *
  * @param {String} label_msg
  */
-export const logging = (label_msg = "default") => {
+export const logging = (label_msg = 'default') => {
   const log_info_parser = (info) => {
     const time_prefix = `[${info.timestamp} - ${label_msg}]`;
     const info_suffix = `${info.level}: ${info.message}`;
@@ -41,7 +41,7 @@ export const logging = (label_msg = "default") => {
   const logger_setup = {
     format: format.combine(
       label({ label: label_msg }),
-      format.timestamp({ format: "DD/MM/YYYY HH:mm:ss.ss" }),
+      format.timestamp({ format: 'DD/MM/YYYY HH:mm:ss.ss' }),
       format.colorize(),
       format.printf(log_info_parser)
     ),
@@ -66,7 +66,7 @@ export const log_message = (logger__, level, message) => {
   });
 };
 
-export const agentMorganReporter = logging("morgan");
+export const agentMorganReporter = logging('morgan');
 
 // Use winston agent to report for Logtail
 if (env.LOGTAIL_TOKEN) {
@@ -75,18 +75,18 @@ if (env.LOGTAIL_TOKEN) {
   agentMorganReporter.add(new LogtailTransport(logtail));
 }
 
-morgan.token("type", function (req, res) {
-  return req.headers["content-type"];
+morgan.token('type', function (req, res) {
+  return req.headers['content-type'];
 });
 
 const morgan_format = json(
-  ":type :method :status :url :res[content-length] bytes :response-time ms :total-time ms"
+  ':type :method :status :url :res[content-length] bytes :response-time ms :total-time ms'
 );
 
 const stream_channels = {
   stream: {
     // Configure Morgan to use our custom logger with custom severity
-    write: (message) => agentMorganReporter.log("info", message),
+    write: (message) => agentMorganReporter.log('info', message),
   },
 };
 
