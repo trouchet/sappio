@@ -5,7 +5,9 @@ const favicon_MW = favicon(
   process.cwd() + "/src/public/favicon.ico"
 );
 
-export const preparation_MWs = [
+let preparation_MWs = [];
+
+export default preparation_MWs = [
   favicon_MW,
   express.urlencoded({ extended: false }),
   express.json(),
