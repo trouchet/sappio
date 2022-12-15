@@ -1,5 +1,5 @@
-import MD5 from "crypto-js/md5.js";
-import { v4 as uuidv4 } from "uuid";
+import MD5 from 'crypto-js/md5.js';
+import { v4 as uuidv4 } from 'uuid';
 
 exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries

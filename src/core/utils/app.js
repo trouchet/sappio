@@ -1,22 +1,22 @@
-import swStats from "swagger-stats";
-import swaggerUi from "swagger-ui-express";
-import { parseExpressApp } from "express-route-parser";
+import swStats from 'swagger-stats';
+import swaggerUi from 'swagger-ui-express';
+import { parseExpressApp } from 'express-route-parser';
 
-import { swaggerSpec } from "./swagger.js";
-import middlewares from "../middlewares/bundler.js";
-import { errors_MWs } from "../middlewares/errors.js";
+import { swaggerSpec } from './swagger';
+import middlewares from '../middlewares/bundler';
+import { errors_MWs } from '../middlewares/errors';
 
 export const prepareApp = (app) => {
   const swaggerMW = swStats.getMiddleware({
     swaggerSpec: swaggerSpec,
   });
 
-  app.set("views", process.cwd() + "/src/core/views");
-  app.set("view engine", "pug");
+  app.set('views', process.cwd() + '/src/core/views');
+  app.set('view engine', 'pug');
 
   // Swagger middleware
   app.use(swaggerMW);
-  app.use("/swagger", swaggerUi.serve);
+  app.use('/swagger', swaggerUi.serve);
 
   /**
    * @openapi
@@ -27,7 +27,7 @@ export const prepareApp = (app) => {
    *       200:
    *         description: Returns the swagger of available routes.
    */
-  app.get("/swagger", swaggerUi.setup(swaggerSpec));
+  app.get('/swagger', swaggerUi.setup(swaggerSpec));
 
   /**
    * @openapi
@@ -38,7 +38,7 @@ export const prepareApp = (app) => {
    *       200:
    *         description: Returns the available routes.
    */
-  app.get("/all", function (req, res) {
+  app.get('/all', function (req, res) {
     res.send(parseExpressApp(app));
   });
 

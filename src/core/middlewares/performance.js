@@ -12,7 +12,7 @@ const msg_1 = 'Too many requests from this source!';
 const msg_2 = `Please, try again after ${obsvWindow_min} minutes`;
 
 const limiter_options = {
-  windowMs: convertTimeDouble(obsvWindow_min, "minute", "second") * 1000,
+  windowMs: convertTimeDouble(obsvWindow_min, 'minute', 'second') * 1000,
   max: maxRequestCount,
   message: msg_1 + msg_2,
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
