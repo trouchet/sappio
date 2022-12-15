@@ -2,9 +2,9 @@ import swStats from 'swagger-stats';
 import swaggerUi from 'swagger-ui-express';
 import { parseExpressApp } from 'express-route-parser';
 
-import { swaggerSpec } from './swagger';
+import swaggerSpec from './swagger';
 import middlewares from '../middlewares/bundler';
-import { errors_MWs } from '../middlewares/errors';
+import error_middlewares from '../middlewares/errors';
 
 export const prepareApp = (app) => {
   const swaggerMW = swStats.getMiddleware({
@@ -42,31 +42,27 @@ export const prepareApp = (app) => {
     res.send(parseExpressApp(app));
   }); 
 
-  middlewares.reduce(
+  return middlewares.reduce(
     (app, middleware) => app.use(middleware), 
     app
-  )
-
-  return app;
+  );
 };
 
 export const routeApp = (app, routers) => {
-  for (let router of routers) {
-    app.use(router);
-  }
-
-  return app;
+  return routers.reduce(
+    (app, router) => app.use(router), 
+    app
+  );
 };
 
 export const pospareApp = (app) => {
   /**
    * Any error handler middleware MUST be added after we define our routes.
    */
-  for (const error_middleware of errors_MWs) {
-    app.use(error_middleware);
-  }
-
-  return app;
+  return error_middlewares.reduce(
+    (app, error_middleware) => app.use(error_middleware), 
+    app
+  );
 };
 
 export const buildApp = (app, routers) => pospareApp(
