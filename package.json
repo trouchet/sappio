@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/trouchet/sappio#readme",
   "scripts": {
-    "init": "npm run hooks:prepare && npm install && npm run build && npm audit fix && npm run db:init",
+    "init": "npm run hooks:prepare && npm ci && npm run build && npm audit fix && npm run db:init",
     "db:init": "npm run migrations && npm run seeds",
     "hooks:prepare": "husky install",
     "start": "nodemon --trace-warnings  ./src/index.js",
@@ -27,9 +27,9 @@
     "docker:build": "./scripts/docker-build.sh",
     "build": "npm run node:build && npm run docker:build",
     "pm2:deploy": "pm2 start ./src/config/pm2_configs.js --attach --watch --time --wait-ready",
-    "test": "jest --clearCache --collect-coverage --coverage",
+    "test": "jest --collect-coverage --coverage",
     "test:ci": "jest --ci --clearCache --collect-coverage --coverage",
-    "test:watch": "jest --clearCache  --watchAll --collect-coverage --coverage",
+    "test:watch": "jest --watchAll --collect-coverage --coverage",
     "db:seeds": "knex --env ${KNEX_ENV} --knexfile ./src/config/knexfile.js seed:run",
     "db:seeds:local": "knex --env dockerLocal --knexfile ./src/config/knexfile.js seed:run",
     "db:migrations": "knex --env ${KNEX_ENV} --knexfile ./src/config/knexfile.js migrate:latest",
@@ -118,8 +118,5 @@
     "tx2": "^1.0.5",
     "uuid": "^9.0.0",
     "winston": "^3.8.2"
-  },
-  "optionalDependencies": {
-    "fsevents": "^2.3.2"
   }
 }
