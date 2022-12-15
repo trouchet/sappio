@@ -1,3 +1,4 @@
+// Source: https://github.com/joshburgess/eslint-config-standard-trailing-commas/blob/master/eslintrc.json
 module.exports = {
   "parserOptions": {
     "ecmaVersion": 7,
