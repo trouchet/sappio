@@ -1,4 +1,4 @@
-import { env } from "./dotenv.js";
+import env from "./dotenv.js";
 import path from "path";
 
 const BASE_PATH = process.cwd() + "/" + "db";

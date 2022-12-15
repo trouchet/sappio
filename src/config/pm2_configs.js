@@ -1,4 +1,4 @@
-import { env } from "../config/dotenv.js";
+import env from "../config/dotenv.js";
 
 export default {
   apps: [

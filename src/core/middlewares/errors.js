@@ -1,5 +1,5 @@
 import { log } from "../../utils/logger.js";
-import { env } from "../../config/dotenv.js";
+import env from "../../config/dotenv.js";
 import {
   getErrorMessage,
   getHttpStatusCode,
