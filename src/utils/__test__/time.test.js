@@ -1,7 +1,5 @@
 import {
-  timeScaler,
   convertTimeDouble,
-  getTimestampTimezone,
 } from "../time.js";
 import { log } from "../logger.js";
 
