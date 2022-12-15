@@ -40,11 +40,12 @@ export const prepareApp = (app) => {
    */
   app.get('/all', function (req, res) {
     res.send(parseExpressApp(app));
-  });
+  }); 
 
-  for (const middleware of middlewares) {
-    app.use(middleware);
-  }
+  middlewares.reduce(
+    (app, middleware) => app.use(middleware), 
+    app
+  )
 
   return app;
 };
