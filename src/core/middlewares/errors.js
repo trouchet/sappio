@@ -94,7 +94,9 @@ const errorHandlerMiddleware = (error, request, response, next) => {
   next();
 };
 
-export const errors_MWs = [
+const errors_MWs = [];
+
+export default errors_MWs = [
   errorHandlerMiddleware, 
   errorReporter()
 ];

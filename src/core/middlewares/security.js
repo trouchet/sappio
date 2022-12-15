@@ -1,7 +1,9 @@
-import helmet from "helmet";
-import cors from "cors";
+import helmet from 'helmet';
+import cors from 'cors';
 
-export const security_MWs = [
+export const security_MWs = [];
+
+export default security_MWs = [
   helmet(), 
   cors()
 ];
