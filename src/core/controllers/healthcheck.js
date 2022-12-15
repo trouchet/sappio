@@ -1,5 +1,5 @@
-import pkg from "../../config/app_info.js";
-import { log } from "../../utils/logger.js";
+import pkg from "../../config/app_info";
+import { log } from "../../utils/logger";
 
 export const healthCheck = async (req, res, next) => {
   log("debug", "healthCheck controller called");

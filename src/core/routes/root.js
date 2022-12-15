@@ -1,13 +1,11 @@
 import express from "express";
+import { getToken } from "../controllers/token";
+import { healthCheck } from "../controllers/healthcheck";
 
-export const router = express.Router();
-
-import { getToken } from "../controllers/token.js";
-import { healthCheck } from "../controllers/healthcheck.js";
-import { log } from "../../utils/logger.js";
+const router = express.Router();
 
 // TAKE NOTE: Utilize this to provide created error likeso: next(error)
-import createHttpError from "http-errors";
+// import createHttpError from "http-errors";
 
 /**
  * @openapi
@@ -73,3 +71,5 @@ router.get("/healthcheck", healthCheck);
  *       200:
  *         description: Returns a descriptive application swagger with request statistics.
  */
+
+export default router;

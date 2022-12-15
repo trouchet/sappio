@@ -1,7 +1,5 @@
-import app from "./app.js";
-import { log } from "../utils/logger.js";
-
-const FINISH_CONNECTION_TIMEOUT = 1500;
+import app from "./app";
+import { log } from "../utils/logger";
 
 export let startServer = (port) => {
   app.listen(port, (err) => {

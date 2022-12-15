@@ -2,11 +2,9 @@ import {
   mockRequest,
   mockResponse,
   mockNext,
-} from "../../../utils/interceptor.js";
+} from "../../../utils/interceptor";
 
-import pkg from "../../../config/app_info.js";
-
-import { healthCheck } from "../healthcheck.js";
+import { healthCheck } from "../healthcheck";
 
 describe("healthcheck", () => {
   afterEach(() => {
@@ -15,9 +13,9 @@ describe("healthcheck", () => {
   });
 
   it("should call mocked log for invalid from scaler", async () => {
-    let req = mockRequest();
-    let res = mockResponse();
-    let next = mockNext();
+    const req = mockRequest();
+    const res = mockResponse();
+    const next = mockNext();
 
     await healthCheck(req, res, next);
 

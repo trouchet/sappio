@@ -16,12 +16,12 @@ exports.seed = function (knex, Promise) {
         {
           id: uuidv4(),
           email: "nakaz@email.com",
-          password: MD5("password1"),
+          password: MD5("secret-1"),
         },
         {
           id: uuidv4(),
           email: "jaywon@email.com",
-          password: MD5("password123"),
+          password: MD5("secret-2"),
         },
       ]);
     });

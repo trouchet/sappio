@@ -2,9 +2,9 @@ import {
   mockRequest,
   mockResponse,
   mockNext,
-} from "../../../utils/interceptor.js";
+} from "../../../utils/interceptor";
 
-import { getToken } from "../token.js";
+import { getToken } from "../token";
 
 describe("token", () => {
   afterEach(() => {
@@ -13,9 +13,9 @@ describe("token", () => {
   });
 
   it("should call mocked log for invalid from scaler", async () => {
-    let req = mockRequest();
+    const req = mockRequest();
     const res = mockResponse();
-    let next = mockNext();
+    const next = mockNext();
 
     await getToken(req, res, next);
 

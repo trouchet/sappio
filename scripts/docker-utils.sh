@@ -29,7 +29,7 @@ sanitize() {
 #   container_id_1
 #   container_id_2
 listContainerPIDsByToken() {
-    docker ps -a | grep $1 | awk '{ print $1 }'
+    docker ps -a | grep $1 | awk "{ print $1 }"
 }
 
 # stopAndRemoveContainer

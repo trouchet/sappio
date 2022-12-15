@@ -1,6 +1,6 @@
-import { log } from "../../utils/logger.js";
-import { jwt_secret } from "../../config/jwt_secret.js";
-import { generateJWToken } from "../services/token-gen.js";
+import { log } from "../../utils/logger";
+import jwt_secret from "../../config/jwt_secret";
+import { generateJWToken } from "../services/token-gen";
 
 const JWT_TOKEN_DURATION = 3600;
 

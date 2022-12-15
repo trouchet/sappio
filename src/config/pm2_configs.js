@@ -1,11 +1,11 @@
-import { env } from "../config/dotenv.js";
+import env from "./dotenv";
 
 export default {
   apps: [
     {
       name: "sappio",
-      script: "./index.js",
-      instances: env.NUM_PORTS,
+      script: "../src/index.js",
+      instances: env.NUM_PORTS || 42,
       watch: true,
       exec_mode: "cluster",
       instance_var: "INSTANCE_ID",

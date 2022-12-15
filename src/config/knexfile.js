@@ -1,4 +1,4 @@
-import { env } from "./dotenv.js";
+import env from "./dotenv";
 import path from "path";
 
 const BASE_PATH = process.cwd() + "/" + "db";
@@ -23,29 +23,28 @@ const dev_connection = {
   connection: {
     host: "localhost",
     database: "sappio_db",
-    user: process.env.POSTGRES_USER || "postgres",
-    password: process.env.POSTGRES_PASSWORD || "postgres",
+    user: env.POSTGRES_USER || "postgres",
+    password: env.POSTGRES_PASSWORD || "postgres",
     port: 5432,
   },
 };
 
 const docker_connection = {
   connection: {
-    host: process.env.POSTGRES_HOST || "localhost",
+    host: env.POSTGRES_HOST || "localhost",
     database: "sappio_db",
-    user: process.env.POSTGRES_USER || "postgres",
-    password: process.env.POSTGRES_PASSWORD || "postgres",
+    user: env.POSTGRES_USER || "postgres",
+    password: env.POSTGRES_PASSWORD || "postgres",
     port: 5432,
   },
 };
 
 const prod_connection = {
-  host: process.env.POSTGRES_HOST,
-  database: process.env.POSTGRES_DATABASE,
-  user: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  port: process.env.POSTGRES_PORT,
-  port: 5432,
+  host: env.POSTGRES_HOST,
+  database: env.POSTGRES_DATABASE,
+  user: env.POSTGRES_USER,
+  password: env.POSTGRES_PASSWORD,
+  port: env.POSTGRES_PORT,
 };
 
 let knex_config = {};

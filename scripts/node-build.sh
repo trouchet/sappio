@@ -3,13 +3,13 @@
 BASEDIR=$(dirname $0)
 source "${BASEDIR}/linux-utils.sh"
 
-NODE_VERSION='16'
-NVM_VERSION='18.12.1'
+NODE_VERSION="16"
+NVM_VERSION="18.12.1"
 
 # Verifies if command runs as sudo
 sh_c=$( get_if_root )
 
-os_install_repo="$(echo "$( os_info )" | awk '{ print $3 }' FS=":")"
+os_install_repo="$(echo "$( os_info )" | awk "{ print $3 }" FS=":")"
 
 # Install curl if not already present
 $sh_c "$os_install_repo install curl -y" 

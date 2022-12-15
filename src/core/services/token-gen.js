@@ -1,6 +1,6 @@
 import rs from "jsrsasign";
 
-import { log } from "../../utils/logger.js";
+import { log } from "../../utils/logger";
 
 export const generateJWToken = (payload, secret, duration) => {
   log("debug", "service generateJWToken called");
@@ -16,5 +16,10 @@ export const generateJWToken = (payload, secret, duration) => {
   payload.iat = tNow;
   payload.exp = tEnd;
 
-  return rs.KJUR.jws.JWS.sign("HS256", jwtHeader, payload, { utf8: secret });
+  return rs.KJUR.jws.JWS.sign(
+    "HS256", 
+    jwtHeader, 
+    payload, 
+    { utf8: secret }
+  );
 };

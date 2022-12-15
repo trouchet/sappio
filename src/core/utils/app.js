@@ -3,7 +3,7 @@ import swaggerUi from "swagger-ui-express";
 import { parseExpressApp } from "express-route-parser";
 
 import { swaggerSpec } from "./swagger.js";
-import { middlewares } from "../middlewares/bundler.js";
+import middlewares from "../middlewares/bundler.js";
 import { errors_MWs } from "../middlewares/errors.js";
 
 export const prepareApp = (app) => {
@@ -68,10 +68,10 @@ export const pospareApp = (app) => {
   return app;
 };
 
-export const buildApp = (app, routers) => {
-  app = prepareApp(app);
-  app = routeApp(app, routers);
-  app = pospareApp(app);
+export const buildApp = (app, routers) => pospareApp(
+  routeApp(
+    prepareApp(app), 
+    routers
+  )
+);
 
-  return app;
-};

@@ -1,10 +1,9 @@
-import { log } from "../../utils/logger.js";
-import { env } from "../../config/dotenv.js";
+import env from "../../config/dotenv";
 import {
   getErrorMessage,
   getHttpStatusCode,
   logErrorMessage,
-} from "../utils/error-handler.js";
+} from "../utils/error-handler";
 import { errorReporter } from "express-youch";
 
 const NODE_ENVIRONMENT = env.NODE_ENV || "development";
@@ -66,7 +65,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
   response.format({
     //
     // Callback to run when `Accept` header contains either
-    // `application/json` or `*/*`, or if it isn't set at all.
+    // `application/json` or `*/*`, or if it isn"t set at all.
     //
     "application/json": () => {
       /**
@@ -93,4 +92,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
   next();
 };
 
-export const errors_MWs = [errorHandlerMiddleware, errorReporter()];
+export const errors_MWs = [
+  errorHandlerMiddleware, 
+  errorReporter()
+];
