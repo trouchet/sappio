@@ -16,7 +16,7 @@ let res;
  */
 const next = jest.fn();
 
-describe("app", () => {
+describe('app', () => {
   /**
    * Reset the `req` and `res` object before each test is ran.
    */
