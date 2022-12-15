@@ -1,6 +1,6 @@
-import express from "express";
-import { buildApp } from "./utils/app.js";
-import { router } from "./routes/root.js";
+import express from 'express';
+import { buildApp } from './utils/app';
+import { router } from './routes/root';
 
 const app = buildApp(express(), [router]);
 

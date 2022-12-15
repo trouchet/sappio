@@ -1,11 +1,11 @@
 /* 
   Required middleware libraries
 */
-import { logging_MWs } from "./logging.js";
-import { preparation_MWs } from "./preparation.js";
-import { validation_MWs } from "./validation.js";
-import { performance_MWs } from "./performance.js";
-import { security_MWs } from "./security.js";
+import { logging_MWs } from './logging';
+import { preparation_MWs } from './preparation';
+import { validation_MWs } from './validation';
+import { performance_MWs } from './performance';
+import { security_MWs } from './security';
 
 /*
   Exported middlewares

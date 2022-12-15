@@ -1,13 +1,12 @@
-import { log } from "../../utils/logger.js";
-import env from "../../config/dotenv.js";
+import env from '../../config/dotenv';
 import {
   getErrorMessage,
   getHttpStatusCode,
   logErrorMessage,
-} from "../utils/error-handler.js";
-import { errorReporter } from "express-youch";
+} from '../utils/error-handler';
+import { errorReporter } from 'express-youch';
 
-const NODE_ENVIRONMENT = env.NODE_ENV || "development";
+const NODE_ENVIRONMENT = env.NODE_ENV || 'development';
 
 /**
  * Generic Express error handler middleware.
@@ -42,7 +41,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
    * Error object should never be sent in a response when
    * your application is running in production.
    */
-  if (NODE_ENVIRONMENT !== "production") {
+  if (NODE_ENVIRONMENT !== 'production') {
     errorResponse.body = errorMessage;
   }
 
@@ -68,7 +67,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
     // Callback to run when `Accept` header contains either
     // `application/json` or `*/*`, or if it isn't set at all.
     //
-    "application/json": () => {
+    'application/json': () => {
       /**
        * Set a JSON formatted response body.
        * Response header: `Content-Type: `application/json`
@@ -83,7 +82,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
        * Set a plain text response body.
        * Response header: `Content-Type: text/plain`
        */
-      response.type("text/plain").send(errorResponse.body);
+      response.type('text/plain').send(errorResponse.body);
     },
   });
 
@@ -93,4 +92,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
   next();
 };
 
-export const errors_MWs = [errorHandlerMiddleware, errorReporter()];
+export const errors_MWs = [
+  errorHandlerMiddleware, 
+  errorReporter()
+];

@@ -1,3 +1,7 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 
-export default const env = dotenv.config('./config/.env').parsed;
+const ENV_PATH = process.cwd() + '/' + '.env';
+
+let env = dotenv.config(ENV_PATH).parsed;
+
+export default env;
