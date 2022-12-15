@@ -9,8 +9,7 @@
     "url": "git+https://github.com/trouchet/sappio.git"
   },
   "keywords": [
-    "nodejs",
-    "app"
+    "nodejs"
   ],
   "author": "brunolnetto",
   "license": "MIT",
@@ -19,13 +18,11 @@
   },
   "homepage": "https://github.com/trouchet/sappio#readme",
   "scripts": {
-    "init": "npm run hooks:prepare && npm ci && npm run build && npm audit fix && npm run db:init",
+    "init": "./scripts/npm-init.sh",
     "db:init": "npm run migrations && npm run seeds",
     "hooks:prepare": "husky install",
     "start": "nodemon --trace-warnings  ./src/index.js",
-    "node:build": "./scripts/node-build.sh",
-    "docker:build": "./scripts/docker-build.sh",
-    "build": "npm run node:build && npm run docker:build",
+    "build": "./scripts/npm-build.sh",
     "pm2:deploy": "pm2 start ./src/config/pm2_configs.js --attach --watch --time --wait-ready",
     "test": "jest --collect-coverage --coverage",
     "test:ci": "jest --ci --clearCache --collect-coverage --coverage",
@@ -39,8 +36,7 @@
     "docker:clean": "./scripts/docker-clean.sh $npm_config_tag",
     "docker:deploy": "./scripts/docker-deploy.sh $npm_config_tag $npm_config_from $npm_config_to",
     "docker:watch": "./scripts/docker-deploy.sh $npm_config_tag",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "prettier --write . && prettier --check .",
     "get-version": "echo $npm_package_version"
   },
   "devDependencies": {
