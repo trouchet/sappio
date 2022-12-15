@@ -3,7 +3,7 @@
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 [![codecov](https://codecov.io/gh/web-needle/sappio/branch/main/graph/badge.svg?token=9UP6CDA1WC)](https://codecov.io/gh/web-needle/sappio)
 
-A sappio sitting on a prisma and looking for somewhere over rainbow.
+A sappio on prisma looking somewhere over rainbow.
 
 It means, a simple logging NodeJS template app.
 
