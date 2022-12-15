@@ -1,10 +1,10 @@
-import env from "./dotenv";
-import path from "path";
+import env from './dotenv';
+import path from 'path';
 
-const BASE_PATH = process.cwd() + "/" + "db";
+const BASE_PATH = process.cwd() + '/' + 'db';
 
 const base_knex_env_config = {
-  client: "pg",
+  client: 'pg',
   pool: {
     min: 2,
     max: 40,
@@ -12,29 +12,29 @@ const base_knex_env_config = {
     idleTimeoutMillis: 600000,
   },
   migrations: {
-    directory: path.join(BASE_PATH, "migrations"),
+    directory: path.join(BASE_PATH, 'migrations'),
   },
   seeds: {
-    directory: path.join(BASE_PATH, "seeds"),
+    directory: path.join(BASE_PATH, 'seeds'),
   },
 };
 
 const dev_connection = {
   connection: {
-    host: "localhost",
-    database: "sappio_db",
-    user: env.POSTGRES_USER || "postgres",
-    password: env.POSTGRES_PASSWORD || "postgres",
+    host: 'localhost',
+    database: 'sappio_db',
+    user: env.POSTGRES_USER || 'postgres',
+    password: env.POSTGRES_PASSWORD || 'postgres',
     port: 5432,
   },
 };
 
 const docker_connection = {
   connection: {
-    host: env.POSTGRES_HOST || "localhost",
-    database: "sappio_db",
-    user: env.POSTGRES_USER || "postgres",
-    password: env.POSTGRES_PASSWORD || "postgres",
+    host: env.POSTGRES_HOST || 'localhost',
+    database: 'sappio_db',
+    user: env.POSTGRES_USER || 'postgres',
+    password: env.POSTGRES_PASSWORD || 'postgres',
     port: 5432,
   },
 };

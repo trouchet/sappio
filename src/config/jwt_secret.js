@@ -1,5 +1,5 @@
-import env from "./dotenv";
+import env from './dotenv';
 
-let jwt_secret = "";
+let jwt_secret = '';
 
-export default jwt_secret = env.JWT_KEY || "1234";
+export default jwt_secret = env.JWT_KEY || '1234';
