@@ -1,4 +1,4 @@
-# This workflow will: 
+# This workflow will:
 # - clean installation of node dependencies;
 # - cache/restore them;
 # - build the source code;
@@ -14,7 +14,7 @@ on:
   pull_request:
     branches: ["main", "development"]
 
-jobs: 
+jobs:
   test-codecov:
     runs-on: ${{ matrix.os }}
     strategy:

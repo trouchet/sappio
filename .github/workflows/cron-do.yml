@@ -5,10 +5,10 @@ name: Cron Job
 on:
   # Triggers the workflow every day minutes
   schedule:
-    - cron: '00 10 * * 6,7'
-    - cron: '00 10 * * 1,2,3,4,5'
+    - cron: "00 10 * * 6,7"
+    - cron: "00 10 * * 1,2,3,4,5"
 
-     # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+      # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "cron"
   cron:
@@ -21,7 +21,7 @@ jobs:
       - name: Run working script
         if: github.event.schedule != '00 10 * * 1,2,3,4,5'
         run: echo "Wake up! Grab a brush and put a little makeup"
-      
+
       - name: Run resting script
         if: github.event.schedule != '00 10 * * 1,2,3,4,5'
         run: echo "It's not time to make a change! Just relax, take it easy."
