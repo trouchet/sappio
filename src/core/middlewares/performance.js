@@ -20,4 +20,7 @@ const limiter_options = {
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 };
 
-export const performance_MWs = [rateLimit(limiter_options), compression()];
+export const performance_MWs = [
+  rateLimit(limiter_options), 
+  compression()
+];

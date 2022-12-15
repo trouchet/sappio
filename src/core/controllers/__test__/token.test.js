@@ -2,9 +2,9 @@ import {
   mockRequest,
   mockResponse,
   mockNext,
-} from "../../../utils/interceptor.js";
+} from "../../../utils/interceptor";
 
-import { getToken } from "../token.js";
+import { getToken } from "../token";
 
 describe("token", () => {
   afterEach(() => {

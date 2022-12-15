@@ -2,11 +2,9 @@ import {
   mockRequest,
   mockResponse,
   mockNext,
-} from "../../../utils/interceptor.js";
+} from "../../../utils/interceptor";
 
-import pkg from "../../../config/app_info.js";
-
-import { healthCheck } from "../healthcheck.js";
+import { healthCheck } from "../healthcheck";
 
 describe("healthcheck", () => {
   afterEach(() => {
