@@ -94,7 +94,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
   next();
 };
 
-const error_middlewares = [
+let error_middlewares = [
   errorHandlerMiddleware, 
   errorReporter()
 ];
