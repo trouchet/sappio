@@ -11,7 +11,8 @@ module.exports = {
 
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
 
   "plugins": [
@@ -138,7 +139,13 @@ module.exports = {
     "space-in-parens": [2, "never"],
     "space-infix-ops": 2,
     "space-unary-ops": [2, { "words": true, "nonwords": false }],
-    "spaced-comment": [2, "always", { "line": { "markers": ["*package", "!", ","] }, "block": { "balanced": true, "markers": ["*package", "!", ","], "exceptions": ["*"] } }],
+    "spaced-comment": [2, "always", 
+      { "line": { "markers": ["*package", "!", ","] }, 
+        "block": { "balanced": true, 
+        "markers": ["*package", "!", ","], 
+        "exceptions": ["*"] } 
+      }
+    ],
     "template-curly-spacing": [2, "never"],
     "unicode-bom": [2, "never"],
     "use-isnan": 2,
