@@ -12,7 +12,7 @@ expressjwt({
 */
 
 const security_middlewares = [
-  helmet(), 
+  helmet(),
   cors(),
 ];
 
