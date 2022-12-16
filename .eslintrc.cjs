@@ -28,7 +28,7 @@ module.exports = {
 
   "extends": [
     "eslint:recommended",
-    "plugin:jest/all", 
+    "plugin:jest/style",
     "plugin:jest-extended/all",
     "plugin:jest-formatting/recommended",
   ],
