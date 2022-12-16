@@ -55,7 +55,7 @@ describe('time', () => {
     const from_unit = 'minute';
     const to_unit = 'second';
 
-    const converted_value = convertTimeDouble(1, from_unit, to_unit);
+    const converted_value = convertTimeDouble(value, from_unit, to_unit);
 
     expect(converted_value).toBe(expected_value);
   });

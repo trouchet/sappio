@@ -16,6 +16,6 @@ const prewares = [
   validation_middlewares,
   performance_middlewares,
   security_middlewares,
-].reduce((acc, arr) => acc.concat(arr), []);;
+].reduce((acc, arr) => acc.concat(arr), []);
 
 export default prewares;
