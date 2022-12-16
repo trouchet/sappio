@@ -13,7 +13,7 @@ module.exports = {
     "es6": true,
     "node": true
   },
-
+  
   "plugins": [
     "standard",
     "promise",
@@ -25,6 +25,22 @@ module.exports = {
     "navigator": false,
     "window": false
   },
+
+  "extends": [
+    "eslint:recommended",
+    "plugin:jest/all", 
+    "plugin:jest-extended/all",
+    "plugin:jest-formatting/recommended",
+  ],
+  
+  "overrides": [
+    {
+      "files": ["test/**"],
+      "plugins": ["jest"],
+      "extends": ["plugin:jest/recommended"],
+      "rules": { "jest/prefer-expect-assertions": "off" }
+    }
+  ],
 
   "rules": {
     "jest/no-disabled-tests": "warn",
