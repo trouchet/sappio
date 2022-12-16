@@ -38,9 +38,9 @@ export default {
   // This option sets the URL for the jsdom environment.
   // It is reflected in properties such as location.href.
   // @see: https://github.com/facebook/jest/issues/6769
-  //testEnvironmentOptions: {
-  //  url: "http://localhost/",
-  //},
+  // testEnvironmentOptions: {
+  //   url: "http://localhost/",
+  // },
 
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 
