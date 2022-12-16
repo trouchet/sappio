@@ -32,15 +32,6 @@ module.exports = {
     "plugin:jest-extended/all",
     "plugin:jest-formatting/recommended",
   ],
-  
-  "overrides": [
-    {
-      "files": ["test/**"],
-      "plugins": ["jest"],
-      "extends": ["plugin:jest/recommended"],
-      "rules": { "jest/prefer-expect-assertions": "off" }
-    }
-  ],
 
   "rules": {
     "jest/no-disabled-tests": "warn",
