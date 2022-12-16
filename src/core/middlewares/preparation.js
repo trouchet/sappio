@@ -5,11 +5,13 @@ const favicon_MW = favicon(
   process.cwd() + '/src/public/favicon.ico'
 );
 
-let preparation_MWs = [];
+let preparation_middlewares = [];
 
-export default preparation_MWs = [
+preparation_middlewares = [
   favicon_MW,
   express.urlencoded({ extended: false }),
   express.json(),
   express.static(process.cwd() + '/src/public'),
-];
+]
+
+export default preparation_middlewares;

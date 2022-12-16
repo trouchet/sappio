@@ -1,12 +1,14 @@
 import helmet from 'helmet';
 import cors from 'cors';
 
-export const security_MWs = [];
+export let security_middlewares = [];
 
-export default security_MWs = [
+security_middlewares = [
   helmet(), 
   cors()
-];
+]
+
+export default security_middlewares;
 
 /*
 TODO: Define 
