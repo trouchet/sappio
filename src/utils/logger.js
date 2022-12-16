@@ -5,7 +5,7 @@ import json from 'morgan-json';
 import { Logtail } from '@logtail/node';
 import { LogtailTransport } from '@logtail/winston';
 
-import env from '../config/dotenv';
+import env from '../config/env_info';
 
 const { createLogger, format, transports } = winston;
 
@@ -66,13 +66,13 @@ export const log_message = (logger__, level, message) => {
   });
 };
 
-export const agentMorganReporter = logging('morgan');
+export const reporter = logging('morgan');
 
 // Use winston agent to report for Logtail
 if (env.LOGTAIL_TOKEN) {
   const logtail = new Logtail(env.LOGTAIL_TOKEN);
 
-  agentMorganReporter.add(new LogtailTransport(logtail));
+  reporter.add(new LogtailTransport(logtail));
 }
 
 morgan.token('type', function (req, res) {
@@ -86,7 +86,7 @@ const morgan_format = json(
 const stream_channels = {
   stream: {
     // Configure Morgan to use our custom logger with custom severity
-    write: (message) => agentMorganReporter.log('info', message),
+    write: (message) => reporter.log('info', message),
   },
 };
 
@@ -96,5 +96,6 @@ const stream_channels = {
  */
 export const morganMiddleware = morgan(morgan_format, stream_channels);
 
-export const logger = agentMorganReporter;
-export const log = (type, msg) => log_message(logger, type, msg);
+const log = (type, msg) => log_message(reporter, type, msg);
+
+export default log; 
