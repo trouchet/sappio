@@ -1,10 +1,10 @@
-import swStats from 'swagger-stats';
-import swaggerUi from 'swagger-ui-express';
-import { parseExpressApp } from 'express-route-parser';
+import swStats from 'swagger-stats'
+import swaggerUi from 'swagger-ui-express'
+import { parseExpressApp } from 'express-route-parser'
 
-import swaggerSpec from './swagger';
-import poswares from '../middlewares/poswares_bundler';
-import prewares from '../middlewares/prewares_bundler';
+import swaggerSpec from './swagger'
+import poswares from '../middlewares/poswares_bundler'
+import prewares from '../middlewares/prewares_bundler'
 
 const setupEngine = (app) => {
   app.set('views', process.cwd() + '/src/core/views');

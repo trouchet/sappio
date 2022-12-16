@@ -75,18 +75,16 @@ if (env.LOGTAIL_TOKEN) {
   reporter.add(new LogtailTransport(logtail));
 }
 
-morgan.token('type', function (req, res) {
+morgan.token('type', (req, res) => {
   return req.headers['content-type'];
 });
 
-const morgan_format = json(
-  ':type :method :status :url :res[content-length] bytes :response-time ms :total-time ms'
-);
+const morgan_format = ':type :method :status :url :res[content-length] bytes :response-time ms :total-time ms';
 
 const stream_channels = {
   stream: {
     // Configure Morgan to use our custom logger with custom severity
-    write: (message) => reporter.log('info', message),
+    write: (message) => reporter.log('info', message)
   },
 };
 
