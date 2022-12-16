@@ -1,4 +1,4 @@
-# This workflow will: 
+# This workflow will:
 # - clean installation of node dependencies;
 # - cache/restore them;
 # - build the source code;
@@ -14,14 +14,14 @@ on:
   pull_request:
     branches: ["main", "development"]
 
-jobs: 
+jobs:
   test-codecov:
     runs-on: ${{ matrix.os }}
     strategy:
       max-parallel: 42
       fail-fast: false
       matrix:
-        os: [ubuntu-18.04, ubuntu-20.04, macos-latest, windows-latest]
+        os: [ubuntu-20.04, ubuntu-22.04, macos-latest, windows-latest]
         node-version: [16.x, 18.x, 19.x]
         exclude:
           - os: ubuntu-18.04

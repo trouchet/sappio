@@ -1,17 +1,16 @@
-import { log } from "../../utils/logger.js";
-import { jwt_secret } from "../../config/jwt_secret.js";
-import { generateJWToken } from "../services/token-gen.js";
-
-const JWT_TOKEN_DURATION = 3600;
+import log from '../../utils/logger';
+import { 
+  jwt_token_string, 
+  jwt_token_duration_ms,
+} from '../../config/jwt_info';
+import { generateJWToken } from '../services/token-gen';
 
 export const getToken = (req, res, next) => {
-  log("debug", "getToken controller called");
+  log('debug', 'getToken controller called');
 
   const body = req?.body === undefined ? {} : req.body;
-
-  const secret = res.get("x-secret") || jwt_secret;
-
-  const duration = parseInt(res.get("x-duration")) || JWT_TOKEN_DURATION;
+  const secret = res.get('x-secret') || jwt_token_string;
+  const duration = parseInt(res.get('x-duration')) || jwt_token_duration_ms;
 
   res.status = 200;
   res.send({

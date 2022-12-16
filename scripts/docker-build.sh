@@ -33,7 +33,7 @@ if [ -z "$REPO_FILE" ]; then
 	REPO_FILE="$DEFAULT_REPO_FILE"
 fi
 
-mirror=''
+mirror=""
 DRY_RUN=${DRY_RUN:-}
 while [ $# -gt 0 ]; do
 	case "$1" in
@@ -62,7 +62,7 @@ echo_docker_as_nonroot() {
 	if command_exists docker && [ -e /var/run/docker.sock ]; then
 		(
 			set -x
-			$sh_c 'docker version'
+			$sh_c "docker version"
 		) || true
 	fi
 
@@ -84,7 +84,7 @@ echo_docker_as_nonroot() {
 	echo "users access, refer to https://docs.docker.com/go/daemon-access/"
 	echo
 	echo "WARNING: Access to the remote API on a privileged Docker daemon is equivalent"
-	echo "         to root access on the host. Refer to the 'Docker daemon attack surface'"
+	echo "         to root access on the host. Refer to the "Docker daemon attack surface""
 	echo "         documentation for details: https://docs.docker.com/go/attack-surface/"
 	echo
 	echo "================================================================================"
@@ -93,11 +93,11 @@ echo_docker_as_nonroot() {
 
 docker_installation_pre_warning () {
 	if command_exists docker; then
-		cat >&2 <<-'EOF'
+		cat >&2 <<-"EOF"
 			Warning: the "docker" command appears to already exist on this system.
 
 			If you already have Docker installed, this script can cause trouble, which is
-			why we're displaying this warning and provide the opportunity to cancel the
+			why we"re displaying this warning and provide the opportunity to cancel the
 			installation.
 
 			If you installed the current Docker package using this script and are using it
@@ -141,11 +141,11 @@ do_docker_install() {
 
 				$sh_c "apt-get update -qq >/dev/null"
 				$sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq $pre_reqs >/dev/null"
-				$sh_c 'mkdir -p /etc/apt/keyrings && chmod -R 0755 /etc/apt/keyrings'
+				$sh_c "mkdir -p /etc/apt/keyrings && chmod -R 0755 /etc/apt/keyrings"
 				$sh_c "curl -fsSL \"$DOWNLOAD_URL/linux/$lsb_dist/gpg\" | gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg"
 				$sh_c "chmod a+r /etc/apt/keyrings/docker.gpg"
 				$sh_c "echo \"$apt_repo\" > /etc/apt/sources.list.d/docker.list"
-				$sh_c 'apt-get update -qq >/dev/null'
+				$sh_c "apt-get update -qq >/dev/null"
 			)
 
 			pkg_version=""
@@ -155,25 +155,25 @@ do_docker_install() {
 				else
 					# Will work for incomplete versions IE (17.12), but may not actually grab the "latest" if in the test channel
 					pkg_pattern="$(echo "$VERSION" | sed "s/-ce-/~ce~.*/g" | sed "s/-/.*/g").*-0~$lsb_dist"
-					search_command="apt-cache madison 'docker-ce' | grep '$pkg_pattern' | head -1 | awk '{\$1=\$1};1' | cut -d' ' -f 3"
+					search_command="apt-cache madison "docker-ce" | grep "$pkg_pattern" | head -1 | awk "{\$1=\$1};1" | cut -d" " -f 3"
 					pkg_version="$($sh_c "$search_command")"
 
-					echo "INFO: Searching repository for VERSION '$VERSION'"
+					echo "INFO: Searching repository for VERSION "$VERSION""
 					echo "INFO: $search_command"
 
 					if [ -z "$pkg_version" ]; then
 						echo
-						echo "ERROR: '$VERSION' not found amongst apt-cache madison results"
+						echo "ERROR: "$VERSION" not found amongst apt-cache madison results"
 						echo
 						exit 1
 					fi
 
 					if version_gte "18.09"; then
-							search_command="apt-cache madison 'docker-ce-cli' | \
-											grep '$pkg_pattern' | \
+							search_command="apt-cache madison "docker-ce-cli" | \
+											grep "$pkg_pattern" | \
 											head -1 | \
-											awk '{\$1=\$1};1' | \
-											cut -d' ' -f 3"
+											awk "{\$1=\$1};1" | \
+											cut -d" " -f 3"
 							echo "INFO: $search_command"
 							cli_pkg_version="=$($sh_c "$search_command")"
 					fi
@@ -184,7 +184,7 @@ do_docker_install() {
 			(
 				pkgs="docker-ce${pkg_version%=}"
 				if version_gte "18.09"; then
-						# older versions didn't ship the cli and containerd as separate packages
+						# older versions didn"t ship the cli and containerd as separate packages
 						pkgs="$pkgs docker-ce-cli${cli_pkg_version%=} containerd.io"
 				fi
 				if version_gte "20.10"; then
@@ -242,33 +242,33 @@ do_docker_install() {
 					echo "# WARNING: VERSION pinning is not supported in DRY_RUN"
 				else
 					pkg_pattern="$(echo "$VERSION" | sed "s/-ce-/\\\\.ce.*/g" | sed "s/-/.*/g").*$pkg_suffix"
-					search_command="$pkg_manager list --showduplicates 'docker-ce' | grep '$pkg_pattern' | tail -1 | awk '{print \$2}'"
+					search_command="$pkg_manager list --showduplicates "docker-ce" | grep "$pkg_pattern" | tail -1 | awk "{print \$2}""
 					pkg_version="$($sh_c "$search_command")"
 					
-					echo "INFO: Searching repository for VERSION '$VERSION'"
+					echo "INFO: Searching repository for VERSION "$VERSION""
 					echo "INFO: $search_command"
 
 					if [ -z "$pkg_version" ]; then
 						echo
-						echo "ERROR: '$VERSION' not found amongst $pkg_manager list results"
+						echo "ERROR: "$VERSION" not found amongst $pkg_manager list results"
 						echo
 						exit 1
 					fi
 
 					if version_gte "18.09"; then
-						# older versions don't support a cli package
-						search_command="$pkg_manager list --showduplicates 'docker-ce-cli' | grep '$pkg_pattern' | tail -1 | awk '{print \$2}'"
-						cli_pkg_version="$($sh_c "$search_command" | cut -d':' -f 2)"
+						# older versions don"t support a cli package
+						search_command="$pkg_manager list --showduplicates "docker-ce-cli" | grep "$pkg_pattern" | tail -1 | awk "{print \$2}""
+						cli_pkg_version="$($sh_c "$search_command" | cut -d":" -f 2)"
 					fi
 					
-					# Cut out the epoch and prefix with a '-'
-					pkg_version="-$(echo "$pkg_version" | cut -d':' -f 2)"
+					# Cut out the epoch and prefix with a "-"
+					pkg_version="-$(echo "$pkg_version" | cut -d":" -f 2)"
 				fi
 			fi
 			(
 				pkgs="docker-ce$pkg_version"
 				if version_gte "18.09"; then
-					# older versions didn't ship the cli and containerd as separate packages
+					# older versions didn"t ship the cli and containerd as separate packages
 					if [ -n "$cli_pkg_version" ]; then
 						pkgs="$pkgs docker-ce-cli-$cli_pkg_version containerd.io"
 					else
@@ -320,7 +320,7 @@ do_docker_install() {
 				$sh_c "zypper install -y $pre_reqs"
 				$sh_c "zypper addrepo $repo_file_url"
 				if ! is_dry_run; then
-						cat >&2 <<-'EOF'
+						cat >&2 <<-"EOF"
 						WARNING!!
 						openSUSE repository (https://download.opensuse.org/repositories/security:SELinux) will be enabled now.
 						Do you wish to continue?
@@ -338,22 +338,22 @@ do_docker_install() {
 					echo "# WARNING: VERSION pinning is not supported in DRY_RUN"
 				else
 					pkg_pattern="$(echo "$VERSION" | sed "s/-ce-/\\\\.ce.*/g" | sed "s/-/.*/g")"
-					search_command="zypper search -s --match-exact 'docker-ce' | grep '$pkg_pattern' | tail -1 | awk '{print \$6}'"
+					search_command="zypper search -s --match-exact "docker-ce" | grep "$pkg_pattern" | tail -1 | awk "{print \$6}""
 					pkg_version="$($sh_c "$search_command")"
-					echo "INFO: Searching repository for VERSION '$VERSION'"
+					echo "INFO: Searching repository for VERSION "$VERSION""
 					echo "INFO: $search_command"
 					if [ -z "$pkg_version" ]; then
 						echo
-						echo "ERROR: '$VERSION' not found amongst zypper list results"
+						echo "ERROR: "$VERSION" not found amongst zypper list results"
 						echo
 						exit 1
 					fi
-					search_command="zypper search -s --match-exact 'docker-ce-cli' | grep '$pkg_pattern' | tail -1 | awk '{print \$6}'"
-					# It's okay for cli_pkg_version to be blank, since older versions don't support a cli package
+					search_command="zypper search -s --match-exact "docker-ce-cli" | grep "$pkg_pattern" | tail -1 | awk "{print \$6}""
+					# It"s okay for cli_pkg_version to be blank, since older versions don"t support a cli package
 					cli_pkg_version="$($sh_c "$search_command")"
 					pkg_version="-$pkg_version"
 
-					search_command="zypper search -s --match-exact 'docker-ce-rootless-extras' | grep '$pkg_pattern' | tail -1 | awk '{print \$6}'"
+					search_command="zypper search -s --match-exact "docker-ce-rootless-extras" | grep "$pkg_pattern" | tail -1 | awk "{print \$6}""
 					rootless_pkg_version="$($sh_c "$search_command")"
 					rootless_pkg_version="-$rootless_pkg_version"
 				fi
@@ -362,7 +362,7 @@ do_docker_install() {
 				pkgs="docker-ce$pkg_version"
 				if version_gte "18.09"; then
 					if [ -n "$cli_pkg_version" ]; then
-						# older versions didn't ship the cli and containerd as separate packages
+						# older versions didn"t ship the cli and containerd as separate packages
 						pkgs="$pkgs docker-ce-cli-$cli_pkg_version containerd.io"
 					else
 						pkgs="$pkgs docker-ce-cli containerd.io"
@@ -388,14 +388,14 @@ do_docker_install() {
 			if [ -z "$lsb_dist" ]; then
 				if is_darwin; then
 					echo
-					echo "ERROR: Unsupported operating system 'macOS'"
+					echo "ERROR: Unsupported operating system "macOS""
 					echo "Please get Docker Desktop from https://www.docker.com/products/docker-desktop"
 					echo
 					exit 1
 				fi
 			fi
 			echo
-			echo "ERROR: Unsupported distribution '$lsb_dist'"
+			echo "ERROR: Unsupported distribution "$lsb_dist""
 			echo
 			exit 1
 			;;

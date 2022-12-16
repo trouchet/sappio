@@ -22,7 +22,7 @@ command_exists() {
 # examples:
 # 	>> command_exists echo # 0 (success)
 listPIDsAttachedToPort () {
-	echo "$(lsof -i ":$1" | awk '{ print $2 }' | awk 'NR>1')"  | uniq -u
+	echo "$(lsof -i ":$1" | awk "{ print $2 }" | awk "NR>1")"  | uniq -u
 }
 
 # Compares two CalVer (YY.MM) version strings. 
@@ -36,16 +36,16 @@ listPIDsAttachedToPort () {
 calver_compare() (
 	set +x
 
-	yy_a="$(echo "$1" | cut -d'.' -f1)"
-	yy_b="$(echo "$2" | cut -d'.' -f1)"
+	yy_a="$(echo "$1" | cut -d"." -f1)"
+	yy_b="$(echo "$2" | cut -d"." -f1)"
 	if [ "$yy_a" -lt "$yy_b" ]; then
 		return 1
 	fi
 	if [ "$yy_a" -gt "$yy_b" ]; then
 		return 0
 	fi
-	mm_a="$(echo "$1" | cut -d'.' -f2)"
-	mm_b="$(echo "$2" | cut -d'.' -f2)"
+	mm_a="$(echo "$1" | cut -d"." -f2)"
+	mm_b="$(echo "$2" | cut -d"." -f2)"
 	if [ "${mm_a#0}" -lt "${mm_b#0}" ]; then
 		return 1
 	fi
@@ -85,10 +85,10 @@ get_distribution() {
 		lsb_dist="$(. /etc/os-release && echo "$ID")"
 	fi
 	# Returning an empty string here should be alright since the
-	# case statements don't act unless you provide an actual value
+	# case statements don"t act unless you provide an actual value
 
 	# perform some very rudimentary platform detection
-	lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"
+	lsb_dist="$(echo "$lsb_dist" | tr "[:upper:]" "[:lower:]")"
 
 	echo "$lsb_dist"
 }
@@ -99,7 +99,7 @@ get_distribution() {
 # 	>> get_debian_version 
 # 	bullseye
 get_debian_version() {
-	dist_version="$(sed 's/\/.*//' /etc/debian_version | sed 's/\..*//')"
+	dist_version="$(sed "s/\/.*//" /etc/debian_version | sed "s/\..*//")"
 	case "$dist_version" in
 		11)
 			echo "bullseye"
@@ -130,20 +130,20 @@ check_forked_dist() {
 		lsb_release_exit_code=$?
 		set -e
 
-		# Check if the command has exited successfully, it means we're in a forked distro
+		# Check if the command has exited successfully, it means we"re in a forked distro
 		if [ "$lsb_release_exit_code" = "0" ]; then
 			# Print info about current distro
 			cat <<-EOF
-			You're using '$lsb_dist' version '$dist_version'.
+			You"re using "$lsb_dist" version "$dist_version".
 			EOF
 
 			# Get the upstream release info
-			lsb_dist=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'id' | cut -d ':' -f 2 | tr -d '[:space:]')
-			dist_version=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'codename' | cut -d ':' -f 2 | tr -d '[:space:]')
+			lsb_dist=$(lsb_release -a -u 2>&1 | tr "[:upper:]" "[:lower:]" | grep -E "id" | cut -d ":" -f 2 | tr -d "[:space:]")
+			dist_version=$(lsb_release -a -u 2>&1 | tr "[:upper:]" "[:lower:]" | grep -E "codename" | cut -d ":" -f 2 | tr -d "[:space:]")
 
 			# Print info about upstream distro
 			cat <<-EOF
-			Upstream release is '$lsb_dist' version '$dist_version'.
+			Upstream release is "$lsb_dist" version "$dist_version".
 			EOF
 		else
 			if [ -r /etc/debian_version ] && [ "$lsb_dist" != "ubuntu" ] && [ "$lsb_dist" != "raspbian" ]; then
@@ -151,7 +151,7 @@ check_forked_dist() {
 					# OSMC runs Raspbian
 					lsb_dist=raspbian
 				else
-					# We're Debian and don't even know it!
+					# We"re Debian and don"t even know it!
 					lsb_dist=debian
 				fi
 				
@@ -312,14 +312,14 @@ get_pkg_manager() {
 			if [ -z "$lsb_dist" ]; then
 				if is_darwin; then
 					echo
-					echo "ERROR: Unsupported operating system 'macOS'"
+					echo "ERROR: Unsupported operating system "macOS""
 					echo "Please get Docker Desktop from https://www.docker.com/products/docker-desktop"
 					echo
 					exit 1
 				fi
 			fi
 			echo
-			echo "ERROR: Unsupported distribution '$lsb_dist'"
+			echo "ERROR: Unsupported distribution "$lsb_dist""
 			echo
 			exit 1
 			;;
@@ -341,7 +341,7 @@ os_info() {
 		echo "Operating system WSL DETECTED."
 		echo
 		exit 1
-		cat >&2 <<-'EOF'
+		cat >&2 <<-"EOF"
 
 		EOF
 		( set -x; sleep 20 )
@@ -350,10 +350,10 @@ os_info() {
 	if [ -z "$lsb_dist" ]; then
 		if is_darwin; then
 			echo
-			echo "Operating system 'macOS' DETECTED."
+			echo "Operating system "macOS" DETECTED."
 			echo
 			exit 1
-			cat >&2 <<-'EOF'
+			cat >&2 <<-"EOF"
 
 			EOF
 			( set -x; sleep 20 )
@@ -372,14 +372,14 @@ os_info() {
 # 	>> echo "$( get_if_root )"
 #	sudo -E sh -c
 get_if_root() {
-	sh_c='sh -c'
-	if [ "$user" != 'root' ]; then
+	sh_c="sh -c"
+	if [ "$user" != "root" ]; then
 		if command_exists sudo; then
-			sh_c='sudo -E sh -c'
+			sh_c="sudo -E sh -c"
 		elif command_exists su; then
-			sh_c='su -c'
+			sh_c="su -c"
 		else
-			cat >&2 <<-'EOF'
+			cat >&2 <<-"EOF"
 			Error: We require either "sudo" or "su" commands for root mode.
 			EOF
 			exit 1
