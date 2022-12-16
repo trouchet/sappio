@@ -74,3 +74,4 @@ router.get('/healthcheck', healthCheck);
  */
 
 export default router;
+

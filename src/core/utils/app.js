@@ -13,15 +13,15 @@ const setupEngine = (app) => {
 
 const prepareApp = (app) => {
   prewares.reduce(
-    (app, middleware) => app.use(middleware), 
-    app
+    (app, middleware) => app.use(middleware),
+    app,
   );
 };
 
 const routeApp = (app, routers) => {
   routers.reduce(
     (app, router) => app.use(router), 
-    app
+    app,
   );
 };
 
