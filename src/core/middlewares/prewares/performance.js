@@ -1,6 +1,6 @@
 import compression from 'compression';
 import { rateLimit } from 'express-rate-limit';
-import { convertTimeDouble } from '../../utils/time';
+import { convertTimeDouble } from '../../../utils/time';
 
 // Time window: 1 minute
 const obsvWindow_min = 1;
@@ -19,9 +19,7 @@ const limiter_options = {
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 };
 
-export let performance_middlewares = [];
-
-performance_middlewares = [
+const performance_middlewares = [
   rateLimit(limiter_options),
   compression(),
 ];

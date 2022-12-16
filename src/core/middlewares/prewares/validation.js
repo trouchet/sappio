@@ -58,9 +58,7 @@ export const validationErrorMiddleware = (error, request, response, next) => {
   next();
 };
 
-export let validation_middlewares = [];
-
-validation_middlewares = [
+const validation_middlewares = [
   validationErrorMiddleware,
 ]
 

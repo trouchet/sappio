@@ -1,14 +1,12 @@
 import favicon from 'serve-favicon';
 import express from 'express';
 
-const favicon_MW = favicon(
+const favicon_middleware = favicon(
   process.cwd() + '/src/public/favicon.ico'
 );
 
-let preparation_middlewares = [];
-
-preparation_middlewares = [
-  favicon_MW,
+const preparation_middlewares = [
+  favicon_middleware,
   express.urlencoded({ extended: false }),
   express.json(),
   express.static(process.cwd() + '/src/public'),

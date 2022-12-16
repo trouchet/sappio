@@ -1,5 +1,5 @@
 import { Merror } from 'express-merror';
-import { log } from '../../utils/logger';
+import log from '../../utils/logger';
 
 /**
  * Extract an error stack or error message from an Error object.

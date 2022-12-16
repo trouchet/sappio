@@ -1,9 +1,9 @@
-import env from '../../config/dotenv';
+import env from '../../../config/env_info';
 import {
   getErrorMessage,
   getHttpStatusCode,
   logErrorMessage,
-} from '../utils/error-handler';
+} from '../../utils/error-handler';
 import { errorReporter } from 'express-youch';
 
 const NODE_ENVIRONMENT = env.NODE_ENV || 'development';
@@ -94,7 +94,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
   next();
 };
 
-let error_middlewares = [
+const error_middlewares = [
   errorHandlerMiddleware,
   errorReporter(),
 ];

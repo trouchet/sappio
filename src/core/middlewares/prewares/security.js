@@ -1,17 +1,8 @@
 import helmet from 'helmet';
 import cors from 'cors';
 
-export let security_middlewares = [];
-
-security_middlewares = [
-  helmet(), 
-  cors()
-]
-
-export default security_middlewares;
-
 /*
-TODO: Define 
+TODO: Ass JWT validation middleware
 import { expressjwt } from "express-jwt";
 
 expressjwt({
@@ -19,3 +10,11 @@ expressjwt({
   algorithms: ["HS256"],
 })
 */
+
+const security_middlewares = [
+  helmet(), 
+  cors()
+]
+
+export default security_middlewares;
+

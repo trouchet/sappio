@@ -1,4 +1,5 @@
 import express from 'express';
+
 import { getToken } from '../controllers/token';
 import { healthCheck } from '../controllers/healthcheck';
 

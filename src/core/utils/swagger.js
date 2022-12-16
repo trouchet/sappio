@@ -1,5 +1,4 @@
 import swaggerJSDoc from 'swagger-jsdoc';
-
 import pkg from '../../config/app_info';
 
 // Configuration to
@@ -17,5 +16,6 @@ const options = {
   ],
 };
 
-export const swaggerSpec = swaggerJSDoc(options);
+const swaggerSpec = swaggerJSDoc(options);
+
 export default swaggerSpec; 
