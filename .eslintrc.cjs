@@ -11,15 +11,15 @@ module.exports = {
 
   "env": {
     "es6": true,
-    "node": true,
-    "jest/globals": true
+    "node": true
   },
 
   "plugins": [
     "standard",
-    "promise"
+    "promise",
+    "jest"
   ],
-
+  
   "globals": {
     "document": false,
     "navigator": false,
@@ -27,6 +27,11 @@ module.exports = {
   },
 
   "rules": {
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
     "accessor-pairs": 2,
     "arrow-spacing": [2, { "before": true, "after": true }],
     "block-spacing": [2, "always"],
