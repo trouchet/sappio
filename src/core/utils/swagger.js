@@ -9,7 +9,7 @@ const options = {
     info: {
       title: pkg.name,
       version: pkg.version,
-    }
+    },
   },
   apis: [
     './src/core/routes/*.js', 
