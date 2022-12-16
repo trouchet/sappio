@@ -1,7 +1,9 @@
 import * as winston from 'winston';
 import morgan from 'morgan';
-import json from 'morgan-json';
 
+/*
+ * import json from 'morgan-json';
+ */
 import { Logtail } from '@logtail/node';
 import { LogtailTransport } from '@logtail/winston';
 
@@ -45,13 +47,22 @@ export const logging = (label_msg = 'default') => {
       format.colorize(),
       format.printf(log_info_parser)
     ),
-    transports: [new transports.Console()],
-    exceptionHandlers: [
-      new transports.Console({
-        format: format.errors(),
-      }),
+    transports: [
+      new transports.Console(
+        {
+          level: 'debug',
+          handleExceptions: true,
+          json: false,
+          colorize: true
+        }
+      )
     ],
-    rejectionHandlers: [new transports.Console()],
+    exceptionHandlers: [
+      new transports.Console({ format: format.errors(), }),
+    ],
+    rejectionHandlers: [
+      new transports.Console()
+    ],
   };
 
   const logger_ = createLogger(logger_setup);
