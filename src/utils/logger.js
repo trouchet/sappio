@@ -54,11 +54,15 @@ export const logging = (label_msg = 'default') => {
           handleExceptions: true,
           json: false,
           colorize: true
-        }
+        },
       )
     ],
     exceptionHandlers: [
-      new transports.Console({ format: format.errors(), }),
+      new transports.Console(
+        { 
+          format: format.errors(), 
+        }
+      ),
     ],
     rejectionHandlers: [
       new transports.Console()
@@ -97,7 +101,7 @@ const morgan_format = ':type :method :status :url :res[content-length] bytes :re
 const stream_channels = {
   stream: {
     // Configure Morgan to use our custom logger with custom severity
-    write: (message) => reporter.log('info', message)
+    write: (message) => reporter.log('info', message),
   },
 };
 
