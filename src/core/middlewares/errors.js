@@ -95,8 +95,8 @@ const errorHandlerMiddleware = (error, request, response, next) => {
 };
 
 let error_middlewares = [
-  errorHandlerMiddleware, 
-  errorReporter()
+  errorHandlerMiddleware,
+  errorReporter(),
 ];
 
 export default error_middlewares;
