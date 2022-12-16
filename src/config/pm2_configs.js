@@ -1,4 +1,4 @@
-import env from "./dotenv";
+import env from './dotenv';
 
 export default {
   apps: [

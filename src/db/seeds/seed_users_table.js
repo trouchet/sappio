@@ -20,7 +20,7 @@ exports.seed = function (knex, Promise) {
         },
         {
           id: uuidv4(),
-          email: "jaywon@email.com",
+          email: 'jaywon@email.com',
           password: MD5('secret-2'),
         },
       ]);

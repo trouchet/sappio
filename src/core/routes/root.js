@@ -17,7 +17,7 @@ const router = express.Router();
  *         description: Returns a smile face.
  */
 router.get('/', (req, res) => {
-  res.render(index, { title: 'Home' });
+  res.render('index', { title: 'Home' });
 });
 
 /**

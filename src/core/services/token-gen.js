@@ -17,9 +17,9 @@ export const generateJWToken = (payload, secret, duration) => {
   payload.exp = tEnd;
 
   return rs.KJUR.jws.JWS.sign(
-    'HS256', 
-    jwtHeader, 
-    payload, 
+    'HS256',
+    jwtHeader,
+    payload,
     { utf8: secret }
   );
 };

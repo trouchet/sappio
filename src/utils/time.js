@@ -22,9 +22,9 @@ export const convertTimeDouble = (value, from_unit_str, to_unit_str) => {
   }
 
   if (
-      typeof from_unit_str !== 'string' || 
+    typeof from_unit_str !== 'string' ||
       typeof to_unit_str !== 'string'
-    ) {
+  ) {
     log(
       'error',
       `From and to unit strings must belong to list [ ${timeHierarchy} ]`
