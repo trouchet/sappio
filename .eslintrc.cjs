@@ -131,7 +131,7 @@ module.exports = {
     "padded-blocks": [2, "never"],
     "quotes": [2, "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
     "rest-spread-spacing": [2, "never"],
-    "semi": [2, "always"],
+    "semi": 0,
     "semi-spacing": [2, { "before": false, "after": true }],
     "space-before-blocks": [2, "always"],
     "space-before-function-paren": [2, "always"],
@@ -146,11 +146,9 @@ module.exports = {
     "wrap-iife": [2, "any"],
     "yield-star-spacing": [2, "both"],
     "yoda": [2, "never"],
-
     "standard/object-curly-even-spacing": [2, "either"],
     "standard/array-bracket-even-spacing": [2, "either"],
     "standard/computed-property-even-spacing": [2, "even"],
-
     "promise/param-names": 2
   }
 }
