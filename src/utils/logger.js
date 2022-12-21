@@ -42,8 +42,16 @@ export const logging = (label_msg = 'default') => {
 
   const logger_setup = {
     format: format.combine(
-      label({ label: label_msg }),
-      format.timestamp({ format: 'DD/MM/YYYY HH:mm:ss.ss' }),
+      label(
+        { 
+          label: label_msg 
+        }
+      ),
+      format.timestamp(
+        { 
+          format: 'DD/MM/YYYY HH:mm:ss.ss' 
+        }
+      ),
       format.colorize(),
       format.printf(log_info_parser)
     ),

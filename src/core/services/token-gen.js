@@ -1,12 +1,13 @@
 import rs from 'jsrsasign';
 
 import log from '../../utils/logger';
+import env from '../../config/env_info';
 
 export const generateJWToken = (payload, secret, duration) => {
   log('debug', 'service generateJWToken called');
 
   const jwtHeader = {
-    alg: 'HS256',
+    alg: env.JWT_ALGO,
     typ: 'JWT',
   };
 
