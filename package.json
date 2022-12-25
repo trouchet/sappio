@@ -40,19 +40,19 @@
     "get-version": "echo $npm_package_version"
   },
   "devDependencies": {
-    "@babel/cli": "^7.19.3",
-    "@babel/core": "^7.20.5",
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.7",
     "@babel/plugin-transform-runtime": "^7.19.6",
     "@babel/preset-env": "^7.20.2",
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
-    "@typescript-eslint/eslint-plugin": "5.46.1",
-    "@typescript-eslint/parser": "5.46.1",
+    "@typescript-eslint/eslint-plugin": "5.47.0",
+    "@typescript-eslint/parser": "5.47.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^29.3.1",
     "bats": "^1.8.2",
     "bats-assert": "github:ztombol/bats-assert",
     "bats-support": "github:ztombol/bats-support",
-    "eslint": "^8.29.0",
+    "eslint": "^8.30.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jest": "^27.1.7",
@@ -71,7 +71,7 @@
     "superagent": "^8.0.6",
     "supertest": "^6.3.3",
     "swagger-autogen": "^2.22.0",
-    "swagger-jsdoc": "^6.2.5",
+    "swagger-jsdoc": "^6.2.7",
     "ts-jest": "^29.0.3"
   },
   "engines": {
@@ -79,7 +79,7 @@
     "npm": ">=6.9.0"
   },
   "dependencies": {
-    "@babel/core": "^7.20.5",
+    "@babel/core": "^7.20.7",
     "@babel/preset-env": "^7.20.2",
     "@logtail/node": "^0.1.14",
     "@logtail/winston": "^0.1.14",
@@ -94,7 +94,7 @@
     "express": "^4.18.2",
     "express-actuator": "^1.8.2",
     "express-json-validator-middleware": "^3.0.1",
-    "express-jwt": "^7.7.7",
+    "express-jwt": "^8.2.0",
     "express-merror": "^1.0.0",
     "express-rate-limit": "^6.7.0",
     "express-route-parser": "^1.0.5",
