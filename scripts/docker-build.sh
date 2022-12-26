@@ -120,19 +120,19 @@ do_docker_install() {
 	lsb_dist=$( get_distribution )
 	dist_version=$( get_dist_version )
 
-	case "$lsb_dist" in 
+	case "$lsb_dist" in
 		ubuntu|debian|raspbian)
 
 			pre_reqs="apt-transport-https ca-certificates curl"
 			if ! command -v gpg > /dev/null; then
 				pre_reqs="$pre_reqs gnupg"
 			fi
-			
+
 			dist_URL="$DOWNLOAD_URL/linux/$lsb_dist"
 			signed_route="/etc/apt/keyrings/docker.gpg"
 			architecture="$(dpkg --print-architecture)"
 			apt_repo="deb [arch=$architecture signed-by=$signed_route] $dist_URL $dist_version $CHANNEL"
-			
+
 			echo "================================================================================"
 			(
 				if ! is_dry_run; then
@@ -210,7 +210,7 @@ do_docker_install() {
 			echo "================================================================================"
 
 			echo_docker_as_nonroot
-			
+
 			exit 0
 			;;
 
@@ -244,7 +244,7 @@ do_docker_install() {
 					pkg_pattern="$(echo "$VERSION" | sed "s/-ce-/\\\\.ce.*/g" | sed "s/-/.*/g").*$pkg_suffix"
 					search_command="$pkg_manager list --showduplicates "docker-ce" | grep "$pkg_pattern" | tail -1 | awk "{print \$2}""
 					pkg_version="$($sh_c "$search_command")"
-					
+
 					echo "INFO: Searching repository for VERSION "$VERSION""
 					echo "INFO: $search_command"
 
@@ -260,7 +260,7 @@ do_docker_install() {
 						search_command="$pkg_manager list --showduplicates "docker-ce-cli" | grep "$pkg_pattern" | tail -1 | awk "{print \$2}""
 						cli_pkg_version="$($sh_c "$search_command" | cut -d":" -f 2)"
 					fi
-					
+
 					# Cut out the epoch and prefix with a "-"
 					pkg_version="-$(echo "$pkg_version" | cut -d":" -f 2)"
 				fi
@@ -399,13 +399,13 @@ do_docker_install() {
 			echo
 			exit 1
 			;;
-			
+
 	esac
 }
 
 do_install() {
 	# Verify if docker already exists and outputs a warning log
-	docker_installation_pre_warning 
+	docker_installation_pre_warning
 
 	# Check if this is a forked distro
 	check_forked_dist
@@ -419,4 +419,4 @@ do_install() {
 do_install
 
 systemctl start docker.service
-systemctl enable docker.service 
+systemctl enable docker.service

@@ -12,7 +12,7 @@ const options = {
     },
   },
   apis: [
-    './src/core/routes/*.js', 
+    './src/core/routes/*.js',
     './src/core/utils/app.js',
   ],
 };

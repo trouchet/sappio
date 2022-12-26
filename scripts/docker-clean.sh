@@ -8,13 +8,13 @@ sanitize
 
 IMAGE_NAME=$1
 
-if [[ $# -eq 0 ]]; then 
-	echo "Provide Docker image name!" 
+if [[ $# -eq 0 ]]; then
+	echo "Provide Docker image name!"
 
 elif docker ps -a | grep "$1"; then
 	if [[ $(docker ps -a | grep $1 | wc -l) -eq 1  ]]; then
 		container_id=$(docker ps -a | grep $1 | head -n1 | awk "{print $1}");
-		
+
 		echo "Container image $IMAGE_NAME with ID $container_id exists!"
 		echo "We will stop and remove from active images."
 
@@ -29,4 +29,3 @@ elif docker ps -a | grep "$1"; then
 else
 	echo "No such container image $1 yet"
 fi;
-
