@@ -2,11 +2,11 @@
 
 deps_keys=( "dependencies" "devDependencies" )
 grep_ignores=( 
-        "node_modules" 
-        ".git" 
-        "package-lock.json"
-        "codecov"
-        "scripts"
+        "*node_modules*" 
+        "*.git*" 
+        "*package-lock.json*"
+        "*codecov*"
+        "*scripts*"
     )
 
 dependency_ocurrences=""
@@ -51,6 +51,18 @@ function jsonValue() {
 #   b
 function jsonKeys() {
     echo "$1" | jq -r 'to_entries[] | .key'
+}
+
+function command_build () {
+    grep_command_1="grep -rnw $PROJECT_ROOT_PATH -e \"$dependency_name\""
+        
+    string_pattern="'%s\n'"
+    expansion='"${grep_ignores[@]}"'
+    
+    grep_command_2="grep -vEf <(printf $string_pattern $expansion)"
+
+    grep_command="$grep_command_1 | $grep_command_2"
+    echo "$grep_command"
 }
 
 command_name='npm-list'
@@ -102,11 +114,11 @@ for deps_key in "${deps_keys[@]}"; do
     deps_json="$(jsonValue "$packages_json" "$deps_key")"
 
     for dependency_name in $(jsonKeys "$deps_json"); do
-        grep_command="grep -rnw "$PROJECT_ROOT_PATH" -e "$dependency_name" \"${grep_ignores[@]/#/--exclude=}\""
+        grep_command="$(command_build)"
         
         dependency_count="$(eval "$grep_command" | wc -l)"
         dependency_filenames="$(eval "$grep_command")"
-        
+
         # Checks if there is at least once dependency appearance
         if [[ $dependency_count -eq 1 ]]; then
             is_used=0
@@ -116,14 +128,16 @@ for deps_key in "${deps_keys[@]}"; do
         fi
 
         if [[ $IS_COLORED -eq 1 ]]; then
-            if [[ $dependency_count -eq 1 ]]; then
-                echo "$dependency_name" >> .npm_clean
+            # Color red
+            if [ $dependency_count -eq 0 ] || [ $dependency_count -eq 1 ]; then
                 dependency_name="\033[91;1m$dependency_name\033[0m"
+            
+            # Color green
             else
                 dependency_name="\033[0;32m$dependency_name\033[0m"
             fi
         fi
-        
+
         if [[ $IS_VERBOSE -eq 1 ]]; then
             echo "$(repeat '=' $FENCE_SIZE)"
             printf "$dependency_name:$dependency_count \n"
@@ -136,5 +150,3 @@ for deps_key in "${deps_keys[@]}"; do
         fi
     done;
 done;
-
-
