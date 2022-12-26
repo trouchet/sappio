@@ -17,4 +17,3 @@ const security_middlewares = [
 ];
 
 export default security_middlewares;
-

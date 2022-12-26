@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get value from json dictionary
-# 
+#
 # examples:
 # 	>> jsonValue "{"a": 1, "b": 2}" "a"
 #   1
@@ -10,7 +10,7 @@ function jsonValue() {
 }
 
 # Get keys from json dictionary
-# 
+#
 # examples:
 # 	>> jsonKeys "{"a": 1, "b": 2}"
 #   a
@@ -26,9 +26,9 @@ ROOT_PROJECT_PATH="$1"
 dependency_json="$ROOT_PROJECT_PATH/package.json"
 keys=( "dependencies" "devDependencies" )
 
-grepignore_tokens=( 
-        "node_modules" 
-        ".git" 
+grepignore_tokens=(
+        "node_modules"
+        ".git"
         "package-lock"
         "codecov"
         "scripts"
@@ -44,15 +44,15 @@ for key in "${keys[@]}"; do
     while read dependency; do
         grep_command="grep -rnw "$ROOT_PROJECT_PATH" -e "$dependency" | \
                       grep -v -f <(printf "%s\n" "${grepignore_tokens[@]}")"
-        
+
         dependency_ocurrences="$(eval "$grep_command")"
-        
+
         dependency_ocurrences_filenames="$(eval "$grep_command" | \
                                            awk "{ print $1 }" FS=":" | \
                                            uniq -c)"
-        
+
         dependency_count="$(eval "$grep_command" | wc -l)"
-        
+
         if [[ $dependency_count -eq 1 ]]; then
             echo "$dependency" >> unused_dependencies.txt
             dependency="\033[91;1m$dependency\033[0m"

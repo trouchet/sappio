@@ -43,13 +43,13 @@ export const logging = (label_msg = 'default') => {
   const logger_setup = {
     format: format.combine(
       label(
-        { 
-          label: label_msg 
+        {
+          label: label_msg
         }
       ),
       format.timestamp(
-        { 
-          format: 'DD/MM/YYYY HH:mm:ss.ss' 
+        {
+          format: 'DD/MM/YYYY HH:mm:ss.ss'
         }
       ),
       format.colorize(),
@@ -67,8 +67,8 @@ export const logging = (label_msg = 'default') => {
     ],
     exceptionHandlers: [
       new transports.Console(
-        { 
-          format: format.errors(), 
+        {
+          format: format.errors(),
         }
       ),
     ],
@@ -121,4 +121,4 @@ export const morganMiddleware = morgan(morgan_format, stream_channels);
 
 const log = (type, msg) => log_message(reporter, type, msg);
 
-export default log; 
+export default log;

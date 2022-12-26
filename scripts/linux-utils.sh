@@ -8,7 +8,7 @@ set -e
 # strip "v" prefix if present
 VERSION="${VERSION#v}"
 
-# Checks command existence 
+# Checks command existence
 #
 # examples:
 # 	>> command_exists echo # 0 (success)
@@ -16,7 +16,7 @@ command_exists() {
 	command -v "$@" > /dev/null 2>&1
 }
 
-# Checks command existence 
+# Checks command existence
 # 	returns 0 (success)
 #
 # examples:
@@ -25,11 +25,11 @@ listPIDsAttachedToPort () {
 	echo "$(lsof -i ":$1" | awk "{ print $2 }" | awk "NR>1")"  | uniq -u
 }
 
-# Compares two CalVer (YY.MM) version strings. 
+# Compares two CalVer (YY.MM) version strings.
 # 	if version A is newer or equal than version B, or 1 (fail) otherwise. Patch
 # releases and pre-release (-alpha/-beta) are not taken into account
 #
-# examples: 
+# examples:
 # 	>> calver_compare 20.10 19.03 # 0 (success)
 # 	>> calver_compare 20.10 20.10 # 0 (success)
 # 	>> calver_compare 19.03 20.10 # 1 (fail)
@@ -54,11 +54,11 @@ calver_compare() (
 )
 
 # Checks if the version specified in $VERSION is at least
-# the given CalVer (YY.MM) version. 
-# returns 0 (success) if $VERSION is either unset (=latest) 
+# the given CalVer (YY.MM) version.
+# returns 0 (success) if $VERSION is either unset (=latest)
 # or newer or equal than the specified version. Returns 1 (fail)
 # otherwise.
-# 
+#
 # examples:
 #
 # >> VERSION=20.10
@@ -72,10 +72,10 @@ version_gte() {
 	eval calver_compare "$VERSION" "$1"
 }
 
-# Gets Linux distribution 
+# Gets Linux distribution
 #
 # examples:
-# 	>> get_distribution 
+# 	>> get_distribution
 # 	ubuntu
 get_distribution() {
 	lsb_dist=""
@@ -96,7 +96,7 @@ get_distribution() {
 # Gets Debian version
 #
 # examples:
-# 	>> get_debian_version 
+# 	>> get_debian_version
 # 	bullseye
 get_debian_version() {
 	dist_version="$(sed "s/\/.*//" /etc/debian_version | sed "s/\..*//")"
@@ -154,7 +154,7 @@ check_forked_dist() {
 					# We"re Debian and don"t even know it!
 					lsb_dist=debian
 				fi
-				
+
 				dist_version="$( get_debian_version )"
 			fi
 		fi
@@ -222,7 +222,7 @@ get_dist_version() {
 	echo $dist_version
 }
 
-# Check if it is a macOS  
+# Check if it is a macOS
 #
 # examples:
 # 	>> is_darwin # 1 (fail)
@@ -253,7 +253,7 @@ is_wsl() {
 # 	>> check_dist_deprecation
 check_dist_deprecation() {
 	lsb_dist=$( get_distribution )
-	dist_version=$( get_dist_version ) 
+	dist_version=$( get_dist_version )
 
 	# Print deprecation warnings for distro versions that recently reached EOL,
 	# but may still be commonly used (especially LTS versions).
@@ -273,7 +273,7 @@ get_pkg_manager() {
 	lsb_dist=$( get_distribution )
 	dist_version=$( get_dist_version )
 
-	case "$lsb_dist" in 
+	case "$lsb_dist" in
 		ubuntu|debian|raspbian)
 			pkg_manager="apt-get"
 
@@ -301,7 +301,7 @@ get_pkg_manager() {
 				echo "Packages for SLES are currently only available for s390x"
 				exit 1
 			fi
-			
+
 			pkg_manager="zypper"
 
 			echo "$pkg_manager"
@@ -323,14 +323,14 @@ get_pkg_manager() {
 			echo
 			exit 1
 			;;
-			
+
 	esac
 }
 
 # Get OS information in pattern "lsb_dist:dist_version:pkg_manager"
 #
 # examples:
-# 	>> get_pkg_manager 
+# 	>> get_pkg_manager
 os_info() {
 	lsb_dist=$( get_distribution )
 	dist_version=$( get_dist_version )
@@ -390,7 +390,7 @@ get_if_root() {
 }
 
 # Get filtered list of files
-# 
+#
 # examples:
 # 	>> get_pkg_manager
 filtered_ls () {

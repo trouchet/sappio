@@ -46,7 +46,7 @@ export default {
 
   reporters: [
     [
-      'jest-slow-test-reporter', 
+      'jest-slow-test-reporter',
       { numTests: 8, color: true },
     ],
   ],
