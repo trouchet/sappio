@@ -26,4 +26,3 @@ jobs:
       - name: Run resting script
         if: github.event.schedule != '00 10 * * 1,2,3,4,5'
         run: echo "It's not time to make a change! Just relax, take it easy."
-

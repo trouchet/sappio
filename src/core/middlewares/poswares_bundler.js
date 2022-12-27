@@ -1,4 +1,4 @@
-/* 
+/*
   Required pos-request response middleware libraries
 */
 import error_middlewares from './poswares/errors'

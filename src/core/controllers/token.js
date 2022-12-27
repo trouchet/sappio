@@ -1,6 +1,6 @@
 import log from '../../utils/logger';
-import { 
-  jwt_token_string, 
+import {
+  jwt_token_string,
   jwt_token_duration_ms,
 } from '../../config/jwt_info';
 import { generateJWToken } from '../services/token-gen';

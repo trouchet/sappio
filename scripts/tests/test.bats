@@ -11,7 +11,7 @@ load "../../node_modules/bats-assert/load"
     result="$(echo 2+2 | bc)"
 
     # Then the expectet result
-    # makes assertions to ensure that 
+    # makes assertions to ensure that
     # the code does what it should
     assert_equal "$result" 4
 }

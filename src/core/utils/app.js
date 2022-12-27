@@ -20,7 +20,7 @@ const prepareApp = (app) => {
 
 const routeApp = (app, routers) => {
   routers.reduce(
-    (app, router) => app.use(router), 
+    (app, router) => app.use(router),
     app,
   );
 };
@@ -30,7 +30,7 @@ const pospareApp = (app) => {
    * Any error handler middleware MUST be added after we define our routes.
    */
   poswares.reduce(
-    (app, error_middleware) => app.use(error_middleware), 
+    (app, error_middleware) => app.use(error_middleware),
     app
   );
 };
@@ -75,9 +75,8 @@ export const buildApp = (app, routers) => {
   prepareApp(app);
   routeApp(app, routers);
   pospareApp(app);
-  
+
   fermataApp(app);
 
   return app;
 };
-
