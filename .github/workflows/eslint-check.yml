@@ -1,0 +1,30 @@
+name: Run ESLint on Pull Requests
+
+on:
+  - pull_request
+
+jobs:
+  build:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 42
+      fail-fast: false
+      matrix:
+        node-version: [16.x, 18.x, 19.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+      
+      # Check out the repository
+      - uses: actions/checkout@v3
+
+      # Install Node.js
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Install your dependencies
+      - run: npm ci
+
+      # Run ESLint
+      - uses: eslint/github-action@v0

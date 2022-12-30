@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/trouchet/sappio#readme",
   "scripts": {
+    "eslint:github-action": "eslint src/",
     "init": "./scripts/npm-init.sh",
     "db:init": "npm run migrations && npm run seeds",
     "hooks:prepare": "husky install",
