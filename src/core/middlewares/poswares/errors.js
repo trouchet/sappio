@@ -1,12 +1,12 @@
-import env from "../../../config/env_info";
+import env from '../../../config/env_info'
 import {
   getErrorMessage,
   getHttpStatusCode,
-  logErrorMessage,
-} from "../../utils/error-handler";
-import { errorReporter } from "express-youch";
+  logErrorMessage
+} from '../../utils/error-handler'
+import { errorReporter } from 'express-youch'
 
-const NODE_ENVIRONMENT = env.NODE_ENV || "development";
+const NODE_ENVIRONMENT = env.NODE_ENV || 'development'
 
 /**
  * Generic Express error handler middleware.
@@ -17,22 +17,22 @@ const NODE_ENVIRONMENT = env.NODE_ENV || "development";
  * @param {Function} next - Express `next()` function
  */
 const errorHandlerMiddleware = (error, request, response, next) => {
-  const errorMessage = getErrorMessage(error);
+  const errorMessage = getErrorMessage(error)
 
-  logErrorMessage(errorMessage);
+  logErrorMessage(errorMessage)
 
   /**
    * If response headers have already been sent,
    * delegate to the default Express error handler.
    */
   if (response.headersSent) {
-    return next(error);
+    return next(error)
   }
 
   const errorResponse = {
     statusCode: getHttpStatusCode({ error, response }),
-    body: undefined,
-  };
+    body: undefined
+  }
 
   /**
    * Error messages and error stacks often reveal details
@@ -41,14 +41,14 @@ const errorHandlerMiddleware = (error, request, response, next) => {
    * Error object should never be sent in a response when
    * your application is running in production.
    */
-  if (NODE_ENVIRONMENT !== "production") {
-    errorResponse.body = errorMessage;
+  if (NODE_ENVIRONMENT !== 'production') {
+    errorResponse.body = errorMessage
   }
 
   /**
    * Set the response status code.
    */
-  response.status(errorResponse.statusCode);
+  response.status(errorResponse.statusCode)
 
   /**
    * Send an appropriately formatted response.
@@ -67,12 +67,12 @@ const errorHandlerMiddleware = (error, request, response, next) => {
     // Callback to run when `Accept` header contains either
     // `application/json` or `*/*`, or if it isn"t set at all.
     //
-    "application/json": () => {
+    'application/json': () => {
       /**
        * Set a JSON formatted response body.
        * Response header: `Content-Type: `application/json`
        */
-      response.json({ message: errorResponse.body });
+      response.json({ message: errorResponse.body })
     },
     /**
      * Callback to run when none of the others are matched.
@@ -82,16 +82,16 @@ const errorHandlerMiddleware = (error, request, response, next) => {
        * Set a plain text response body.
        * Response header: `Content-Type: text/plain`
        */
-      response.type("text/plain").send(errorResponse.body);
-    },
-  });
+      response.type('text/plain').send(errorResponse.body)
+    }
+  })
 
   /**
    * Ensure any remaining middleware are run.
    */
-  next();
-};
+  next()
+}
 
-const error_middlewares = [errorHandlerMiddleware, errorReporter()];
+const error_middlewares = [errorHandlerMiddleware, errorReporter()]
 
-export default error_middlewares;
+export default error_middlewares

@@ -1,4 +1,4 @@
-import env from './env_info';
+import env from './env_info'
 
 export default {
   apps: [
@@ -17,12 +17,12 @@ export default {
       exp_backoff_restart_delay: 100,
       env: {
         PORT: 3000,
-        NODE_ENV: 'development',
+        NODE_ENV: 'development'
       },
       env_production: {
         PORT: 80,
-        NODE_ENV: 'production',
-      },
-    },
-  ],
-};
+        NODE_ENV: 'production'
+      }
+    }
+  ]
+}

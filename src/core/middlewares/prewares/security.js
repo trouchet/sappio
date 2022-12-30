@@ -1,5 +1,5 @@
-import helmet from "helmet";
-import cors from "cors";
+import helmet from 'helmet'
+import cors from 'cors'
 
 /*
 TODO: Ass JWT validation middleware
@@ -11,6 +11,6 @@ expressjwt({
 })
 */
 
-const security_middlewares = [helmet(), cors()];
+const security_middlewares = [helmet(), cors()]
 
-export default security_middlewares;
+export default security_middlewares

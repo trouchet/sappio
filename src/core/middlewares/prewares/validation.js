@@ -1,4 +1,4 @@
-import { ValidationError } from "express-json-validator-middleware";
+import { ValidationError } from 'express-json-validator-middleware'
 
 /**
  * Error handler middleware for handling errors of the
@@ -20,7 +20,7 @@ export const validationErrorMiddleware = (error, request, response, next) => {
    * delegate to the default Express error handler.
    */
   if (response.headersSent) {
-    return next(error);
+    return next(error)
   }
 
   /**
@@ -34,9 +34,9 @@ export const validationErrorMiddleware = (error, request, response, next) => {
    *
    * @see https://expressjs.com/en/guide/error-handling.html#the-default-error-handler
    */
-  const isValidationError = error instanceof ValidationError;
+  const isValidationError = error instanceof ValidationError
   if (!isValidationError) {
-    return next(error);
+    return next(error)
   }
 
   /**
@@ -52,12 +52,12 @@ export const validationErrorMiddleware = (error, request, response, next) => {
    * @see https://httpstatuses.com/400
    */
   response.status(400).json({
-    errors: error.validationErrors,
-  });
+    errors: error.validationErrors
+  })
 
-  next();
-};
+  next()
+}
 
-const validation_middlewares = [validationErrorMiddleware];
+const validation_middlewares = [validationErrorMiddleware]
 
-export default validation_middlewares;
+export default validation_middlewares
