@@ -1,12 +1,12 @@
-import env from '../../../config/env_info';
+import env from "../../../config/env_info";
 import {
   getErrorMessage,
   getHttpStatusCode,
   logErrorMessage,
-} from '../../utils/error-handler';
-import { errorReporter } from 'express-youch';
+} from "../../utils/error-handler";
+import { errorReporter } from "express-youch";
 
-const NODE_ENVIRONMENT = env.NODE_ENV || 'development';
+const NODE_ENVIRONMENT = env.NODE_ENV || "development";
 
 /**
  * Generic Express error handler middleware.
@@ -41,7 +41,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
    * Error object should never be sent in a response when
    * your application is running in production.
    */
-  if (NODE_ENVIRONMENT !== 'production') {
+  if (NODE_ENVIRONMENT !== "production") {
     errorResponse.body = errorMessage;
   }
 
@@ -62,31 +62,29 @@ const errorHandlerMiddleware = (error, request, response, next) => {
    *
    * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
    */
-  response.format(
-    {
-      //
-      // Callback to run when `Accept` header contains either
-      // `application/json` or `*/*`, or if it isn"t set at all.
-      //
-      'application/json': () => {
-        /**
-         * Set a JSON formatted response body.
-         * Response header: `Content-Type: `application/json`
-         */
-        response.json({ message: errorResponse.body });
-      },
+  response.format({
+    //
+    // Callback to run when `Accept` header contains either
+    // `application/json` or `*/*`, or if it isn"t set at all.
+    //
+    "application/json": () => {
       /**
-       * Callback to run when none of the others are matched.
+       * Set a JSON formatted response body.
+       * Response header: `Content-Type: `application/json`
        */
-      default: () => {
-        /**
-         * Set a plain text response body.
-         * Response header: `Content-Type: text/plain`
-         */
-        response.type('text/plain').send(errorResponse.body);
-      },
-    }
-  );
+      response.json({ message: errorResponse.body });
+    },
+    /**
+     * Callback to run when none of the others are matched.
+     */
+    default: () => {
+      /**
+       * Set a plain text response body.
+       * Response header: `Content-Type: text/plain`
+       */
+      response.type("text/plain").send(errorResponse.body);
+    },
+  });
 
   /**
    * Ensure any remaining middleware are run.
@@ -94,9 +92,6 @@ const errorHandlerMiddleware = (error, request, response, next) => {
   next();
 };
 
-const error_middlewares = [
-  errorHandlerMiddleware,
-  errorReporter(),
-];
+const error_middlewares = [errorHandlerMiddleware, errorReporter()];
 
 export default error_middlewares;

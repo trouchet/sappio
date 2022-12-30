@@ -2,17 +2,17 @@ import {
   mockRequest,
   mockResponse,
   mockNext,
-} from '../../../utils/interceptor';
+} from "../../../utils/interceptor";
 
-import { healthCheck } from '../healthcheck';
+import { healthCheck } from "../healthcheck";
 
-describe('healthcheck', () => {
+describe("healthcheck", () => {
   afterEach(() => {
     // restore the spy created with spyOn
     jest.restoreAllMocks();
   });
 
-  it('should call mocked log for invalid from scaler', async () => {
+  it("should call mocked log for invalid from scaler", async () => {
     const req = mockRequest();
     const res = mockResponse();
     const next = mockNext();

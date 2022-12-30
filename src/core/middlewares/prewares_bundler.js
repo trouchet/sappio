@@ -1,11 +1,11 @@
 /*
   Required pre-request response middleware libraries
 */
-import logging_middlewares from './prewares/logging'
-import preparation_middlewares from './prewares/preparation'
-import validation_middlewares from './prewares/validation'
-import performance_middlewares from './prewares/performance'
-import security_middlewares from './prewares/security'
+import logging_middlewares from "./prewares/logging";
+import preparation_middlewares from "./prewares/preparation";
+import validation_middlewares from "./prewares/validation";
+import performance_middlewares from "./prewares/performance";
+import security_middlewares from "./prewares/security";
 
 /*
   Exported middlewares

@@ -1,4 +1,4 @@
-import { ValidationError } from 'express-json-validator-middleware';
+import { ValidationError } from "express-json-validator-middleware";
 
 /**
  * Error handler middleware for handling errors of the
@@ -58,8 +58,6 @@ export const validationErrorMiddleware = (error, request, response, next) => {
   next();
 };
 
-const validation_middlewares = [
-  validationErrorMiddleware,
-]
+const validation_middlewares = [validationErrorMiddleware];
 
 export default validation_middlewares;
