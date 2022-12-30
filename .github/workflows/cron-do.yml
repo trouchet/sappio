@@ -19,7 +19,6 @@ jobs:
     steps:
       # Runs a single command using the runners shell
       - name: Run working script
-
         if: github.event.schedule != '0 10 * * 1,2,3,4,5'
         run: echo "Wake up! Grab a brush and put a little makeup"
 
