@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/trouchet/sappio#readme",
   "scripts": {
-    "eslint:github-action": "eslint src/",
     "init": "./scripts/npm-init.sh",
     "db:init": "npm run migrations && npm run seeds",
     "hooks:prepare": "husky install",
@@ -37,6 +36,7 @@
     "docker:clean": "./scripts/docker-clean.sh $npm_config_tag",
     "docker:deploy": "./scripts/docker-deploy.sh $npm_config_tag $npm_config_from $npm_config_to",
     "docker:watch": "./scripts/docker-deploy.sh $npm_config_tag",
+    "eslint:github-action": "eslint src/",
     "format": "prettier --write . && prettier --check .",
     "get-version": "echo $npm_package_version"
   },
