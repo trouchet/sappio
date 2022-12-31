@@ -1,5 +1,5 @@
-import { Merror } from 'express-merror'
-import log from '../../utils/logger'
+import { Merror } from "express-merror";
+import log from "../../utils/logger";
 
 /**
  * Extract an error stack or error message from an Error object.
@@ -16,18 +16,18 @@ export const getErrorMessage = (error) => {
    * an error message and a function call stack.
    */
 
-  const error_msg = { message: '', stack: '' }
+  const error_msg = { message: "", stack: "" };
   if (error?.stack) {
-    console.log(error)
-    error_msg.stack = error.stack
+    console.log(error);
+    error_msg.stack = error.stack;
   }
 
-  if (typeof error.toString === 'function') {
-    error_msg.message = error.toString()
+  if (typeof error.toString === "function") {
+    error_msg.message = error.toString();
   }
 
-  return error_msg
-}
+  return error_msg;
+};
 
 /**
  * Log an error message to stderr.
@@ -37,8 +37,8 @@ export const getErrorMessage = (error) => {
  * @param {string} error
  */
 export const logErrorMessage = (error) => {
-  log('error', error)
-}
+  log("error", error);
+};
 
 /**
  * Determines if an HTTP status code falls in the 4xx or 5xx error ranges.
@@ -46,8 +46,7 @@ export const logErrorMessage = (error) => {
  * @param {number} statusCode - HTTP status code
  * @return {boolean}
  */
-export const isErrorStatusCode = (statusCode) =>
-  statusCode >= 400 && statusCode < 600
+export const isErrorStatusCode = (statusCode) => statusCode >= 400 && statusCode < 600;
 
 /**
  * Look for an error HTTP status code (in order of preference):
@@ -67,9 +66,9 @@ export const getHttpStatusCode = ({ error, response }) => {
    * Check if the error object specifies an HTTP
    * status code which we can use.
    */
-  const statusCodeFromError = error.status || error.statusCode
+  const statusCodeFromError = error.status || error.statusCode;
   if (isErrorStatusCode(statusCodeFromError)) {
-    return statusCodeFromError
+    return statusCodeFromError;
   }
 
   /**
@@ -78,9 +77,9 @@ export const getHttpStatusCode = ({ error, response }) => {
    * middleware might already have set an error HTTP
    * status code (4xx or 5xx).
    */
-  const statusCodeFromResponse = response.statusCode
+  const statusCodeFromResponse = response.statusCode;
   if (isErrorStatusCode(statusCodeFromResponse)) {
-    return statusCodeFromResponse
+    return statusCodeFromResponse;
   }
 
   /**
@@ -89,9 +88,9 @@ export const getHttpStatusCode = ({ error, response }) => {
    *
    * @see https://httpstatuses.com/500
    */
-  return 500
-}
+  return 500;
+};
 
 export const reportMerror = (code, message, properties) => {
-  return new Merror(code, message, properties)
-}
+  return new Merror(code, message, properties);
+};

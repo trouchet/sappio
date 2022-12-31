@@ -1,6 +1,6 @@
-import { morganMiddleware } from '../../../utils/logger'
-import actuator from 'express-actuator'
+import { morganMiddleware } from "../../../utils/logger";
+import actuator from "express-actuator";
 
-const logging_middlewares = [morganMiddleware, actuator()]
+const logging_middlewares = [morganMiddleware, actuator()];
 
-export default logging_middlewares
+export default logging_middlewares;
