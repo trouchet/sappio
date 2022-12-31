@@ -6,7 +6,7 @@ const startServer = (port) => {
   const success_msg = `😿 Failed to listen on PORT ${port}`;
 
   app.listen(
-    port, 
+    port,
     (err) => err ? log('error', fail_msg) : log('info', success_msg)
   );
 };
