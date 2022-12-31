@@ -21,7 +21,7 @@ repos:
     hooks:
       - id: remove-crlf
       - id: remove-tabs
-        args: [--whitespaces-count, '2']  # defaults to: 4
+        args: [--whitespaces-count, '2'] # defaults to: 4
       - id: insert-license
         files: \.groovy$
         args:
@@ -31,25 +31,25 @@ repos:
   - repo: https://github.com/pryorda/dockerfilelint-precommit-hooks
     rev: v0.1.0
     hooks:
-    -   id: dockerfilelint
+      - id: dockerfilelint
         stages: [commit]
 
-  -   repo: https://github.com/pre-commit/mirrors-jshint
-      rev: 'v2.13.6'
-      hooks:
-      -   id: jshint
+  - repo: https://github.com/pre-commit/mirrors-jshint
+    rev: 'v2.13.6'
+    hooks:
+      - id: jshint
 
-  -   repo: https://github.com/pre-commit/mirrors-fixmyjs
-      rev: 'v2.0.0'
-      hooks:
-      -   id: fixmyjs
+  - repo: https://github.com/pre-commit/mirrors-fixmyjs
+    rev: 'v2.0.0'
+    hooks:
+      - id: fixmyjs
 
-  -   repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
-      rev: v1.1.2
-      hooks:
-      -   id: markdown-toc
-          # optional custom config:
-          args: [--indent, "    ", -i]
-      -   id: dockerfile_lint
-          # optional custom config:
-          args: [--json, --verbose, --dockerfile]
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
+    rev: v1.1.2
+    hooks:
+      - id: markdown-toc
+        # optional custom config:
+        args: [--indent, '    ', -i]
+      - id: dockerfile_lint
+        # optional custom config:
+        args: [--json, --verbose, --dockerfile]
