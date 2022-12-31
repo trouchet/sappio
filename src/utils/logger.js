@@ -44,7 +44,7 @@ export const logging = (label_msg = 'default') => {
     format.timestamp({ format: 'DD/MM/YYYY HH:mm:ss.ss' }),
     format.colorize(),
     format.printf(log_info_parser)
-  ) 
+  )
 
   const console_transport = new transports.Console(
     {
@@ -78,7 +78,7 @@ if (env.LOGTAIL_TOKEN) {
   const logtail = new Logtail(env.LOGTAIL_TOKEN);
 
   const logtail_transport = new LogtailTransport(logtail);
-  
+
   reporter.add(logtail_transport);
 }
 
