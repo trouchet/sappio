@@ -46,15 +46,13 @@ export const logging = (label_msg = 'default') => {
     format.printf(log_info_parser)
   );
 
-  const console_transport = new transports.Console(
-    {
-      format: format.errors(),
-      level: 'debug',
-      handleExceptions: true,
-      json: false,
-      colorize: true,
-    }
-  );
+  const console_transport = new transports.Console({
+    format: format.errors(),
+    level: 'debug',
+    handleExceptions: true,
+    json: false,
+    colorize: true,
+  });
 
   const logger_setup = {
     format: format_object,
