@@ -51,7 +51,6 @@
     "bats-support": "github:ztombol/bats-support",
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.24.1",
     "eslint-plugin-jest": "^27.1.7",
     "eslint-plugin-jest-extended": "^2.0.0",
     "eslint-plugin-jest-formatting": "^3.1.0",
