@@ -11,9 +11,6 @@ expressjwt({
 })
 */
 
-const security_middlewares = [
-  helmet(),
-  cors(),
-];
+const security_middlewares = [helmet(), cors()];
 
 export default security_middlewares;

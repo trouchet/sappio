@@ -1,15 +1,7 @@
 import log from './logger';
 import _ from 'lodash';
 
-const timeHierarchy = [
-  'second',
-  'minute',
-  'hour',
-  'day',
-  'week',
-  'month',
-  'year',
-];
+const timeHierarchy = ['second', 'minute', 'hour', 'day', 'week', 'month', 'year'];
 
 export const timeScaler = [60, 60, 24, 7, 30, 12];
 
@@ -21,14 +13,8 @@ export const convertTimeDouble = (value, from_unit_str, to_unit_str) => {
     return;
   }
 
-  if (
-    typeof from_unit_str !== 'string' ||
-      typeof to_unit_str !== 'string'
-  ) {
-    log(
-      'error',
-      `From and to unit strings must belong to list [ ${timeHierarchy} ]`
-    );
+  if (typeof from_unit_str !== 'string' || typeof to_unit_str !== 'string') {
+    log('error', `From and to unit strings must belong to list [ ${timeHierarchy} ]`);
     return;
   }
 
@@ -37,10 +23,8 @@ export const convertTimeDouble = (value, from_unit_str, to_unit_str) => {
 
   if (fromIndex === -1) {
     log('error', errorMsg.replace('_ITEM_', from_unit_str));
-    return;
   } else if (toIndex === -1) {
     log('error', errorMsg.replace('_ITEM_', to_unit_str));
-    return;
   } else {
     let reduce_fun = [];
     if (fromIndex > toIndex) {
@@ -53,7 +37,7 @@ export const convertTimeDouble = (value, from_unit_str, to_unit_str) => {
     if (toIndex > fromIndex) {
       scalers = timeScaler.slice(fromIndex, toIndex);
     } else if (toIndex < fromIndex) {
-      let reversedtimeScaler = _.reverse([...timeScaler]);
+      const reversedtimeScaler = _.reverse([...timeScaler]);
 
       toIndex = timeScaler.length - toIndex;
       fromIndex = timeScaler.length - fromIndex;

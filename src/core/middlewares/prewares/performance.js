@@ -19,9 +19,6 @@ const limiter_options = {
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 };
 
-const performance_middlewares = [
-  rateLimit(limiter_options),
-  compression(),
-];
+const performance_middlewares = [rateLimit(limiter_options), compression()];
 
 export default performance_middlewares;

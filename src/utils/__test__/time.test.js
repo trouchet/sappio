@@ -1,6 +1,4 @@
-import {
-  convertTimeDouble,
-} from '../time';
+import { convertTimeDouble } from '../time';
 import { log } from '../logger';
 
 const max_scaler = 60 * 60 * 24 * 7 * 30 * 12;

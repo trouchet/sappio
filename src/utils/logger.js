@@ -7,11 +7,10 @@ import morgan from 'morgan';
 import { Logtail } from '@logtail/node';
 import { LogtailTransport } from '@logtail/winston';
 
-import env from '../config/env_info';
-
 const { createLogger, format, transports } = winston;
-
 const { label } = format;
+
+import env from '../config/env_info';
 
 /*
   We may define our own logging level. The default are given below
@@ -40,71 +39,53 @@ export const logging = (label_msg = 'default') => {
     return `${time_prefix} - ${info_suffix}`;
   };
 
+  const format_object = format.combine(
+    label({ label: label_msg }),
+    format.timestamp({ format: 'DD/MM/YYYY HH:mm:ss.ss' }),
+    format.colorize(),
+    format.printf(log_info_parser)
+  );
+
+  const console_transport = new transports.Console({
+    format: format.errors(),
+    level: 'debug',
+    handleExceptions: true,
+    json: false,
+    colorize: true,
+  });
+
   const logger_setup = {
-    format: format.combine(
-      label(
-        {
-          label: label_msg
-        }
-      ),
-      format.timestamp(
-        {
-          format: 'DD/MM/YYYY HH:mm:ss.ss'
-        }
-      ),
-      format.colorize(),
-      format.printf(log_info_parser)
-    ),
-    transports: [
-      new transports.Console(
-        {
-          level: 'debug',
-          handleExceptions: true,
-          json: false,
-          colorize: true
-        },
-      )
-    ],
-    exceptionHandlers: [
-      new transports.Console(
-        {
-          format: format.errors(),
-        }
-      ),
-    ],
-    rejectionHandlers: [
-      new transports.Console()
-    ],
+    format: format_object,
+    transports: [console_transport],
+    exceptionHandlers: [console_transport],
+    rejectionHandlers: [console_transport],
   };
 
-  const logger_ = createLogger(logger_setup);
-
-  return logger_;
+  return createLogger(logger_setup);
 };
-
-
 
 export const log_message = (logger__, level, message) => {
-  logger__.log({
-    level,
-    message,
-  });
+  logger__.log({ level, message });
 };
 
-export const reporter = logging('morgan');
+const logging_default_name = 'morgan';
+export const reporter = logging(logging_default_name);
 
 // Use winston agent to report for Logtail
 if (env.LOGTAIL_TOKEN) {
   const logtail = new Logtail(env.LOGTAIL_TOKEN);
 
-  reporter.add(new LogtailTransport(logtail));
+  const logtail_transport = new LogtailTransport(logtail);
+
+  reporter.add(logtail_transport);
 }
 
 morgan.token('type', (req, res) => {
   return req.headers['content-type'];
 });
 
-const morgan_format = ':type :method :status :url :res[content-length] bytes :response-time ms :total-time ms';
+const morgan_format =
+  ':type :method :status :url :res[content-length] bytes :response-time ms :total-time ms';
 
 const stream_channels = {
   stream: {

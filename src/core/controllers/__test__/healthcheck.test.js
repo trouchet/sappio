@@ -1,8 +1,4 @@
-import {
-  mockRequest,
-  mockResponse,
-  mockNext,
-} from '../../../utils/interceptor';
+import { mockRequest, mockResponse, mockNext } from '../../../utils/interceptor';
 
 import { healthCheck } from '../healthcheck';
 

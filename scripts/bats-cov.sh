@@ -2,8 +2,8 @@
 # Get keys from json dictionary
 #
 # examples:
-# 	>> bats-coverage . ./coverage/ ./tests
-#    # coverage content from folder . on folder ./coverage
+#   >> bash ./bats-cov.sh . ./coverage/ ./tests
+#    # coverage c/ontent from folder . on folder ./coverage
 
 rm -rf $2
 

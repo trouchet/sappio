@@ -1,5 +1,5 @@
 # Reference URL: https://docs.docker.com/compose
-version: "3.9"
+version: '3.9'
 
 services:
   sappio_db:

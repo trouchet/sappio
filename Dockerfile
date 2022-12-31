@@ -9,6 +9,6 @@ RUN mkdir /usr/app
 WORKDIR /usr/app
 COPY . /usr/app
 
-EXPOSE $APP_PORT
+EXPOSE 3000
 
 CMD [ "pm2-runtime", "index.js" ]

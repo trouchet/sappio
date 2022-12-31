@@ -48,6 +48,6 @@ describe('app', () => {
     const response = await request(app).get('/');
 
     expect(response.statusCode).toBe(expectedStatus);
-    expect(response['header']['content-type']).toEqual(expectedContentType);
+    expect(response.header['content-type']).toEqual(expectedContentType);
   });
 });

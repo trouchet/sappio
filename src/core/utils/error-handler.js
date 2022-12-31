@@ -17,13 +17,13 @@ export const getErrorMessage = (error) => {
    */
 
   const error_msg = { message: '', stack: '' };
-  if (error?.stack) {
+  if (Object.keys(stack).includes('stack')) {
     console.log(error);
-    error_msg['stack'] = error.stack;
+    error_msg.stack = error.stack;
   }
 
   if (typeof error.toString === 'function') {
-    error_msg['message'] = error.toString();
+    error_msg.message = error.toString();
   }
 
   return error_msg;

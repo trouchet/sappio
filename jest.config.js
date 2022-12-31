@@ -44,12 +44,7 @@ export default {
 
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 
-  reporters: [
-    [
-      'jest-slow-test-reporter',
-      { numTests: 8, color: true },
-    ],
-  ],
+  reporters: [['jest-slow-test-reporter', { numTests: 8, color: true }]],
 
   coverageThreshold: {
     global: {
