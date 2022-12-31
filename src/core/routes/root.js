@@ -1,7 +1,7 @@
-import express from "express";
+import express from 'express';
 
-import { getToken } from "../controllers/token";
-import { healthCheck } from "../controllers/healthcheck";
+import { getToken } from '../controllers/token';
+import { healthCheck } from '../controllers/healthcheck';
 
 const router = express.Router();
 
@@ -17,8 +17,8 @@ const router = express.Router();
  *       200:
  *         description: Returns a smile face.
  */
-router.get("/", (req, res) => {
-  res.render("index", { title: "Home" });
+router.get('/', (req, res) => {
+  res.render('index', { title: 'Home' });
 });
 
 /**
@@ -30,7 +30,7 @@ router.get("/", (req, res) => {
  *       200:
  *         description: Returns an object.
  */
-router.post("/token", getToken);
+router.post('/token', getToken);
 
 /**
  * @openapi
@@ -41,7 +41,7 @@ router.post("/token", getToken);
  *       200:
  *         description: Returns an object a message and package version
  */
-router.get("/healthcheck", healthCheck);
+router.get('/healthcheck', healthCheck);
 
 /**
  * @openapi

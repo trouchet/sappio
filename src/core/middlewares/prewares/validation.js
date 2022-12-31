@@ -1,4 +1,4 @@
-import { ValidationError } from "express-json-validator-middleware";
+import { ValidationError } from 'express-json-validator-middleware';
 
 /**
  * Error handler middleware for handling errors of the

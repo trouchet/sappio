@@ -1,5 +1,5 @@
-import { morganMiddleware } from "../../../utils/logger";
-import actuator from "express-actuator";
+import { morganMiddleware } from '../../../utils/logger';
+import actuator from 'express-actuator';
 
 const logging_middlewares = [morganMiddleware, actuator()];
 

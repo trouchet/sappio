@@ -1,4 +1,4 @@
-import { validationResult } from "express-validator";
+import { validationResult } from 'express-validator';
 
 // Finds the validation errors in this request and wraps them in an object with handy functions
 const validateRequest = (req, res, invalid_code) => {

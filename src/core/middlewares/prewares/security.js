@@ -1,5 +1,5 @@
-import helmet from "helmet";
-import cors from "cors";
+import helmet from 'helmet';
+import cors from 'cors';
 
 /*
 TODO: Ass JWT validation middleware

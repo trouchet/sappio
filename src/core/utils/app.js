@@ -1,14 +1,14 @@
-import swStats from "swagger-stats";
-import swaggerUi from "swagger-ui-express";
-import { parseExpressApp } from "express-route-parser";
+import swStats from 'swagger-stats';
+import swaggerUi from 'swagger-ui-express';
+import { parseExpressApp } from 'express-route-parser';
 
-import swaggerSpec from "./swagger";
-import poswares from "../middlewares/poswares_bundler";
-import prewares from "../middlewares/prewares_bundler";
+import swaggerSpec from './swagger';
+import poswares from '../middlewares/poswares_bundler';
+import prewares from '../middlewares/prewares_bundler';
 
 const setupEngine = (app) => {
-  app.set("views", process.cwd() + "/src/core/views");
-  app.set("view engine", "pug");
+  app.set('views', process.cwd() + '/src/core/views');
+  app.set('view engine', 'pug');
 };
 
 const prepareApp = (app) => {
@@ -41,9 +41,9 @@ const fermataApp = (app) => {
   });
 
   app.use(swaggerMW);
-  app.use("/swagger", swaggerUi.serve);
+  app.use('/swagger', swaggerUi.serve);
 
-  app.get("/swagger", swaggerUi.setup(swaggerSpec));
+  app.get('/swagger', swaggerUi.setup(swaggerSpec));
 
   /**
    * @openapi
@@ -54,7 +54,7 @@ const fermataApp = (app) => {
    *       200:
    *         description: Returns the available routes.
    */
-  app.get("/all", function (req, res) {
+  app.get('/all', function (req, res) {
     res.send(parseExpressApp(app));
   });
 };

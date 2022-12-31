@@ -1,7 +1,7 @@
 /*
   Required pos-request response middleware libraries
 */
-import error_middlewares from "./poswares/errors";
+import error_middlewares from './poswares/errors';
 
 /*
   Exported middlewares

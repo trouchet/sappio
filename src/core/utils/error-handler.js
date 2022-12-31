@@ -1,5 +1,5 @@
-import { Merror } from "express-merror";
-import log from "../../utils/logger";
+import { Merror } from 'express-merror';
+import log from '../../utils/logger';
 
 /**
  * Extract an error stack or error message from an Error object.
@@ -16,13 +16,13 @@ export const getErrorMessage = (error) => {
    * an error message and a function call stack.
    */
 
-  const error_msg = { message: "", stack: "" };
+  const error_msg = { message: '', stack: '' };
   if (error?.stack) {
     console.log(error);
     error_msg.stack = error.stack;
   }
 
-  if (typeof error.toString === "function") {
+  if (typeof error.toString === 'function') {
     error_msg.message = error.toString();
   }
 
@@ -37,7 +37,7 @@ export const getErrorMessage = (error) => {
  * @param {string} error
  */
 export const logErrorMessage = (error) => {
-  log("error", error);
+  log('error', error);
 };
 
 /**

@@ -9,9 +9,9 @@ name: Build CI
 
 on:
   push:
-    branches: ["main", "development"]
+    branches: ['main', 'development']
   pull_request:
-    branches: ["main", "development"]
+    branches: ['main', 'development']
 
 jobs:
   build:
@@ -31,6 +31,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: 'npm'
 
       - run: npm ci
