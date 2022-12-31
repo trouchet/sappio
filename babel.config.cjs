@@ -1,12 +1,12 @@
 module.exports = {
   ignore: [/\/core-js/],
-  sourceType: "module",
+  sourceType: 'module',
   presets: [
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
-        useBuiltIns: "entry",
-        corejs: "3.22",
+        useBuiltIns: 'entry',
+        corejs: '3.22',
       },
     ],
   ],
