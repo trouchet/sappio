@@ -17,7 +17,7 @@ export const getErrorMessage = (error) => {
    */
 
   const error_msg = { message: '', stack: '' };
-  if (error?.stack) {
+  if (Object.keys(stack).includes('stack')) {
     console.log(error);
     error_msg.stack = error.stack;
   }
