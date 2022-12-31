@@ -44,30 +44,28 @@ export const logging = (label_msg = 'default') => {
     format.timestamp({ format: 'DD/MM/YYYY HH:mm:ss.ss' }),
     format.colorize(),
     format.printf(log_info_parser)
-  ) 
+  );
 
-  const console_transport = new transports.Console(
-    {
-      format: format.errors(),
-      level: 'debug',
-      handleExceptions: true,
-      json: false,
-      colorize: true,
-    }
-  )
+  const console_transport = new transports.Console({
+    format: format.errors(),
+    level: 'debug',
+    handleExceptions: true,
+    json: false,
+    colorize: true,
+  });
 
   const logger_setup = {
     format: format_object,
-    transports: [ console_transport ],
-    exceptionHandlers: [ console_transport ],
-    rejectionHandlers: [ console_transport ],
+    transports: [console_transport],
+    exceptionHandlers: [console_transport],
+    rejectionHandlers: [console_transport],
   };
 
   return createLogger(logger_setup);
 };
 
 export const log_message = (logger__, level, message) => {
-  logger__.log({ level, message, });
+  logger__.log({ level, message });
 };
 
 const logging_default_name = 'morgan';
@@ -78,7 +76,7 @@ if (env.LOGTAIL_TOKEN) {
   const logtail = new Logtail(env.LOGTAIL_TOKEN);
 
   const logtail_transport = new LogtailTransport(logtail);
-  
+
   reporter.add(logtail_transport);
 }
 
