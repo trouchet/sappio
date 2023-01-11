@@ -135,16 +135,16 @@ check_forked_dist() {
       # Print info about current distro
       cat <<-EOF
       You're using '$lsb_dist' version '$dist_version'.
-			EOF
+      EOF
 
-			# Get the upstream release info
-			lsb_dist=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'id' | cut -d ':' -f 2 | tr -d '[:space:]')
-			dist_version=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'codename' | cut -d ':' -f 2 | tr -d '[:space:]')
+      # Get the upstream release info
+      lsb_dist=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'id' | cut -d ':' -f 2 | tr -d '[:space:]')
+      dist_version=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'codename' | cut -d ':' -f 2 | tr -d '[:space:]')
 
-			# Print info about upstream distro
-			cat <<-EOF
-			Upstream release is '$lsb_dist' version '$dist_version'.
-			EOF
+      # Print info about upstream distro
+      cat <<-EOF
+      Upstream release is '$lsb_dist' version '$dist_version'.
+      EOF
     else
       if [ -r /etc/debian_version ] && [ "$lsb_dist" != "ubuntu" ] && [ "$lsb_dist" != "raspbian" ]; then
         if [ $lsb_dist = "osmc" ]; then
@@ -338,12 +338,12 @@ os_info() {
 
   if is_wsl; then
     echo
-		echo "Operating system WSL DETECTED."
-		echo
-		cat >&2 <<-'EOF'
+    echo "Operating system WSL DETECTED."
+    echo
+    cat >&2 <<-'EOF'
 
-		EOF
-		( set -x; sleep 20 )
+    EOF
+    ( set -x; sleep 20 )
   fi
 
   if [ -z "$lsb_dist" ]; then
@@ -372,15 +372,15 @@ get_if_root() {
 
   if [ "$user" != "root" ]; then
     if command_exists sudo; then
-			sh_c='sudo -E sh -c'
-		elif command_exists su; then
-			sh_c='su -c'
-		else
-			cat >&2 <<-'EOF'
-			Error: We require either "sudo" or "su" commands for root mode.
-			EOF
-			exit 1
-		fi
+      sh_c='sudo -E sh -c'
+    elif command_exists su; then
+      sh_c='su -c'
+    else
+      cat >&2 <<-'EOF'
+      Error: We require either "sudo" or "su" commands for root mode.
+      EOF
+      exit 1
+    fi
   fi
 
   echo "$sh_c"
