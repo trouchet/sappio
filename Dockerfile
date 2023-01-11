@@ -1,6 +1,6 @@
 FROM node:19-alpine
 
-ADD . ./
+COPY . ./
 
 RUN npm ci --quiet
 RUN npm install pm2 -g

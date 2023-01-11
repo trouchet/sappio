@@ -134,25 +134,25 @@ check_forked_dist() {
     if [ "$lsb_release_exit_code" = "0" ]; then
       # Print info about current distro
       cat <<-EOF
-      You"re using "$lsb_dist" version "$dist_version".
-      EOF
+      You're using '$lsb_dist' version '$dist_version'.
+			EOF
 
-      # Get the upstream release info
-      lsb_dist=$(lsb_release -a -u 2>&1 | tr "[:upper:]" "[:lower:]" | grep -E "id" | cut -d ":" -f 2 | tr -d "[:space:]")
-      dist_version=$(lsb_release -a -u 2>&1 | tr "[:upper:]" "[:lower:]" | grep -E "codename" | cut -d ":" -f 2 | tr -d "[:space:]")
+			# Get the upstream release info
+			lsb_dist=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'id' | cut -d ':' -f 2 | tr -d '[:space:]')
+			dist_version=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'codename' | cut -d ':' -f 2 | tr -d '[:space:]')
 
-      # Print info about upstream distro
-      cat <<-EOF
-      Upstream release is "$lsb_dist" version "$dist_version".
-      EOF
+			# Print info about upstream distro
+			cat <<-EOF
+			Upstream release is '$lsb_dist' version '$dist_version'.
+			EOF
     else
       if [ -r /etc/debian_version ] && [ "$lsb_dist" != "ubuntu" ] && [ "$lsb_dist" != "raspbian" ]; then
-        if [ "$lsb_dist" = "osmc" ]; then
+        if [ $lsb_dist = "osmc" ]; then
           # OSMC runs Raspbian
-          lsb_dist=raspbian
+          lsb_dist="raspbian"
         else
           # We"re Debian and don"t even know it!
-          lsb_dist=debian
+          lsb_dist="debian"
         fi
 
         dist_version="$( get_debian_version )"
@@ -168,8 +168,8 @@ check_forked_dist() {
  # 1 (fail)
 dist_deprecation_notice() {
 
-  distro=$1
-  distro_version=$2
+  distro="$1"
+  distro_version="$2"
 
   echo
   printf "\033[91;1mDEPRECATION WARNING\033[0m\n"
@@ -312,14 +312,14 @@ get_pkg_manager() {
       if [ -z "$lsb_dist" ]; then
         if is_darwin; then
           echo
-          echo "ERROR: Unsupported operating system "macOS""
+          echo "ERROR: Unsupported operating system \"macOS\""
           echo "Please get Docker Desktop from https://www.docker.com/products/docker-desktop"
           echo
           exit 1
         fi
       fi
       echo
-      echo "ERROR: Unsupported distribution "$lsb_dist""
+      echo "ERROR: Unsupported distribution \"$lsb_dist\""
       echo
       exit 1
       ;;
@@ -332,19 +332,18 @@ get_pkg_manager() {
 # examples:
 #   >> get_pkg_manager
 os_info() {
-  lsb_dist=$( get_distribution )
-  dist_version=$( get_dist_version )
-  pkg_manager=$( get_pkg_manager )
+  lsb_dist="$( get_distribution )"
+  dist_version="$( get_dist_version )"
+  pkg_manager="$( get_pkg_manager )"
 
   if is_wsl; then
     echo
-    echo "Operating system WSL DETECTED."
-    echo
-    exit 1
-    cat >&2 <<-"EOF"
+		echo "Operating system WSL DETECTED."
+		echo
+		cat >&2 <<-'EOF'
 
-    EOF
-    ( set -x; sleep 20 )
+		EOF
+		( set -x; sleep 20 )
   fi
 
   if [ -z "$lsb_dist" ]; then
@@ -353,10 +352,6 @@ os_info() {
       echo "Operating system "macOS" DETECTED."
       echo
       exit 1
-      cat >&2 <<-"EOF"
-
-      EOF
-      ( set -x; sleep 20 )
     fi
   fi
 
@@ -372,21 +367,23 @@ os_info() {
 #   >> echo "$( get_if_root )"
 #  sudo -E sh -c
 get_if_root() {
+  user="$(id -un 2>/dev/null || true)"
   sh_c="sh -c"
+
   if [ "$user" != "root" ]; then
     if command_exists sudo; then
-      sh_c="sudo -E sh -c"
-    elif command_exists su; then
-      sh_c="su -c"
-    else
-      cat >&2 <<-"EOF"
-      Error: We require either "sudo" or "su" commands for root mode.
-      EOF
-      exit 1
-    fi
+			sh_c='sudo -E sh -c'
+		elif command_exists su; then
+			sh_c='su -c'
+		else
+			cat >&2 <<-'EOF'
+			Error: We require either "sudo" or "su" commands for root mode.
+			EOF
+			exit 1
+		fi
   fi
 
-  echo $sh_c
+  echo "$sh_c"
 }
 
 # Get filtered list of files
