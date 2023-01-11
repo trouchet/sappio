@@ -2,6 +2,10 @@ import { mockRequest, mockResponse, mockNext } from '../../../utils/interceptor'
 
 import { healthCheck } from '../healthcheck';
 
+const req = mockRequest();
+const res = mockResponse();
+const next = mockNext();
+
 describe('healthcheck', () => {
   afterEach(() => {
     // restore the spy created with spyOn
@@ -9,10 +13,6 @@ describe('healthcheck', () => {
   });
 
   it('should call mocked log for invalid from scaler', async () => {
-    const req = mockRequest();
-    const res = mockResponse();
-    const next = mockNext();
-
     await healthCheck(req, res, next);
 
     expect(res.send).toHaveBeenCalledTimes(1);
