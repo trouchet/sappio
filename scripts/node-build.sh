@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASEDIR=$(dirname $0)
+BASEDIR=$(dirname "$0")
 source "${BASEDIR}/linux-utils.sh"
 
 NODE_VERSION="16"
@@ -17,7 +17,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 
 # Retrieve necessary repositories
 $sh_c "curl curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash"
-$sh_c "export NVM_DIR="$HOME/.nvm""
+$sh_c "export NVM_DIR=\"$HOME/.nvm\""
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 

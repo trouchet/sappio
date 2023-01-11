@@ -13,7 +13,7 @@ services:
       POSTGRESQL_PASSWORD: ${DB_PASSWORD}
       POSTGRESQL_USER: ${DB_USER}
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - database:/var/lib/postgresql/data
     ports:
       - ${DB_PORT}:${DB_PORT}
     stop_grace_period: 1s
@@ -37,4 +37,4 @@ networks:
   backend:
 
 volumes:
-  db-data:
+  database:
