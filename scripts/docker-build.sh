@@ -318,19 +318,19 @@ do_docker_install() {
           set -x
         fi
         $sh_c "zypper install -y $pre_reqs"
-        $sh_c "zypper addrepo $repo_file_url"
-        if ! is_dry_run; then
-            cat >&2 <<-"EOF"
-            WARNING!!
-            openSUSE repository (https://download.opensuse.org/repositories/security:SELinux) will be enabled now.
-            Do you wish to continue?
-            You may press Ctrl+C now to abort this script.
-            EOF
-            ( set -x; sleep 30 )
-        fi
-        $sh_c "zypper addrepo $opensuse_repo"
-        $sh_c "zypper --gpg-auto-import-keys refresh"
-        $sh_c "zypper lr -d"
+				$sh_c "zypper addrepo $repo_file_url"
+				if ! is_dry_run; then
+						cat >&2 <<-'EOF'
+						WARNING!!
+						openSUSE repository (https://download.opensuse.org/repositories/security:SELinux) will be enabled now.
+						Do you wish to continue?
+						You may press Ctrl+C now to abort this script.
+						EOF
+						( set -x; sleep 30 )
+				fi
+				$sh_c "zypper addrepo $opensuse_repo"
+				$sh_c "zypper --gpg-auto-import-keys refresh"
+				$sh_c "zypper lr -d"
       )
       pkg_version=""
       if [ -n "$VERSION" ]; then
