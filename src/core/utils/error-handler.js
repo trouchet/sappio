@@ -17,13 +17,18 @@ export const getErrorMessage = (error) => {
    */
 
   const error_msg = { message: '', stack: '' };
-  if (Object.keys(stack).includes('stack')) {
+  if (Object.keys(error).includes('stack')) {
     log('error', error.stack);
     error_msg.stack = error.stack;
+  } else {
+    error_msg.stack = 'We were unable to recover the error stack.';
   }
 
-  if (typeof error.toString === 'function') {
-    error_msg.message = error.toString();
+  if (Object.keys(error).includes('message')) {
+    log('error', error.stack);
+    error_msg.stack = error.stack;
+  } else {
+    error_msg.stack = 'An error occured. We were unable to recover the error message.';
   }
 
   return error_msg;
@@ -89,8 +94,4 @@ export const getHttpStatusCode = ({ error, response }) => {
    * @see https://httpstatuses.com/500
    */
   return 500;
-};
-
-export const reportMerror = (code, message, properties) => {
-  return new Merror(code, message, properties);
 };
