@@ -36,13 +36,11 @@ const fermataApp = (app) => {
    *       200:
    *         description: Returns the swagger of available routes.
    */
-  const swaggerMW = swStats.getMiddleware({
-    swaggerSpec,
-  });
 
-  app.use(swaggerMW);
+  // const swaggerMW = swStats.getMiddleware(swaggerSpec);
+  // app.use(swaggerMW);
+  
   app.use('/swagger', swaggerUi.serve);
-
   app.get('/swagger', swaggerUi.setup(swaggerSpec));
 
   /**

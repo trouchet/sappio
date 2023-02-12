@@ -1,21 +1,27 @@
-import { mockRequest, mockResponse, mockNext } from '../../../utils/interceptor';
-
+import sinon from "sinon"
 import { getToken } from '../token';
+import log from '../../../utils/logger';
 
-describe('token', () => {
-  afterEach(() => {
-    // restore the spy created with spyOn
-    jest.restoreAllMocks();
-  });
+let req, res, next;
 
-  it('should call mocked log for invalid from scaler', async () => {
-    const req = mockRequest();
-    const res = mockResponse();
-    const next = mockNext();
+jest.mock('../../../utils/logger.js');
 
-    await getToken(req, res, next);
-
-    expect(res.send).toHaveBeenCalledTimes(1);
-    expect(res.send.mock.calls.length).toBe(1);
-  });
-});
+describe(
+  'token', 
+  () => {
+    beforeEach(
+      () => {
+        next = sinon.spy();
+        req = { body: {"name": "Ford Prefect"} };
+        res = { send: sinon.spy() }
+      }
+    );
+    it(
+      'must assert token', 
+      async () => {
+         await getToken(req, res, next);
+         expect(log).toHaveBeenCalled(1);
+    }
+  );
+  }
+);

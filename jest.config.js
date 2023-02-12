@@ -44,6 +44,11 @@ export default {
 
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 
+  // Handle module aliases (this will be automatically configured for you soon)
+  moduleNameMapper: {
+    "^#utils/(.*)$": "<rootDir>/src/core/utils/$1",
+  },
+
   reporters: [['jest-slow-test-reporter', { numTests: 8, color: true }]],
 
   coverageThreshold: {

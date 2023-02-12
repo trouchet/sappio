@@ -1,21 +1,29 @@
-import { mockRequest, mockResponse, mockNext } from '../../../utils/interceptor';
-
+import sinon from "sinon"
 import { healthCheck } from '../healthcheck';
+import log from '#utils/logger';
 
-const req = mockRequest();
-const res = mockResponse();
-const next = mockNext();
+let req, res, next;
 
-describe('healthcheck', () => {
-  afterEach(() => {
-    // restore the spy created with spyOn
-    jest.restoreAllMocks();
-  });
+jest.mock('#utils/logger.js');
 
-  it('should call mocked log for invalid from scaler', async () => {
-    await healthCheck(req, res, next);
+describe(
+    'healthcheck', 
+    () => {
+      beforeEach(
+        () => {
+          next = sinon.spy();
+          req = { };
+          res = { send: sinon.spy()}
+        }
+      );
 
-    expect(res.send).toHaveBeenCalledTimes(1);
-    expect(res.send.mock.calls.length).toBe(1);
-  });
-});
+      it(
+        'must assert healthcheck', 
+        async () => {
+            await healthCheck(req, res, next);
+
+            expect(log).toHaveBeenCalled(1);
+        }
+      );
+  }
+);

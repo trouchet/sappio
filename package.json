@@ -8,6 +8,10 @@
     "type": "git",
     "url": "git+https://github.com/trouchet/sappio.git"
   },
+  "imports": {
+    "#utils/*": "./src/core/utils/*.js",
+    "#utils/*.js": "./src/core/utils/*.js"
+  },
   "keywords": [
     "nodejs"
   ],
@@ -22,17 +26,14 @@
     "start": "nodemon --trace-warnings --experimental-modules --es-module-specifier-resolution=node ./src/index.js",
     "build": "./scripts/npm-build.sh",
     "update": "bash ./scripts/npm-update.sh",
-    "db:init": "npm run migrations && npm run seeds",
     "hooks:prepare": "husky install",
     "pm2:deploy": "pm2 start ./src/config/pm2_configs.js --attach --watch --time --wait-ready",
     "test:clear_cache": "jest  --clearCache",
-    "test": "npm run test:clear_cache && jest",
+    "test": "npm run test:clear_cache && jest --detectOpenHandles",
     "test:ci": "jest --ci --collect-coverage --coverage",
     "test:watch": "jest --watchAll --collect-coverage --coverage",
     "db:seeds": "knex --env ${KNEX_ENV} --knexfile ./src/config/knexfile.js seed:run",
     "db:seeds:local": "knex --env dockerLocal --knexfile ./src/config/knexfile.js seed:run",
-    "db:migrations": "knex --env ${KNEX_ENV} --knexfile ./src/config/knexfile.js migrate:latest",
-    "db:migrations:local": "knex --env dockerLocal --knexfile ./src/config/knexfile.js migrate:latest",
     "up": "npm run init && npm run docker:deploy --tag=$npm_config_tag --from=$npm_config_from --to=$npm_config_to",
     "docker:clean": "./scripts/docker-clean.sh $npm_config_tag",
     "docker:deploy": "./scripts/docker-deploy.sh $npm_config_tag $npm_config_from $npm_config_to",
