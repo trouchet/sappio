@@ -7,7 +7,7 @@ let req, res, next;
 jest.mock('../../../utils/logger.js');
 
 describe(
-  'token', 
+  'token',
   () => {
     beforeEach(
       () => {
@@ -17,7 +17,7 @@ describe(
       }
     );
     it(
-      'must assert token', 
+      'must assert token',
       async () => {
          await getToken(req, res, next);
          expect(log).toHaveBeenCalled(1);

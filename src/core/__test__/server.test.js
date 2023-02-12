@@ -11,7 +11,7 @@ describe('server', () => {
       jest.resetAllMocks();
       jest.clearAllMocks();
     }
-  ); 
+  );
   it('call mocked log once', async () => {
     result = startServer(3000);
     expectation = 1;

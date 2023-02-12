@@ -10,7 +10,7 @@ describe('app', () => {
     const expectedContentType = 'text/html; charset=utf-8';
 
     const response = await request(app).get('/');
-    
+
     expect(response.statusCode).toBe(expectedStatus);
     expect(response.header['content-type']).toEqual(expectedContentType);
     expect(log).toHaveBeenCalled(1);

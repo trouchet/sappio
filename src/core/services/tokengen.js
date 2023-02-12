@@ -15,12 +15,12 @@ export const generateJWToken = (payload, secret, duration) => {
 
   const tNow = rs.KJUR.jws.IntDate.get('now');
   const tEnd = tNow + duration;
-  
+
   jwtPayload.iat = tNow;
   jwtPayload.exp = tEnd;
-  
+
   jwtPayload.jwtToken = rs.KJUR.jws.JWS.sign(env.JWT_ALGO, jwtHeader, payload, { utf8: secret })
   log('debug', JSON.stringify(jwtPayload));
-  
+
   return jwtPayload;
 };
