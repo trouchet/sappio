@@ -7,10 +7,10 @@ jest.mock("../app.js");
 // Failed attempt :-(
 
 describe(
-  'server', 
+  'server',
   () => {
     it(
-      'call mocked app', 
+      'call mocked app',
       () => {
         startServer(3000);
 
@@ -22,10 +22,10 @@ describe(
 */
 
 describe(
-  'server', 
+  'server',
   () => {
     it(
-      'dummy test', 
+      'dummy test',
       () => {
         expect(42).toBe(42);
       }
