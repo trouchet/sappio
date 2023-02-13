@@ -51,6 +51,7 @@
     "bats-assert": "github:ztombol/bats-assert",
     "bats-support": "github:ztombol/bats-support",
     "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.3",
