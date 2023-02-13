@@ -33,15 +33,15 @@ describe(
         'must call isErrorStatusCode',
         async () => {
             result = getErrorMessage({});
-            expectation = { 
-                message: 'An error occured. We were unable to recover the error message.', 
+            expectation = {
+                message: 'An error occured. We were unable to recover the error message.',
                 stack: 'An error occured. We were unable to recover the error stack.' };
-            
+
             expect(result).toStrictEqual(expectation);
 
             result = getErrorMessage({'message': 'Fire!'});
-            expectation = { 
-                message: 'Fire!', 
+            expectation = {
+                message: 'Fire!',
                 stack: 'An error occured. We were unable to recover the error stack.'
             };
 
