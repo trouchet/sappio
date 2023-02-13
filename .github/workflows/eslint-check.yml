@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       # Install your dependencies
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
 
       # Run ESLint
       - uses: eslint/github-action@v0

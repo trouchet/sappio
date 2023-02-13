@@ -3,10 +3,11 @@
 deps_keys=( "dependencies" "devDependencies" )
 grep_ignores=(
         "*node_modules*"
-        "*.git*"
         "*package-lock.json*"
         "*codecov*"
         "*scripts*"
+        "*coverage*"
+        "*assets*"
     )
 
 dependency_count=0
@@ -118,7 +119,7 @@ for deps_key in "${deps_keys[@]}"; do
         dependency_filenames="$(eval "$grep_command")"
 
         # Checks if there is at least once dependency appearance
-        if [[ $dependency_count -eq 1 ]]; then
+        if [[ $dependency_count -lt 2 ]]; then
             is_used=0
             echo "$dependency_name" >> "$unused_file"
         else

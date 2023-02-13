@@ -1,4 +1,3 @@
-import swStats from 'swagger-stats';
 import swaggerUi from 'swagger-ui-express';
 import { parseExpressApp } from 'express-route-parser';
 
@@ -39,7 +38,7 @@ const fermataApp = (app) => {
 
   // const swaggerMW = swStats.getMiddleware(swaggerSpec);
   // app.use(swaggerMW);
-  
+
   app.use('/swagger', swaggerUi.serve);
   app.get('/swagger', swaggerUi.setup(swaggerSpec));
 

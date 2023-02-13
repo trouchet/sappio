@@ -28,12 +28,7 @@ export default {
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$',
 
   // If the file path matches any of the patterns, coverage information will be skipped.
-  coveragePathIgnorePatterns: [
-    'node_modules/',
-    'src/config/',
-    'src/utils/logger.js',
-    'src/utils/interceptor.js',
-  ],
+  coveragePathIgnorePatterns: ['node_modules/', 'src/config/', 'src/utils/logger.js'],
 
   // This option sets the URL for the jsdom environment.
   // It is reflected in properties such as location.href.
@@ -46,10 +41,14 @@ export default {
 
   // Handle module aliases (this will be automatically configured for you soon)
   moduleNameMapper: {
-    "^#utils/(.*)$": "<rootDir>/src/core/utils/$1",
+    '^#utils/(.*)$': '<rootDir>/src/utils/$1',
+    '^#config/(.*)$': '<rootDir>/src/config/$1',
   },
 
-  reporters: [['jest-slow-test-reporter', { numTests: 8, color: true }]],
+  reporters: [
+    ['jest-slow-test-reporter', { numTests: 8, color: true }],
+    'jest-progress-bar-reporter',
+  ],
 
   coverageThreshold: {
     global: {

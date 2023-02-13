@@ -336,20 +336,21 @@ os_info() {
   dist_version="$( get_dist_version )"
   pkg_manager="$( get_pkg_manager )"
 
+
   if is_wsl; then
     echo
-    echo "Operating system WSL DETECTED."
+    echo "Operating system \"Windows\" DETECTED."
     echo
     cat >&2 <<-'EOF'
+      EOF
 
-    EOF
     ( set -x; sleep 20 )
   fi
 
   if [ -z "$lsb_dist" ]; then
     if is_darwin; then
       echo
-      echo "Operating system "macOS" DETECTED."
+      echo "Operating system \"macOS\" DETECTED."
       echo
       exit 1
     fi
@@ -377,7 +378,8 @@ get_if_root() {
       sh_c='su -c'
     else
       cat >&2 <<-'EOF'
-      Error: We require either "sudo" or "su" commands for root mode.
+      Error: this installer needs the ability to run commands as root.
+      We are unable to find either "sudo" or "su" available to make this happen.
       EOF
       exit 1
     fi

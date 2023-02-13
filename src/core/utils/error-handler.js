@@ -18,17 +18,15 @@ export const getErrorMessage = (error) => {
 
   const error_msg = { message: '', stack: '' };
   if (Object.keys(error).includes('stack')) {
-    log('error', error.stack);
     error_msg.stack = error.stack;
   } else {
-    error_msg.stack = 'We were unable to recover the error stack.';
+    error_msg.stack = 'An error occured. We were unable to recover the error stack.';
   }
 
   if (Object.keys(error).includes('message')) {
-    log('error', error.stack);
-    error_msg.stack = error.stack;
+    error_msg.message = error.message;
   } else {
-    error_msg.stack = 'An error occured. We were unable to recover the error message.';
+    error_msg.message = 'An error occured. We were unable to recover the error message.';
   }
 
   return error_msg;
