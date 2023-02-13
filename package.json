@@ -9,8 +9,10 @@
     "url": "git+https://github.com/trouchet/sappio.git"
   },
   "imports": {
-    "#utils/*": "./src/core/utils/*.js",
-    "#utils/*.js": "./src/core/utils/*.js",
+    "#utils/*": "./src/utils/*.js",
+    "#utils/*.js": "./src/utils/*.js",
+    "#cutils/*": "./src/core/utils/*.js",
+    "#cutils/*.js": "./src/core/utils/*.js",
     "#config/*": "./src/config/*.js",
     "#config/*.js": "./src/config/*.js"
   },
@@ -56,6 +58,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.3",
     "jest": "^29.3.1",
+    "jest-express": "^1.12.0",
     "jest-slow-test-reporter": "^1.0.0",
     "prettier": "^2.8.3",
     "pug": "^3.0.2",

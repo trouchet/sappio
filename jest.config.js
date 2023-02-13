@@ -41,6 +41,7 @@ export default {
 
   // Handle module aliases (this will be automatically configured for you soon)
   moduleNameMapper: {
+    '^#cutils/(.*)$': '<rootDir>/src/core/utils/$1',
     '^#utils/(.*)$': '<rootDir>/src/utils/$1',
     '^#config/(.*)$': '<rootDir>/src/config/$1',
   },
@@ -52,10 +53,10 @@ export default {
 
   coverageThreshold: {
     global: {
-      statements: 1,
-      branches: 1,
-      functions: 1,
-      lines: 1,
+      statements: 75,
+      branches: 75,
+      functions: 75,
+      lines: 75,
     },
   },
 };
