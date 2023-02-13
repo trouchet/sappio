@@ -44,4 +44,3 @@ lint: clean ## perform inplace lint fixes
 
 install: clean ## install the packages
 	npm install
-
