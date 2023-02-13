@@ -1,7 +1,6 @@
-import app from './app';
 import log from '../utils/logger';
 
-const startServer = (port) => {
+const startServer = (app, port) => {
   const fail_msg = `😿 Failed to listen on PORT ${port}`;
   const succ_msg = `😸 Application server listening on PORT ${port}`;
 

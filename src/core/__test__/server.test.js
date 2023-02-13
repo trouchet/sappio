@@ -1,27 +1,23 @@
-import app from '../app';
+import { Express } from 'jest-express/lib/express';
 import startServer from '../server';
 
-jest.mock('../app.js');
+let app;
 
-/*
-// Failed attempt :-(
-describe(
-  'server',
-  () => {
-    it(
-      'call mocked app',
-      () => {
-        startServer(3000);
+describe('Server', () => {
+  beforeEach(() => {
+    app = new Express();
+  });
 
-        expect(app).toHaveBeenCalled();
-      }
-    );
-  }
-);
-*/
+  afterEach(() => {
+    app.resetMocked();
+  });
 
-describe('server', () => {
-  it('dummy test', () => {
-    expect(42).toBe(42);
+  test('should setup server', () => {
+    const port = 3000;
+
+    startServer(app, port);
+
+    expect(app.listen).toBeCalled();
   });
 });
+
