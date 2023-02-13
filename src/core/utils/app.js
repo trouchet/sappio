@@ -1,7 +1,7 @@
 import swaggerUi from 'swagger-ui-express';
 import { parseExpressApp } from 'express-route-parser';
 
-import swaggerSpec from './swagger.js';
+import swaggerSpec from './swagger';
 import poswares from '../middlewares/poswares_bundler';
 import prewares from '../middlewares/prewares_bundler';
 
