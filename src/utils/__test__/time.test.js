@@ -1,5 +1,5 @@
 import { convertTimeDouble } from '../time';
-import { log } from '../logger';
+import log from '../logger';
 
 const max_scaler = 60 * 60 * 24 * 7 * 30 * 12;
 
@@ -8,7 +8,7 @@ jest.mock('../logger');
 describe('time', () => {
   afterEach(() => {
     // restore the spy created with spyOn
-    jest.restoreAllMocks();
+    jest.resetAllMocks();
   });
 
   it('should call mocked log for invalid from scaler', () => {

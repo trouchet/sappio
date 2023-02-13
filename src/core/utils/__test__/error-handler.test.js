@@ -1,5 +1,5 @@
 import log from '#utils/logger';
-import { getErrorMessage, logErrorMessage } from "../error-handler";
+import { getErrorMessage, isErrorStatusCode, logErrorMessage } from "../error-handler";
 
 jest.mock('#utils/logger.js');
 
@@ -12,7 +12,7 @@ describe(
         'must call logErrorMessage', 
         async () => {
             logErrorMessage("Fire!")
-            expect(log).toHaveBeenCalled(1);
+            expect(log).toHaveBeenCalled();
         }
       );
       it(
@@ -35,14 +35,14 @@ describe(
             result = getErrorMessage({});
             expectation = { 
                 message: 'An error occured. We were unable to recover the error message.', 
-                stack: 'We were unable to recover the error stack.' };
+                stack: 'An error occured. We were unable to recover the error stack.' };
             
             expect(result).toStrictEqual(expectation);
             
             result = getErrorMessage({'message': 'Fire!'});
             expectation = { 
                 message: 'Fire!', 
-                stack: 'An error occured. We were unable to recover the error message.'
+                stack: 'An error occured. We were unable to recover the error stack.'
             };
             
             expect(result).toStrictEqual(expectation);

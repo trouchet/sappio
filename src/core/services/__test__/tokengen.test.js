@@ -1,5 +1,5 @@
 import { generateJWToken } from '../tokengen';
-import { jwt_token_string, jwt_token_duration_ms } from '../../config/jwt_info';
+import { jwt_token_string, jwt_token_duration_ms } from '#config/jwt_info';
 import log from '../../../utils/logger';
 
 let result, expectation;
@@ -22,9 +22,8 @@ describe(
             expectation = ["iat", "exp", "jwtToken"];
 
             expect(result).toStrictEqual(expectation);
-        
-            expect(jwtPayload.exp-jwtPayload.iat).toEqual(duration);
-            expect(log).toHaveBeenCalled(1);
+            expect(jwtPayload.exp-jwtPayload.iat).toEqual(Number(duration));
+            expect(log).toHaveBeenCalled();
         }
       );
   }

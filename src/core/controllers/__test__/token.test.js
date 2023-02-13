@@ -1,10 +1,10 @@
 import sinon from "sinon"
 import { getToken } from '../token';
-import log from '../../../utils/logger';
+import log from '#utils/logger';
 
 let req, res, next;
 
-jest.mock('../../../utils/logger.js');
+jest.mock('#utils/logger.js');
 
 describe(
   'token', 
@@ -20,7 +20,7 @@ describe(
       'must assert token', 
       async () => {
          await getToken(req, res, next);
-         expect(log).toHaveBeenCalled(1);
+         expect(log).toHaveBeenCalled();
     }
   );
   }

@@ -32,7 +32,6 @@ export default {
     'node_modules/',
     'src/config/',
     'src/utils/logger.js',
-    'src/utils/interceptor.js',
   ],
 
   // This option sets the URL for the jsdom environment.
@@ -46,10 +45,14 @@ export default {
 
   // Handle module aliases (this will be automatically configured for you soon)
   moduleNameMapper: {
-    "^#utils/(.*)$": "<rootDir>/src/core/utils/$1",
+    "^#utils/(.*)$": "<rootDir>/src/utils/$1",
+    "^#config/(.*)$": "<rootDir>/src/config/$1",
   },
 
-  reporters: [['jest-slow-test-reporter', { numTests: 8, color: true }]],
+  reporters: [
+    ['jest-slow-test-reporter', { numTests: 8, color: true }],
+    'jest-progress-bar-reporter'
+  ],
 
   coverageThreshold: {
     global: {

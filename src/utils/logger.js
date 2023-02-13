@@ -9,7 +9,7 @@ import { LogtailTransport } from '@logtail/winston';
 
 const { createLogger, format, transports } = winston;
 const { label } = format;
-
+ 
 import env from '../config/env_info';
 
 /*

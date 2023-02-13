@@ -1,4 +1,3 @@
-import swStats from 'swagger-stats';
 import swaggerUi from 'swagger-ui-express';
 import { parseExpressApp } from 'express-route-parser';
 

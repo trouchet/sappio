@@ -13,7 +13,7 @@ describe(
         () => {
           next = sinon.spy();
           req = { };
-          res = { send: sinon.spy()}
+          res = { send: sinon.spy() }
         }
       );
 
@@ -22,7 +22,7 @@ describe(
         async () => {
             await healthCheck(req, res, next);
 
-            expect(log).toHaveBeenCalled(1);
+            expect(log).toHaveBeenCalled();
         }
       );
   }
