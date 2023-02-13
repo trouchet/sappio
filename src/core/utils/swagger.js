@@ -12,7 +12,7 @@ const definitionObject = {
 };
 
 const routeRoutes = [
-  './src/core/routes/*.js', 
+  './src/core/routes/*.js',
   './src/core/utils/app.js'
 ];
 
