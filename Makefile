@@ -34,7 +34,7 @@ build: clean-dist ## remove all test coverage
 	npm run build
 
 test: clean-test ## run tests with jest
-	npm run test:run
+	npm run test
 
 test-watch: clean-test  ## run tests on watchdog mode
 	npm run test:watch
