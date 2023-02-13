@@ -11,10 +11,7 @@ const definitionObject = {
   info: packageInfo,
 };
 
-const routeRoutes = [
-  './src/core/routes/*.js',
-  './src/core/utils/app.js'
-];
+const routeRoutes = ['./src/core/routes/*.js', './src/core/utils/app.js'];
 
 // Configuration to
 const options = {
