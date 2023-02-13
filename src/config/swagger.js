@@ -1,5 +1,4 @@
 import swaggerJSDoc from 'swagger-jsdoc';
-
 import pkg from './app_info';
 
 const packageInfo = {
@@ -13,7 +12,7 @@ const definitionObject = {
 };
 
 const routeRoutes = [
-  './src/core/routes/*.js',
+  './src/core/routes/*.js', 
   './src/core/utils/app.js'
 ];
 
