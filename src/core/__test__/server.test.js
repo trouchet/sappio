@@ -1,7 +1,7 @@
 import app from '../app';
 import startServer from '../server';
 
-jest.mock("../app.js");
+jest.mock('../app.js');
 
 /*
 // Failed attempt :-(
@@ -21,14 +21,8 @@ describe(
 );
 */
 
-describe(
-  'server',
-  () => {
-    it(
-      'dummy test',
-      () => {
-        expect(42).toBe(42);
-      }
-    );
-  }
-);
+describe('server', () => {
+  it('dummy test', () => {
+    expect(42).toBe(42);
+  });
+});

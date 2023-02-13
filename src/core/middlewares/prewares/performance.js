@@ -16,7 +16,7 @@ const limiter_options = {
   max: maxRequestCount,
   message: msg_1 + msg_2,
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false,  // Disable the `X-RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 };
 
 const performance_middlewares = [rateLimit(limiter_options), compression()];
