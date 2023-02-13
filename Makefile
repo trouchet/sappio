@@ -40,8 +40,7 @@ test-watch: clean-test  ## run tests on watchdog mode
 	npm run test:watch
 
 lint: clean ## perform inplace lint fixes
-	npm run format && npm run format:check 
+	npm run format && npm run format:check
 
 install: clean ## install the packages
 	npm install
-
