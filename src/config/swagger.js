@@ -1,6 +1,6 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 
-import pkg from '../../config/app_info';
+import pkg from './app_info';
 
 const packageInfo = {
   title: pkg.name,
