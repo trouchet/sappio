@@ -38,7 +38,7 @@ const fermataApp = (app) => {
 
   // const swaggerMW = swStats.getMiddleware(swaggerSpec);
   // app.use(swaggerMW);
-  
+
   app.use('/swagger', swaggerUi.serve);
   app.get('/swagger', swaggerUi.setup(swaggerSpec));
 

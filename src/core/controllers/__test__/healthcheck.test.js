@@ -7,7 +7,7 @@ let req, res, next;
 jest.mock('#utils/logger.js');
 
 describe(
-    'healthcheck', 
+    'healthcheck',
     () => {
       beforeEach(
         () => {
@@ -18,7 +18,7 @@ describe(
       );
 
       it(
-        'must assert healthcheck', 
+        'must assert healthcheck',
         async () => {
             await healthCheck(req, res, next);
 

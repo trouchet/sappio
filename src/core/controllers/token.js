@@ -13,7 +13,7 @@ export const getToken = (req, res, next) => {
 
   res.status = 200;
   const token_info = generateJWToken({ ...body }, secret, duration);
-  
+
   res.send(token_info);
 
   return next();

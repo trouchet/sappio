@@ -134,17 +134,17 @@ check_forked_dist() {
     if [ "$lsb_release_exit_code" = "0" ]; then
       # Print info about current distro
       cat <<-EOF
-			You're using '$lsb_dist' version '$dist_version'.
-			EOF
+      You're using '$lsb_dist' version '$dist_version'.
+      EOF
 
       # Get the upstream release info
       lsb_dist=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'id' | cut -d ':' -f 2 | tr -d '[:space:]')
       dist_version=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'codename' | cut -d ':' -f 2 | tr -d '[:space:]')
 
       # Print info about upstream distro
-			cat <<-EOF
-			Upstream release is '$lsb_dist' version '$dist_version'.
-			EOF
+      cat <<-EOF
+      Upstream release is '$lsb_dist' version '$dist_version'.
+      EOF
     else
       if [ -r /etc/debian_version ] && [ "$lsb_dist" != "ubuntu" ] && [ "$lsb_dist" != "raspbian" ]; then
         if [ $lsb_dist = "osmc" ]; then
@@ -342,8 +342,8 @@ os_info() {
     echo "Operating system \"Windows\" DETECTED."
     echo
     cat >&2 <<-'EOF'
-			EOF
-    
+      EOF
+
     ( set -x; sleep 20 )
   fi
 
@@ -378,10 +378,10 @@ get_if_root() {
       sh_c='su -c'
     else
       cat >&2 <<-'EOF'
-			Error: this installer needs the ability to run commands as root.
-			We are unable to find either "sudo" or "su" available to make this happen.
-			EOF
-			exit 1
+      Error: this installer needs the ability to run commands as root.
+      We are unable to find either "sudo" or "su" available to make this happen.
+      EOF
+      exit 1
     fi
   fi
 

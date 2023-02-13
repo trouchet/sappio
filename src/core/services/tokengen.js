@@ -18,7 +18,7 @@ export const generateJWToken = (payload, secret, duration) => {
   
   jwtPayload.iat = tNow;
   jwtPayload.exp = tEnd;
-  
+
   jwtPayload.jwtToken = rs.KJUR.jws.JWS.sign(env.JWT_ALGO, jwtHeader, payload, { utf8: secret })
   
   return jwtPayload;
