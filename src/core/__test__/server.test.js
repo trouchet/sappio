@@ -5,7 +5,6 @@ jest.mock('../app.js');
 
 /*
 // Failed attempt :-(
-
 describe(
   'server',
   () => {
