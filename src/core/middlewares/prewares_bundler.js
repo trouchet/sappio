@@ -1,10 +1,10 @@
 /*
   Required pre-request response middleware libraries
 */
-import logging_middlewares from './prewares/logging';
-import preparation_middlewares from './prewares/preparation';
-import performance_middlewares from './prewares/performance';
-import security_middlewares from './prewares/security';
+import logging_middlewares from './prewares/logging.js';
+import preparation_middlewares from './prewares/preparation.js';
+import performance_middlewares from './prewares/performance.js';
+import security_middlewares from './prewares/security.js';
 
 /*
   Exported middlewares

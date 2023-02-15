@@ -1,6 +1,6 @@
 import compression from 'compression';
 import { rateLimit } from 'express-rate-limit';
-import { convertTimeDouble } from '../../../utils/time';
+import { convertTimeDouble } from '#utils/time';
 
 // Time window: 1 minute
 const obsvWindow_min = 1;

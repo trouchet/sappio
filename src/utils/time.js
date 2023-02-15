@@ -1,4 +1,4 @@
-import log from './logger';
+import log from './logger.js';
 import _ from 'lodash';
 
 const timeHierarchy = ['second', 'minute', 'hour', 'day', 'week', 'month', 'year'];

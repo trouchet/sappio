@@ -10,7 +10,7 @@ import { LogtailTransport } from '@logtail/winston';
 const { createLogger, format, transports } = winston;
 const { label } = format;
 
-import env from '../config/env_info';
+import env from '../config/env_info.js';
 
 /*
   We may define our own logging level. The default are given below

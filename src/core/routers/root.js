@@ -1,7 +1,7 @@
 import express from 'express';
 
-import { getToken } from '../controllers/token';
-import { healthCheck } from '../controllers/healthcheck';
+import { getToken } from '../controllers/token.js';
+import { healthCheck } from '../controllers/healthcheck.js';
 
 const router = express.Router();
 

@@ -1,7 +1,7 @@
 import rs from 'jsrsasign';
 
-import log from '../../utils/logger';
-import env from '../../config/env_info';
+import log from '#utils/logger.js';
+import env from '#config/env_info';
 
 export const generateJWToken = (payload, secret, duration) => {
   log('debug', 'service generateJWToken called');

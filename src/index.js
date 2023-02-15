@@ -1,7 +1,7 @@
 // [START app]
-import app from './core/app';
-import startServer from './core/server';
-import env from './config/env_info';
+import app from './core/app.js';
+import startServer from './core/server.js';
+import env from './config/env_info.js';
 
 const port = parseInt(env.APP_PORT, 10) || 3000;
 startServer(app, port);
