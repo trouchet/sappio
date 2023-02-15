@@ -10,11 +10,8 @@ jest.mock('../core/app.js');
 jest.mock('../core/server.js');
 
 describe('healthcheck', () => {
-  it(
-    'must assert mocked calls', 
-    async () => {
+  it('must assert mocked calls', async () => {
         expect(startServer).toHaveBeenCalled();
         expect(startServer).toHaveBeenCalledWith(app, port);
-    }
-  );
+    });
 });

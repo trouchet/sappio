@@ -15,7 +15,6 @@ describe('token', () => {
     data = { name: 'Ford Prefect' };
     secret = jwt_token_string;
     duration = Number(jwt_token_duration_ms);
-    
     next = sinon.spy();
     req = { body: data };
     res = { send: sinon.spy() };
@@ -27,7 +26,6 @@ describe('token', () => {
   });
   it('must assert token', async () => {
     await getToken(req, res, next); 
-    
     expectation = generateJWToken(data, secret, duration);
     sinon.assert.calledWith(res.send, expectation);
   });

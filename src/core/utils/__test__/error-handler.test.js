@@ -1,5 +1,10 @@
 import log from '#utils/logger';
-import { getErrorMessage, getHttpStatusCode, isErrorStatusCode, logErrorMessage } from '../error-handler';
+import { 
+  getErrorMessage, 
+  getHttpStatusCode, 
+  isErrorStatusCode, 
+  logErrorMessage 
+} from '../error-handler';
 
 jest.mock('#utils/logger.js');
 
