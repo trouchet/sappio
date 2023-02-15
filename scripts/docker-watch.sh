@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $# -eq 0 ]];
-  then echo "Container image name not supplied"
+  then echo 'Container image name not supplied'
 elif docker ps -a | grep -qw "$1"; then
 
   if [[ $(docker ps -a | grep -w "$1" | wc -l) -eq 1  ]]; then
@@ -12,10 +12,10 @@ elif docker ps -a | grep -qw "$1"; then
   else
     echo "We found more than one container with name $IMAGE_NAME."
     echo $(docker ps -a | grep -w "$1")
-    echo "We recommend you to watch it manually with command: "
-    echo "./utils/scripts/docker-watch.sh IMAGE_NAME"
+    echo 'We recommend you to watch it manually with command: '
+    echo './utils/scripts/docker-watch.sh IMAGE_NAME'
   fi;
 
 else
-  echo " No such container $1"
+  echo "No such container $1"
 fi;
