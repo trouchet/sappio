@@ -11,6 +11,8 @@
   "imports": {
     "#utils/*": "./src/utils/*.js",
     "#utils/*.js": "./src/utils/*.js",
+    "#core/*": "./src/core/*.js",
+    "#core/*.js": "./src/core/*.js",
     "#cutils/*": "./src/core/utils/*.js",
     "#cutils/*.js": "./src/core/utils/*.js",
     "#config/*": "./src/config/*.js",
