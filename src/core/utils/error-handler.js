@@ -83,7 +83,6 @@ export const getHttpStatusCode = ({ error, response }) => {
   if (isErrorStatusCode(statusCodeFromResponse)) {
     return statusCodeFromResponse;
   }
-  
   /**
    * Fall back to a generic error HTTP status code.
    * 500 (Internal Server Error).

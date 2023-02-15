@@ -44,7 +44,7 @@ export default {
     '^#cutils/(.*)$': '<rootDir>/src/core/utils/$1',
     '^#utils/(.*)$': '<rootDir>/src/utils/$1',
     '^#config/(.*)$': '<rootDir>/src/config/$1',
-    '^#core/(.*)$': '<rootDir>/src/core/$1'
+    '^#core/(.*)$': '<rootDir>/src/core/$1',
   },
 
   reporters: [
