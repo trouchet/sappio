@@ -1,9 +1,9 @@
 import log from '#utils/logger';
-import { 
-  getErrorMessage, 
-  getHttpStatusCode, 
-  isErrorStatusCode, 
-  logErrorMessage 
+import {
+  getErrorMessage,
+  getHttpStatusCode,
+  isErrorStatusCode,
+  logErrorMessage
 } from '../error-handler';
 
 jest.mock('#utils/logger.js');
@@ -63,29 +63,29 @@ describe('utils.error-handler', () => {
     expect(result).toStrictEqual(expectation);
   });
   it('must call logErrorMessage', async () => {
-    data = { 
-      error: {"status": 500}, 
-      response: {}
-    }
+    data = {
+      error: {status: 500},
+      response: {},
+    };
     
-    result = getHttpStatusCode(data)
+    result = getHttpStatusCode(data);
     expectation = 500;
     
     expect(result).toEqual(expectation);
 
     data = { 
-      error: {"status": 200}, 
-      response: {"statusCode": 500}
-    }
+      error: {status: 200}, 
+      response: {statusCode: 500},
+    };
     
-    result = getHttpStatusCode(data)
+    result = getHttpStatusCode(data);
     expectation = 500;
     
     expect(result).toEqual(expectation);
 
     data = {};
     
-    result = getHttpStatusCode(data)
+    result = getHttpStatusCode(data);
     expectation = 500;
     
     expect(result).toEqual(expectation);
