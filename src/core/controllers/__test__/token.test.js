@@ -1,10 +1,7 @@
 import sinon from 'sinon';
 import { getToken } from '../token';
 import log from '#utils/logger';
-import { 
-  jwt_token_string, 
-  jwt_token_duration_ms 
-} from '../../../config/jwt_info';
+import { jwt_token_string, jwt_token_duration_ms } from '#config/jwt_info';
 import { generateJWToken } from '../../services/tokengen';
 
 let req, res, next;
@@ -31,7 +28,7 @@ describe('token', () => {
   it('must assert token', async () => {
     await getToken(req, res, next); 
     
-    expectation = generateJWToken(data, secret, duration)
+    expectation = generateJWToken(data, secret, duration);
     sinon.assert.calledWith(res.send, expectation);
   });
 });
