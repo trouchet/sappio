@@ -33,7 +33,6 @@ if [ -z "$REPO_FILE" ]; then
   REPO_FILE="$DEFAULT_REPO_FILE"
 fi
 
-mirror=''
 DRY_RUN=${DRY_RUN:-}
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -231,7 +230,7 @@ do_docker_install() {
         enable_channel_flag='--set-enabled'
         disable_channel_flag='--set-disabled'
         pre_reqs='dnf-plugins-core'
-        pkg_suffix='fc$dist_version'
+        pkg_suffix="fc$dist_version"
       else
         pkg_manager='yum'
         config_manager='yum-config-manager'
@@ -241,6 +240,20 @@ do_docker_install() {
         pkg_suffix='el'
       fi
       repo_file_url="$DOWNLOAD_URL/linux/$lsb_dist/$REPO_FILE"
+
+      (
+				if ! is_dry_run; then
+					set -x
+				fi
+				$sh_c "$pkg_manager install -y -q $pre_reqs"
+				$sh_c "$config_manager --add-repo $repo_file_url"
+
+				if [ "$CHANNEL" != "stable" ]; then
+					$sh_c "$config_manager $disable_channel_flag docker-ce-*"
+					$sh_c "$config_manager $enable_channel_flag docker-ce-$CHANNEL"
+				fi
+				$sh_c "$pkg_manager makecache"
+			)
 
       pkg_version=''
       if [ -n "$VERSION" ]; then
