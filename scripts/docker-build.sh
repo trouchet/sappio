@@ -83,7 +83,7 @@ echo_docker_as_nonroot() {
   echo 'users access, refer to https://docs.docker.com/go/daemon-access/'
   echo
   echo 'WARNING: Access to the remote API on a privileged Docker daemon is equivalent'
-  echo '         to root access on the host. Refer to the 'Docker daemon attack surface''
+  echo "         to root access on the host. Refer to the 'Docker daemon attack surface'"
   echo '         documentation for details: https://docs.docker.com/go/attack-surface/'
   echo
   echo '================================================================================'
@@ -162,7 +162,7 @@ do_docker_install() {
 
           if [ -z "$pkg_version" ]; then
             echo
-            echo "ERROR: \'$VERSION\' not found amongst apt-cache madison results"
+            printf "ERROR: \'$VERSION\' not found amongst apt-cache madison results"
             echo
             exit 1
           fi

@@ -22,7 +22,8 @@ command_exists() {
 # examples:
 #   >> command_exists echo # 0 (success)
 listPIDsAttachedToPort () {
-  echo "$(lsof -i ":$1" | awk '{ print $2 }' | awk 'NR>1')"  | uniq -u
+  portPIDs="$(lsof -i ":$1" | awk '{ print $2 }' | awk 'NR>1')"
+  echo "$portPIDs"  | uniq -u
 }
 
 # Compares two CalVer (YY.MM) version strings.
@@ -219,7 +220,7 @@ get_dist_version() {
     ;;
   esac
 
-  echo $dist_version
+  echo "$dist_version"
 }
 
 # Check if it is a macOS
@@ -272,6 +273,7 @@ get_pkg_manager() {
   # Verifies if command runs as sudo
   lsb_dist=$( get_distribution )
   dist_version=$( get_dist_version )
+  architecture="$(uname -m)"
 
   case "$lsb_dist" in
     ubuntu|debian|raspbian)
@@ -282,7 +284,7 @@ get_pkg_manager() {
       ;;
 
     centos|fedora|rhel)
-      if [ "$(uname -m)" != 's390x' ] && [ "$lsb_dist" = 'rhel' ]; then
+      if [ "$architecture" != 's390x' ] && [ "$lsb_dist" = 'rhel' ]; then
         echo 'Packages for RHEL are currently only available for s390x.'
         exit 1
       fi
@@ -297,7 +299,7 @@ get_pkg_manager() {
       ;;
 
     sles)
-      if [ "$(uname -m)" != 's390x' ]; then
+      if [ "$architecture" != 's390x' ]; then
         echo 'Packages for SLES are currently only available for s390x'
         exit 1
       fi
@@ -339,7 +341,7 @@ os_info() {
 
   if is_wsl; then
 		echo
-    echo 'Operating system WSL DETECTED.'
+    echo "Operating system 'WSL' DETECTED."
     echo
     cat >&2 <<-'EOF'
 		EOF
