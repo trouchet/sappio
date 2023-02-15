@@ -3,7 +3,7 @@ import {
   getErrorMessage,
   getHttpStatusCode,
   isErrorStatusCode,
-  logErrorMessage
+  logErrorMessage,
 } from '../error-handler';
 
 jest.mock('#utils/logger.js');
@@ -64,7 +64,7 @@ describe('utils.error-handler', () => {
   });
   it('must call logErrorMessage', async () => {
     data = {
-      error: {status: 500},
+      error: {status: 500 },
       response: {},
     };
     
@@ -74,8 +74,8 @@ describe('utils.error-handler', () => {
     expect(result).toEqual(expectation);
 
     data = { 
-      error: {status: 200}, 
-      response: {statusCode: 500},
+      error: {status: 200 }, 
+      response: {statusCode: 500 },
     };
     
     result = getHttpStatusCode(data);
@@ -90,5 +90,4 @@ describe('utils.error-handler', () => {
     
     expect(result).toEqual(expectation);
   });
-  
 });
