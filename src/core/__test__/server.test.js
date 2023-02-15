@@ -20,4 +20,3 @@ describe('Server', () => {
     expect(app.listen).toBeCalled();
   });
 });
-
