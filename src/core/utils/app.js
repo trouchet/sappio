@@ -6,7 +6,7 @@ import poswares from '../middlewares/poswares_bundler.js';
 import prewares from '../middlewares/prewares_bundler.js';
 
 const setupEngine = (app) => {
-  app.set('views', process.cwd()+'/src/core/views');
+    app.set('views', process.cwd()+'/src/core/views');
   app.set('view engine', 'pug');
 };
 
