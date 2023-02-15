@@ -69,7 +69,7 @@ export const getHttpStatusCode = ({ error, response }) => {
    * Check if the error object specifies an HTTP
    * status code which we can use.
    */
-  const statusCodeFromError = error.status || error.statusCode;
+  const statusCodeFromError = error?.status || error?.statusCode || 200;
   if (isErrorStatusCode(statusCodeFromError)) {
     return statusCodeFromError;
   }
@@ -80,11 +80,11 @@ export const getHttpStatusCode = ({ error, response }) => {
    * middleware might already have set an error HTTP
    * status code (4xx or 5xx).
    */
-  const statusCodeFromResponse = response.statusCode;
+  const statusCodeFromResponse = response?.statusCode || 200;
   if (isErrorStatusCode(statusCodeFromResponse)) {
     return statusCodeFromResponse;
   }
-
+  
   /**
    * Fall back to a generic error HTTP status code.
    * 500 (Internal Server Error).
