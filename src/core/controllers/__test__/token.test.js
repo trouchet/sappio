@@ -25,7 +25,7 @@ describe('token', () => {
     sinon.assert.calledOnce(next);
   });
   it('must assert token', async () => {
-    await getToken(req, res, next); 
+    await getToken(req, res, next);
     expectation = generateJWToken(data, secret, duration);
     sinon.assert.calledWith(res.send, expectation);
   });

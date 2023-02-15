@@ -67,27 +67,21 @@ describe('utils.error-handler', () => {
       error: { status: 500 },
       response: {},
     };
-    
     result = getHttpStatusCode(data);
     expectation = 500;
-    
     expect(result).toEqual(expectation);
 
     data = {
       error: { status: 200 }, 
       response: { statusCode: 500 },
     };
-    
     result = getHttpStatusCode(data);
     expectation = 500;
-    
     expect(result).toEqual(expectation);
 
     data = {};
-    
     result = getHttpStatusCode(data);
     expectation = 500;
-    
     expect(result).toEqual(expectation);
   });
 });
