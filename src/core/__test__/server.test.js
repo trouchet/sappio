@@ -8,7 +8,7 @@ jest.mock('#utils/logger');
 describe('Server', () => {
   beforeEach(() => {
     appSpy = {
-      listen: spy()
+      listen: spy(),
     };
   });
 

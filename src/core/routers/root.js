@@ -2,6 +2,7 @@ import express from 'express';
 
 import { getToken } from '../controllers/token.js';
 import { healthCheck } from '../controllers/healthcheck.js';
+import { getHome } from '../controllers/pages.js';
 
 const router = express.Router();
 
@@ -17,9 +18,7 @@ const router = express.Router();
  *       200:
  *         description: Returns a smile face.
  */
-router.get('/', (req, res) => {
-  res.render('index', { title: 'Home' });
-});
+router.get('/', getHome);
 
 /**
  * @openapi

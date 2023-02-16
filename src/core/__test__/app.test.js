@@ -1,10 +1,10 @@
-import { parseExpressApp } from "express-route-parser";
-import request from "supertest"
+import { parseExpressApp } from 'express-route-parser';
+import request from 'supertest'
 import app from '#core/app';
 import jwt_decode from 'jwt-decode';
 
 const superapp = request(app);
-const availableRoutes = parseExpressApp(app)
+const availableRoutes = parseExpressApp(app);
 
 // Use the app object in your tests
 describe('app', () => {

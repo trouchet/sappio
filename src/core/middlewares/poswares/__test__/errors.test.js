@@ -1,6 +1,6 @@
 import error_middlewares, { errorFormatConfig } from '../errors';
 import { assert, spy, stub } from 'sinon';
-import { getErrorMessage, getHttpStatusCode, logErrorMessage } from '#cutils/error-handler.js'; 
+import { getErrorMessage, getHttpStatusCode, logErrorMessage } from '#cutils/error-handler.js';
 
 jest.mock('#cutils/error-handler.js');
 
@@ -15,7 +15,7 @@ describe('error-middlewares', () => {
 
     error = { message: 'Fire!', stack: 'Someone turned all the fans!' };
     request = {};
-    errorResponse = spy(); 
+    errorResponse = spy();
     response = {
       status: spy(),
       format: spy(),

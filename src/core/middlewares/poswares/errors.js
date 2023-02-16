@@ -58,7 +58,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
      * Set the response status code.
      */
     response.status(errorResponse.statusCode);
-  
+
     /**
      * Send an appropriately formatted response.
      *
