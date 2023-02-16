@@ -1,22 +1,29 @@
-import error_middlewares from '../errors'
+import error_middlewares, { errorFormatConfig } from '../errors'
 import sinon from 'sinon';
 import { getErrorMessage, getHttpStatusCode, logErrorMessage } from '#cutils/error-handler.js';
 
 jest.mock('#cutils/error-handler.js');
 
-let error, request, response, next;
+let error, request, response, next, sendSpy;
 
 const errorHandlerMiddleware = error_middlewares[0];
 
 describe('error-middlewares', () => {
   beforeEach(() => {
+    sendSpy = sinon.spy();
+
     error = {message: 'Fire!', stack: 'Someone turned all the fans!'};
     request = {};
+    errorResponse = sinon.spy(); 
     response = {
         status: sinon.spy(),
         format: sinon.spy(),
         json: sinon.spy(),
-        type: sinon.spy(),
+        type: (type_value) => {
+            return {
+                send: sendSpy
+            }
+        },
     };
     next = sinon.spy();
   });
@@ -40,5 +47,14 @@ describe('error-middlewares', () => {
     sinon.assert.calledOnce(next);
     sinon.assert.calledOnce(response.status);
     sinon.assert.calledOnce(response.format);
+  });
+  it('should call sinon mocker functions on error configuration', () => {
+    const config = errorFormatConfig(response, errorResponse);
+
+    config['application/json']()
+    config['default']()
+
+    sinon.assert.calledOnce(response.json);
+    sinon.assert.calledOnce(sendSpy);
   });
 });

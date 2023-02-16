@@ -3,6 +3,32 @@ import { getErrorMessage, getHttpStatusCode, logErrorMessage } from '#cutils/err
 
 const NODE_ENVIRONMENT = env.NODE_ENV || 'development';
 
+export const errorFormatConfig = (response, errorResponse) => {
+  return {
+    //
+    // Callback to run when `Accept` header contains either
+    // `application/json` or `*/*`, or if it isn"t set at all.
+    //
+    'application/json': () => {
+      /**
+       * Set a JSON formatted response body.
+       * Response header: `Content-Type: `application/json`
+       */
+      response.json({ message: errorResponse.body });
+    },
+    /**
+     * Callback to run when none of the others are matched.
+     */
+    default: () => {
+      /**
+       * Set a plain text response body.
+       * Response header: `Content-Type: text/plain`
+       */
+      response.type('text/plain').send(errorResponse.body);
+    },
+  }
+};
+
 /**
  * Generic Express error handler middleware.
  *
@@ -56,31 +82,11 @@ const errorHandlerMiddleware = (error, request, response, next) => {
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
      */
-    const formatConfig = {
-      //
-      // Callback to run when `Accept` header contains either
-      // `application/json` or `*/*`, or if it isn"t set at all.
-      //
-      'application/json': () => {
-        /**
-         * Set a JSON formatted response body.
-         * Response header: `Content-Type: `application/json`
-         */
-        response.json({ message: errorResponse.body });
-      },
-      /**
-       * Callback to run when none of the others are matched.
-       */
-      default: () => {
-        /**
-         * Set a plain text response body.
-         * Response header: `Content-Type: text/plain`
-         */
-        response.type('text/plain').send(errorResponse.body);
-      },
-    }
+    ;
   
-    response.format(formatConfig);
+    response.format(
+      errorFormatConfig(response, errorResponse)
+    );
   
     /**
      * Ensure any remaining middleware are run.
