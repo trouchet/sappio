@@ -72,7 +72,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
      */
     response.format(errorFormatConfig(response, errorResponse));
-  
+
     /**
      * Ensure any remaining middleware are run.
      */
