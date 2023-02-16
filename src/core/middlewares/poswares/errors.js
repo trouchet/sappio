@@ -51,19 +51,8 @@ const errorHandlerMiddleware = (error, request, response, next) => {
   } else {
     const errorResponse = {
       statusCode: getHttpStatusCode({ error, response }),
-      body: undefined,
+      body: errorMessage,
     };
-  
-    /**
-     * Error messages and error stacks often reveal details
-     * about the internals of your application, potentially
-     * making it vulnerable to attack, so these parts of an
-     * Error object should never be sent in a response when
-     * your application is running in production.
-     */
-    if (NODE_ENVIRONMENT !== 'production') {
-      errorResponse.body = errorMessage;
-    }
   
     /**
      * Set the response status code.

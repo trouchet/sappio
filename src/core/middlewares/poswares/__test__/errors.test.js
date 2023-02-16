@@ -1,31 +1,34 @@
 import error_middlewares, { errorFormatConfig } from '../errors'
-import sinon from 'sinon';
+import { assert, spy, stub } from 'sinon';
 import { getErrorMessage, getHttpStatusCode, logErrorMessage } from '#cutils/error-handler.js';
 
 jest.mock('#cutils/error-handler.js');
 
-let error, request, response, next, sendSpy;
+let error, request, response, next, sendSpy, typeSpy;
 
 const errorHandlerMiddleware = error_middlewares[0];
 
 describe('error-middlewares', () => {
   beforeEach(() => {
-    sendSpy = sinon.spy();
+    sendSpy = spy();
+    typeSpy = stub();
 
     error = {message: 'Fire!', stack: 'Someone turned all the fans!'};
     request = {};
-    errorResponse = sinon.spy(); 
+    errorResponse = spy(); 
     response = {
-        status: sinon.spy(),
-        format: sinon.spy(),
-        json: sinon.spy(),
+        status: spy(),
+        format: spy(),
+        json: spy(),
         type: (type_value) => {
+            typeSpy(type_value)
+
             return {
                 send: sendSpy
             }
         },
     };
-    next = sinon.spy();
+    next = spy();
   });
   it('should call log and get error message on sent header', () => {
     response['headersSent'] = true;
@@ -33,7 +36,8 @@ describe('error-middlewares', () => {
     errorHandlerMiddleware(error, request, response, next);
     expect(logErrorMessage).toHaveBeenCalled();
     expect(getErrorMessage).toHaveBeenCalled();
-    sinon.assert.calledOnce(next);
+
+    assert.calledOnce(next);
   });
   it('should call log and get error message on sent header', () => {
     response['headersSent'] = false;
@@ -44,9 +48,9 @@ describe('error-middlewares', () => {
     expect(getErrorMessage).toHaveBeenCalled();
     expect(getHttpStatusCode).toHaveBeenCalled();
 
-    sinon.assert.calledOnce(next);
-    sinon.assert.calledOnce(response.status);
-    sinon.assert.calledOnce(response.format);
+    assert.calledOnce(next);
+    assert.calledOnce(response.status);
+    assert.calledOnce(response.format);
   });
   it('should call sinon mocker functions on error configuration', () => {
     const config = errorFormatConfig(response, errorResponse);
@@ -54,7 +58,7 @@ describe('error-middlewares', () => {
     config['application/json']()
     config['default']()
 
-    sinon.assert.calledOnce(response.json);
-    sinon.assert.calledOnce(sendSpy);
+    assert.calledOnce(response.json);
+    assert.calledOnce(sendSpy);
   });
 });
