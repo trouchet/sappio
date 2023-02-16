@@ -5,7 +5,7 @@ import swaggerSpec from '#config/swagger.js';
 import poswares from '../middlewares/poswares_bundler.js';
 import prewares from '../middlewares/prewares_bundler.js';
 
-const setupEngine = (app) => {
+const setupApp = (app) => {
   app.set('views', process.cwd() + '/src/core/views');
   app.set('view engine', 'pug');
 };
@@ -35,12 +35,7 @@ const fermataApp = (app) => {
    *       200:
    *         description: Returns the swagger of available routes.
    */
-
-  // const swaggerMW = swStats.getMiddleware(swaggerSpec);
-  // app.use(swaggerMW);
-
-  app.use('/swagger', swaggerUi.serve);
-  app.get('/swagger', swaggerUi.setup(swaggerSpec));
+  app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
   /**
    * @openapi
@@ -56,13 +51,15 @@ const fermataApp = (app) => {
   });
 };
 
-export const buildApp = (app, routers) => {
-  setupEngine(app);
-
+const equipApp = (app, routers) => {
   prepareApp(app);
   routeApp(app, routers);
   pospareApp(app);
+}
 
+export const buildApp = (app, routers) => {
+  setupApp(app);
+  equipApp(app, routers)
   fermataApp(app);
 
   return app;

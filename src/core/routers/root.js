@@ -47,7 +47,7 @@ router.get('/healthcheck', healthCheck);
  * @openapi
  * /health:
  *   get:
- *     description: server status
+ *     description: Server status
  *     responses:
  *       200:
  *         description: Returns a json file with current server status.
@@ -57,20 +57,10 @@ router.get('/healthcheck', healthCheck);
  * @openapi
  * /info:
  *   get:
- *     description: current server info
+ *     description: Current server info
  *     responses:
  *       200:
  *         description: Returns a json file with current server info.
- */
-
-/**
- * @openapi
- * /swagger-stats:
- *   get:
- *     description: swagger descriptive request statistics
- *     responses:
- *       200:
- *         description: Returns a descriptive application swagger with request statistics.
  */
 
 export default router;
