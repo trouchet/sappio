@@ -21,10 +21,11 @@
   "keywords": [
     "nodejs"
   ],
-  "author": "brunolnetto",
+  "author": "Bruno Peixoto <brunolnetto@gmail.com> (https://www.linkedin.com/in/brunolnetto/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/trouchet/sappio/issues"
+    "url": "https://github.com/trouchet/sappio/issues",
+    "email": "brunolnetto@gmail.com"
   },
   "homepage": "https://github.com/trouchet/sappio#readme",
   "scripts": {
