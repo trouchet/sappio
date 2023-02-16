@@ -4,7 +4,7 @@ import { getErrorMessage, getHttpStatusCode, logErrorMessage } from '#cutils/err
 const NODE_ENVIRONMENT = env.NODE_ENV || 'development';
 
 export const errorFormatConfig = (response, errorResponse) => {
-  return {
+  const configObject = {
     //
     // Callback to run when `Accept` header contains either
     // `application/json` or `*/*`, or if it isn"t set at all.
@@ -27,6 +27,8 @@ export const errorFormatConfig = (response, errorResponse) => {
       response.type('text/plain').send(errorResponse.body);
     },
   };
+  
+  return configObject;
 };
 
 /**

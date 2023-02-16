@@ -44,7 +44,7 @@ describe('token', () => {
 
   it('must assert token on missing secret and duration', async () => {
     req = {};
-    
+
     await getToken(req, res, next);
     
     expectation = generateJWToken({}, secret, duration);
