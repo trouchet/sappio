@@ -4,7 +4,7 @@ import { getErrorMessage, getHttpStatusCode, logErrorMessage } from '#cutils/err
 
 jest.mock('#cutils/error-handler.js');
 
-let error, request, response, next, sendSpy, typeSpy;
+let error, request, response, errorResponse, next, sendSpy, typeSpy;
 
 const errorHandlerMiddleware = error_middlewares[0];
 
