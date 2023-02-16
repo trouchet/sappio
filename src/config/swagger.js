@@ -26,7 +26,7 @@ const swaggerRoutes = ['./src/core/routers/*.js', './src/core/utils/app.js'];
 const options = {
   definition: definitionObject,
   apis: swaggerRoutes,
-  info: packageInfo
+  info: packageInfo,
 };
 
 const swaggerSpec = swaggerJSDoc(options);
