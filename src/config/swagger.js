@@ -7,11 +7,11 @@ const packageInfo = {
   description: pkg.description,
   license: {
     name: pkg.license,
-    url: "https://github.com/trouchet/sappio/blob/main/LICENSE",
+    url: 'https://github.com/trouchet/sappio/blob/main/LICENSE',
   },
   contact: {
     name: pkg.author,
-    email: "brunolnetto@gmail.com",
+    email: 'brunolnetto@gmail.com',
   },
 };
 

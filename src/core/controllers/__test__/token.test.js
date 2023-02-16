@@ -19,7 +19,7 @@ describe('token', () => {
     req = { body: data };
     res = { 
       get: (key) => res[key],
-      send: sinon.spy() 
+      send: sinon.spy(),
     };
   });
   it('must assert token', async () => {
@@ -28,8 +28,8 @@ describe('token', () => {
     sinon.assert.calledOnce(next);
   });
   it('must assert token on full-available arguments', async () => {
-    res["x-secret"] = secret;
-    res["x-duration"] = duration;
+    res['x-secret'] = secret;
+    res['x-duration'] = duration;
     
     await getToken(req, res, next);
     expectation = generateJWToken(data, secret, duration);
