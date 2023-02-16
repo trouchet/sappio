@@ -27,7 +27,7 @@ export const errorFormatConfig = (response, errorResponse) => {
       response.type('text/plain').send(errorResponse.body);
     },
   };
-  
+
   return configObject;
 };
 

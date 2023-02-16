@@ -46,7 +46,7 @@ describe('token', () => {
     req = {};
 
     await getToken(req, res, next);
-    
+
     expectation = generateJWToken({}, secret, duration);
     sinon.assert.calledWith(res.send, expectation);
   });
