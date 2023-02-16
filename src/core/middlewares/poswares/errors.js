@@ -26,7 +26,7 @@ export const errorFormatConfig = (response, errorResponse) => {
        */
       response.type('text/plain').send(errorResponse.body);
     },
-  }
+  };
 };
 
 /**
@@ -53,7 +53,7 @@ const errorHandlerMiddleware = (error, request, response, next) => {
       statusCode: getHttpStatusCode({ error, response }),
       body: errorMessage,
     };
-  
+
     /**
      * Set the response status code.
      */

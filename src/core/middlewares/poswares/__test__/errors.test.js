@@ -17,15 +17,15 @@ describe('error-middlewares', () => {
     request = {};
     errorResponse = spy(); 
     response = {
-        status: spy(),
-        format: spy(),
-        json: spy(),
-        type: (type_value) => {
-            typeSpy(type_value);
-            return {
-                send: sendSpy,
-            };
-        },
+      status: spy(),
+      format: spy(),
+      json: spy(),
+      type: (type_value) => {
+        typeSpy(type_value);
+        return {
+          send: sendSpy,
+        };
+      },
     };
     next = spy();
   });
@@ -42,7 +42,7 @@ describe('error-middlewares', () => {
     response['headersSent'] = false;
 
     errorHandlerMiddleware(error, request, response, next);
-    
+
     expect(logErrorMessage).toHaveBeenCalled();
     expect(getErrorMessage).toHaveBeenCalled();
     expect(getHttpStatusCode).toHaveBeenCalled();
