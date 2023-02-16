@@ -4,6 +4,15 @@ import pkg from './app_info.js';
 const packageInfo = {
   title: pkg.name,
   version: pkg.version,
+  description: pkg.description,
+  license: {
+    name: pkg.license,
+    url: "https://github.com/trouchet/sappio/blob/main/LICENSE",
+  },
+  contact: {
+    name: pkg.author,
+    email: "brunolnetto@gmail.com",
+  },
 };
 
 const definitionObject = {
@@ -11,12 +20,13 @@ const definitionObject = {
   info: packageInfo,
 };
 
-const routeRoutes = ['./src/core/routes/*.js', './src/core/utils/app.js'];
+const swaggerRoutes = ['./src/core/routers/*.js', './src/core/utils/app.js'];
 
 // Configuration to
 const options = {
   definition: definitionObject,
-  apis: routeRoutes,
+  apis: swaggerRoutes,
+  info: packageInfo
 };
 
 const swaggerSpec = swaggerJSDoc(options);
