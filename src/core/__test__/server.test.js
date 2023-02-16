@@ -1,25 +1,22 @@
-import { Express } from 'jest-express/lib/express';
-import log from '#utils/logger';
 import startServer from '../server';
+import { assert, spy } from 'sinon';
 
-let app;
+let appSpy;
 
 jest.mock('#utils/logger');
 
 describe('Server', () => {
   beforeEach(() => {
-    app = new Express();
-  });
-
-  afterEach(() => {
-    app.resetMocked();
+    appSpy = {
+      listen: spy()
+    };
   });
 
   it('should setup server', () => {
     const port = 3000;
 
-    startServer(app, port);
+    startServer(appSpy, port);
 
-    expect(app.listen).toBeCalled();
+    assert.calledOnce(appSpy.listen);
   });
 });

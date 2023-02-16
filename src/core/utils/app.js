@@ -55,11 +55,11 @@ const equipApp = (app, routers) => {
   prepareApp(app);
   routeApp(app, routers);
   pospareApp(app);
-}
+};
 
 export const buildApp = (app, routers) => {
   setupApp(app);
-  equipApp(app, routers)
+  equipApp(app, routers);
   fermataApp(app);
 
   return app;

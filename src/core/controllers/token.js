@@ -3,7 +3,7 @@ import { jwt_token_string, jwt_token_duration_ms } from '#config/jwt_info.js';
 import { generateJWToken } from '../services/tokengen.js';
 
 export const getToken = (req, res, next) => {
-  log('debug', 'getToken controller called');
+  log('debug', 'Controller getToken called');
 
   const body = Object.keys(req).includes('body') ? req.body : {};
   const secret = Object.keys(res).includes('x-secret') ? res.get('x-secret') : jwt_token_string;
