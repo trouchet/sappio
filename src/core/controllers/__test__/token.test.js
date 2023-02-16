@@ -41,7 +41,7 @@ describe('token', () => {
     expectation = generateJWToken(data, secret, duration);
     sinon.assert.calledWith(res.send, expectation);
   });
-   
+
   it('must assert token on missing secret and duration', async () => {
     req = {};
     

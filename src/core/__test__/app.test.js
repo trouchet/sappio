@@ -1,5 +1,5 @@
 import { parseExpressApp } from 'express-route-parser';
-import request from 'supertest'
+import request from 'supertest';
 import app from '#core/app';
 import jwt_decode from 'jwt-decode';
 
