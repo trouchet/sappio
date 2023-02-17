@@ -25,7 +25,7 @@ clean: clean-test ## Removes all test coverage
 clean-test: ## Removes test and coverage artifacts
   rm -fr coverage/ && rm -fr scripts/coverage/
 
-init: clean ## Initializes the environment with hooks, install, build, and audit fix 
+init: clean ## Initializes the environment with hooks, install, build, and audit fix
   npm run init
 
 start: clean ## Starts an application with nodemon
@@ -34,7 +34,7 @@ start: clean ## Starts an application with nodemon
 update: clean ## Updates dependencies to latest and commit-push changes
   npm run update
 
-list: clean ## Lists packages used on pattern `package_name:num_occurrences:is_used` 
+list: clean ## Lists packages used on pattern `package_name:num_occurrences:is_used`
   npm run list
 
 test: clean-test ## Runs tests with jest
