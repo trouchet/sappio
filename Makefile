@@ -37,8 +37,8 @@ start: clean ## Starts an application with nodemon
 update: clean ## Updates dependencies to latest and commit-push changes
 	npm run update
 
-list: clean ## Lists packages used on pattern `package_name:num_occurrences:is_used` 
-	npm run list
+list: clean ## Lists packages used on pattern `package_name:num_occurrences:is_used`
+  npm run list
 
 test: clean-test ## Runs tests with jest
 	npm run test

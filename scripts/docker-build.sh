@@ -92,19 +92,19 @@ echo_docker_as_nonroot() {
 
 docker_installation_pre_warning () {
   if command_exists docker; then
-		cat >&2 <<-'EOF'
-			Warning: the "docker" command appears to already exist on this system.
+    cat >&2 <<-'EOF'
+      Warning: the "docker" command appears to already exist on this system.
 
-			If you already have Docker installed, this script can cause trouble, which is
-			why we're displaying this warning and provide the opportunity to cancel the
-			installation.
+      If you already have Docker installed, this script can cause trouble, which is
+      why we're displaying this warning and provide the opportunity to cancel the
+      installation.
 
-			If you installed the current Docker package using this script and are using it
-			again to update Docker, you can safely ignore this message.
+      If you installed the current Docker package using this script and are using it
+      again to update Docker, you can safely ignore this message.
 
-			You may press Ctrl+C now to abort this script.
-		EOF
-		( set -x; sleep 10 )
+      You may press Ctrl+C now to abort this script.
+    EOF
+    ( set -x; sleep 10 )
   fi
 }
 
@@ -137,14 +137,14 @@ do_docker_install() {
         if ! is_dry_run; then
           set -x
         fi
-        
+
         $sh_c 'apt-get update -qq >/dev/null'
-				$sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq $pre_reqs >/dev/null"
-				$sh_c 'mkdir -p /etc/apt/keyrings && chmod -R 0755 /etc/apt/keyrings'
-				$sh_c "curl -fsSL \"$DOWNLOAD_URL/linux/$lsb_dist/gpg\" | gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg"
-				$sh_c "chmod a+r /etc/apt/keyrings/docker.gpg"
-				$sh_c "echo \"$apt_repo\" > /etc/apt/sources.list.d/docker.list"
-				$sh_c 'apt-get update -qq >/dev/null'
+        $sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq $pre_reqs >/dev/null"
+        $sh_c 'mkdir -p /etc/apt/keyrings && chmod -R 0755 /etc/apt/keyrings'
+        $sh_c "curl -fsSL \"$DOWNLOAD_URL/linux/$lsb_dist/gpg\" | gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg"
+        $sh_c "chmod a+r /etc/apt/keyrings/docker.gpg"
+        $sh_c "echo \"$apt_repo\" > /etc/apt/sources.list.d/docker.list"
+        $sh_c 'apt-get update -qq >/dev/null'
       )
 
       pkg_version=''
@@ -153,12 +153,12 @@ do_docker_install() {
           echo "# WARNING: $VERSION pinning is not supported in DRY_RUN"
         else
           # Will work for incomplete versions IE (17.12), but may not actually grab the "latest" if in the test channel
-					pkg_pattern="$(echo "$VERSION" | sed "s/-ce-/~ce~.*/g" | sed "s/-/.*/g")"
-					search_command="apt-cache madison 'docker-ce' | grep '$pkg_pattern' | head -1 | awk '{\$1=\$1};1' | cut -d' ' -f 3"
-					pkg_version="$($sh_c "$search_command")"
-					
+          pkg_pattern="$(echo "$VERSION" | sed "s/-ce-/~ce~.*/g" | sed "s/-/.*/g")"
+          search_command="apt-cache madison 'docker-ce' | grep '$pkg_pattern' | head -1 | awk '{\$1=\$1};1' | cut -d' ' -f 3"
+          pkg_version="$($sh_c "$search_command")"
+
           echo "INFO: Searching repository for VERSION '$VERSION'"
-					echo "INFO: $search_command"
+          echo "INFO: $search_command"
 
           if [ -z "$pkg_version" ]; then
             echo
@@ -173,9 +173,9 @@ do_docker_install() {
                 head -1 | \
                 awk '{\$1=\$1};1' | \
                  cut -d' ' -f 3"
-							
+
               echo "INFO: $search_command"
-							cli_pkg_version="=$($sh_c "$search_command")"
+              cli_pkg_version="=$($sh_c "$search_command")"
 
               echo "INFO: $search_command"
               cli_pkg_version="=$($sh_c "$search_command")"
@@ -206,7 +206,7 @@ do_docker_install() {
         fi
 
         $sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends $pkgs >/dev/null"
-        
+
         if version_gte '20.10'; then
           # Install docker-ce-rootless-extras without '--no-install-recommends', so as to install slirp4netns when available
           $sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq docker-ce-rootless-extras${pkg_version%=} >/dev/null"
@@ -242,18 +242,18 @@ do_docker_install() {
       repo_file_url="$DOWNLOAD_URL/linux/$lsb_dist/$REPO_FILE"
 
       (
-				if ! is_dry_run; then
-					set -x
-				fi
-				$sh_c "$pkg_manager install -y -q $pre_reqs"
-				$sh_c "$config_manager --add-repo $repo_file_url"
+        if ! is_dry_run; then
+          set -x
+        fi
+        $sh_c "$pkg_manager install -y -q $pre_reqs"
+        $sh_c "$config_manager --add-repo $repo_file_url"
 
-				if [ "$CHANNEL" != "stable" ]; then
-					$sh_c "$config_manager $disable_channel_flag docker-ce-*"
-					$sh_c "$config_manager $enable_channel_flag docker-ce-$CHANNEL"
-				fi
-				$sh_c "$pkg_manager makecache"
-			)
+        if [ "$CHANNEL" != "stable" ]; then
+          $sh_c "$config_manager $disable_channel_flag docker-ce-*"
+          $sh_c "$config_manager $enable_channel_flag docker-ce-$CHANNEL"
+        fi
+        $sh_c "$pkg_manager makecache"
+      )
 
       pkg_version=''
       if [ -n "$VERSION" ]; then
@@ -261,24 +261,24 @@ do_docker_install() {
           echo "# WARNING: $VERSION pinning is not supported in DRY_RUN"
         else
           pkg_pattern="$(echo "$VERSION" | sed "s/-ce-/\\\\.ce.*/g" | sed "s/-/.*/g").*$pkg_suffix"
-					search_command="$pkg_manager list --showduplicates 'docker-ce' | grep '$pkg_pattern' | tail -1 | awk '{print \$2}'"
-					pkg_version="$($sh_c "$search_command")"
-					
+          search_command="$pkg_manager list --showduplicates 'docker-ce' | grep '$pkg_pattern' | tail -1 | awk '{print \$2}'"
+          pkg_version="$($sh_c "$search_command")"
+
           echo "INFO: Searching repository for VERSION '$VERSION'"
-					echo "INFO: $search_command"
+          echo "INFO: $search_command"
 
           if [ -z "$pkg_version" ]; then
-						echo
-						echo "ERROR: '$VERSION' not found amongst $pkg_manager list results"
-						echo
-						exit 1
-					fi
-					
+            echo
+            echo "ERROR: '$VERSION' not found amongst $pkg_manager list results"
+            echo
+            exit 1
+          fi
+
           if version_gte "18.09"; then
-						# older versions don't support a cli package
-						search_command="$pkg_manager list --showduplicates 'docker-ce-cli' | grep '$pkg_pattern' | tail -1 | awk '{print \$2}'"
-						cli_pkg_version="$($sh_c "$search_command" | cut -d':' -f 2)"
-					fi
+            # older versions don't support a cli package
+            search_command="$pkg_manager list --showduplicates 'docker-ce-cli' | grep '$pkg_pattern' | tail -1 | awk '{print \$2}'"
+            cli_pkg_version="$($sh_c "$search_command" | cut -d':' -f 2)"
+          fi
 
           # Cut out the epoch and prefix with a '-'
           pkg_version="-$(echo "$pkg_version" | cut -d':' -f 2)"
@@ -287,33 +287,33 @@ do_docker_install() {
       (
         pkgs="docker-ce$pkg_version"
 
-				if version_gte "18.09"; then
-					# older versions didn't ship the cli and containerd as separate packages
-					if [ -n "$cli_pkg_version" ]; then
-						pkgs="$pkgs docker-ce-cli-$cli_pkg_version containerd.io"
-					else
-						pkgs="$pkgs docker-ce-cli containerd.io"
-					fi
-				fi
+        if version_gte "18.09"; then
+          # older versions didn't ship the cli and containerd as separate packages
+          if [ -n "$cli_pkg_version" ]; then
+            pkgs="$pkgs docker-ce-cli-$cli_pkg_version containerd.io"
+          else
+            pkgs="$pkgs docker-ce-cli containerd.io"
+          fi
+        fi
 
-				if version_gte "20.10" && [ "$(uname -m)" = "x86_64" ]; then
-						# also install the latest version of the "docker scan" cli-plugin (only supported on x86 currently)
-						pkgs="$pkgs docker-scan-plugin"
-				fi
+        if version_gte "20.10" && [ "$(uname -m)" = "x86_64" ]; then
+            # also install the latest version of the "docker scan" cli-plugin (only supported on x86 currently)
+            pkgs="$pkgs docker-scan-plugin"
+        fi
 
-				if version_gte "20.10"; then
-					pkgs="$pkgs docker-compose-plugin docker-ce-rootless-extras$pkg_version"
-				fi
+        if version_gte "20.10"; then
+          pkgs="$pkgs docker-compose-plugin docker-ce-rootless-extras$pkg_version"
+        fi
 
-				if version_gte "23.0"; then
-						pkgs="$pkgs docker-buildx-plugin"
-				fi
+        if version_gte "23.0"; then
+            pkgs="$pkgs docker-buildx-plugin"
+        fi
 
-				if ! is_dry_run; then
-					set -x
-				fi
-        
-				$sh_c "$pkg_manager install -y -q $pkgs"
+        if ! is_dry_run; then
+          set -x
+        fi
+
+        $sh_c "$pkg_manager install -y -q $pkgs"
       )
 
       echo_docker_as_nonroot
@@ -322,99 +322,99 @@ do_docker_install() {
 
     sles)
       if [ "$(uname -m)" != "s390x" ]; then
-				echo "Packages for SLES are currently only available for s390x"
-				exit 1
-			fi
-			if [ "$dist_version" = "15.3" ]; then
-				sles_version="SLE_15_SP3"
-			else
-				sles_minor_version="${dist_version##*.}"
-				sles_version="15.$sles_minor_version"
-			fi
-			opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/$sles_version/security:SELinux.repo"
-			repo_file_url="$DOWNLOAD_URL/linux/$lsb_dist/$REPO_FILE"
-			pre_reqs="ca-certificates curl libseccomp2 awk"
-			(
-				if ! is_dry_run; then
-					set -x
-				fi
-				$sh_c "zypper install -y $pre_reqs"
-				$sh_c "zypper addrepo $repo_file_url"
-				if ! is_dry_run; then
-						cat >&2 <<-'EOF'
-						WARNING!!
-						openSUSE repository (https://download.opensuse.org/repositories/security:SELinux) will be enabled now.
-						Do you wish to continue?
-						You may press Ctrl+C now to abort this script.
-						EOF
-						( set -x; sleep 15 )
-				fi
-				$sh_c "zypper addrepo $opensuse_repo"
-				$sh_c "zypper --gpg-auto-import-keys refresh"
-				$sh_c "zypper lr -d"
-			)
-			pkg_version=""
-			if [ -n "$VERSION" ]; then
-				if is_dry_run; then
-					echo "# WARNING: VERSION pinning is not supported in DRY_RUN"
-				else
-					pkg_pattern="$(echo "$VERSION" | sed "s/-ce-/\\\\.ce.*/g" | sed "s/-/.*/g")"
-					search_command="zypper search -s --match-exact 'docker-ce' | grep '$pkg_pattern' | tail -1 | awk '{print \$6}'"
-					pkg_version="$($sh_c "$search_command")"
-					echo "INFO: Searching repository for VERSION '$VERSION'"
-					echo "INFO: $search_command"
-					if [ -z "$pkg_version" ]; then
-						echo
-						echo "ERROR: '$VERSION' not found amongst zypper list results"
-						echo
-						exit 1
-					fi
-					search_command="zypper search -s --match-exact 'docker-ce-cli' | grep '$pkg_pattern' | tail -1 | awk '{print \$6}'"
-					# It's okay for cli_pkg_version to be blank, since older versions don't support a cli package
-					cli_pkg_version="$($sh_c "$search_command")"
-					pkg_version="-$pkg_version"
-				fi
-			fi
-			(
-				pkgs="docker-ce$pkg_version"
-				if version_gte "18.09"; then
-					if [ -n "$cli_pkg_version" ]; then
-						# older versions didn't ship the cli and containerd as separate packages
-						pkgs="$pkgs docker-ce-cli-$cli_pkg_version containerd.io"
-					else
-						pkgs="$pkgs docker-ce-cli containerd.io"
-					fi
-				fi
-				if version_gte "20.10"; then
-					pkgs="$pkgs docker-compose-plugin docker-ce-rootless-extras$pkg_version"
-				fi
-				if version_gte "23.0"; then
-						pkgs="$pkgs docker-buildx-plugin"
-				fi
-				if ! is_dry_run; then
-					set -x
-				fi
-				$sh_c "zypper -q install -y $pkgs"
-			)
-			echo_docker_as_nonroot
-			exit 0
-			;;
+        echo "Packages for SLES are currently only available for s390x"
+        exit 1
+      fi
+      if [ "$dist_version" = "15.3" ]; then
+        sles_version="SLE_15_SP3"
+      else
+        sles_minor_version="${dist_version##*.}"
+        sles_version="15.$sles_minor_version"
+      fi
+      opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/$sles_version/security:SELinux.repo"
+      repo_file_url="$DOWNLOAD_URL/linux/$lsb_dist/$REPO_FILE"
+      pre_reqs="ca-certificates curl libseccomp2 awk"
+      (
+        if ! is_dry_run; then
+          set -x
+        fi
+        $sh_c "zypper install -y $pre_reqs"
+        $sh_c "zypper addrepo $repo_file_url"
+        if ! is_dry_run; then
+            cat >&2 <<-'EOF'
+            WARNING!!
+            openSUSE repository (https://download.opensuse.org/repositories/security:SELinux) will be enabled now.
+            Do you wish to continue?
+            You may press Ctrl+C now to abort this script.
+            EOF
+            ( set -x; sleep 15 )
+        fi
+        $sh_c "zypper addrepo $opensuse_repo"
+        $sh_c "zypper --gpg-auto-import-keys refresh"
+        $sh_c "zypper lr -d"
+      )
+      pkg_version=""
+      if [ -n "$VERSION" ]; then
+        if is_dry_run; then
+          echo "# WARNING: VERSION pinning is not supported in DRY_RUN"
+        else
+          pkg_pattern="$(echo "$VERSION" | sed "s/-ce-/\\\\.ce.*/g" | sed "s/-/.*/g")"
+          search_command="zypper search -s --match-exact 'docker-ce' | grep '$pkg_pattern' | tail -1 | awk '{print \$6}'"
+          pkg_version="$($sh_c "$search_command")"
+          echo "INFO: Searching repository for VERSION '$VERSION'"
+          echo "INFO: $search_command"
+          if [ -z "$pkg_version" ]; then
+            echo
+            echo "ERROR: '$VERSION' not found amongst zypper list results"
+            echo
+            exit 1
+          fi
+          search_command="zypper search -s --match-exact 'docker-ce-cli' | grep '$pkg_pattern' | tail -1 | awk '{print \$6}'"
+          # It's okay for cli_pkg_version to be blank, since older versions don't support a cli package
+          cli_pkg_version="$($sh_c "$search_command")"
+          pkg_version="-$pkg_version"
+        fi
+      fi
+      (
+        pkgs="docker-ce$pkg_version"
+        if version_gte "18.09"; then
+          if [ -n "$cli_pkg_version" ]; then
+            # older versions didn't ship the cli and containerd as separate packages
+            pkgs="$pkgs docker-ce-cli-$cli_pkg_version containerd.io"
+          else
+            pkgs="$pkgs docker-ce-cli containerd.io"
+          fi
+        fi
+        if version_gte "20.10"; then
+          pkgs="$pkgs docker-compose-plugin docker-ce-rootless-extras$pkg_version"
+        fi
+        if version_gte "23.0"; then
+            pkgs="$pkgs docker-buildx-plugin"
+        fi
+        if ! is_dry_run; then
+          set -x
+        fi
+        $sh_c "zypper -q install -y $pkgs"
+      )
+      echo_docker_as_nonroot
+      exit 0
+      ;;
 
     *)
       if [ -z "$lsb_dist" ]; then
-				if is_darwin; then
-					echo
-					echo "ERROR: Unsupported operating system 'macOS'"
-					echo "Please get Docker Desktop from https://www.docker.com/products/docker-desktop"
-					echo
-					exit 1
-				fi
-			fi
-			echo
-			echo "ERROR: Unsupported distribution '$lsb_dist'"
-			echo
-			exit 1
-			;;
+        if is_darwin; then
+          echo
+          echo "ERROR: Unsupported operating system 'macOS'"
+          echo "Please get Docker Desktop from https://www.docker.com/products/docker-desktop"
+          echo
+          exit 1
+        fi
+      fi
+      echo
+      echo "ERROR: Unsupported distribution '$lsb_dist'"
+      echo
+      exit 1
+      ;;
 
   esac
 }
