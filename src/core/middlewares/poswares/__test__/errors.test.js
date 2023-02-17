@@ -30,7 +30,7 @@ describe('error-middlewares', () => {
     next = spy();
   });
   it('should call log and get error message on sent header', () => {
-    response['headersSent'] = true;
+    response.headersSent = true;
 
     errorHandlerMiddleware(error, request, response, next);
     expect(logErrorMessage).toHaveBeenCalled();
@@ -39,7 +39,7 @@ describe('error-middlewares', () => {
     assert.calledOnce(next);
   });
   it('should call log and get error message on sent header', () => {
-    response['headersSent'] = false;
+    response.headersSent = false;
 
     errorHandlerMiddleware(error, request, response, next);
 
