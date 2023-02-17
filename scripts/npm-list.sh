@@ -29,9 +29,13 @@ usage()
   exit 2
 }
 
+# Repeats a token n-times
+#
+# examples:
+#   >> repeat "-" "5"
+#   -----
 function repeat() {
     perl -E "say \"$1\" x $2"
-
 }
 
 # Get value from json dictionary

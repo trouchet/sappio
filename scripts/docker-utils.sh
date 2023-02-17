@@ -27,7 +27,7 @@ sanitize() {
 # examples:
 #   >> list container_name_snippet
 #   container_id_1
-#   container_id_2
+#   container_id_2  
 list() {
     docker ps -a | grep "$1" | awk '{ print $1 }'
 }
@@ -35,7 +35,7 @@ list() {
 # stopAndRemoveContainer
 #
 # examples:
-#   >> purge container_id # 0/1 (success/fail)
+#   >> purge $cont # 0/1 (success/fail)
 purge() {
     docker stop "$1" && docker rm "$1"
 }

@@ -240,7 +240,6 @@ is_darwin() {
 # examples:
 #   >> is_wsl # 1 (fail)
 is_wsl() {
-
   case "$(uname -r)" in
     *microsoft* ) true ;; # WSL 2
     *Microsoft* ) true ;; # WSL 1
@@ -332,7 +331,7 @@ get_pkg_manager() {
 # Get OS information in pattern 'lsb_dist:dist_version:pkg_manager'
 #
 # examples:
-#   >> get_pkg_manager
+#   >> os_info
 os_info() {
   lsb_dist="$( get_distribution )"
   dist_version="$( get_dist_version )"
@@ -391,7 +390,7 @@ get_if_root() {
 # Get filtered list of files
 #
 # examples:
-#   >> get_pkg_manager
+#   >> filtered_ls
 filtered_ls () {
   ls "$1" | grep "$2"
 }
