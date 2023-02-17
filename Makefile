@@ -22,10 +22,10 @@ help:
 
 clean: clean-test clean-dist ## remove all test coverage
 
-clean-test: ## remove test and coverage artifacts
+clean-test: # remove test and coverage artifacts
 	rm -fr coverage/
 
-clean-dist: ## remove dist artifacts
+clean-dist: # remove dist artifacts
 	rm -fr dist/
 
 init: clean ## Initializes the environment with hooks install build and audit fix 
