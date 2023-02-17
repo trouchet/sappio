@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: Dockerfile
     networks:
-      - backend    
+      - backend
     env_file:
       - ./.env.docker
     restart: unless-stopped
@@ -20,4 +20,3 @@ services:
 
 networks:
   backend:
-
