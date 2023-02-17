@@ -1,3 +1,5 @@
 #!/bin/bash
 
-bash ./node-build.sh && bash ./docker-build.sh
+BASEDIR=$(dirname "$0")
+
+bash "${BASEDIR}/node-build.sh" && bash "${BASEDIR}/docker-build.sh"

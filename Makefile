@@ -15,32 +15,33 @@ endef
 
 export PRINT_HELP_PYSCRIPT
 
-PACKAGE_VERSION := poetry version -s
-
 PACKAGE_NAME = "sappio"
 
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-clean: clean-test clean-dist ## remove all test coverage
+clean: clean-test ## Removes all test coverage
 
-clean-test: ## remove test and coverage artifacts
+clean-test: ## Removes test and coverage artifacts
 	rm -fr coverage/
 
-clean-dist: ## remove dist artifacts
-	rm -fr dist/
+init: clean ## Initializes the environment with hooks, install, build, and audit fix 
+	npm run init
 
-build: clean-dist ## remove all test coverage
-	npm run build
+update: clean ## Updates dependencies to latest and commit-push changes
+	npm run update
 
-test: clean-test ## run tests with jest
+list: clean ## Lists packages used on pattern `package_name:num_occurrences:is_used` 
+	npm run list
+
+test: clean-test ## Runs tests with jest
 	npm run test
 
-test-watch: clean-test  ## run tests on watchdog mode
+test-watch: clean-test  ## Runs tests on watchdog mode
 	npm run test:watch
 
-lint: clean ## perform inplace lint fixes
+lint: clean ## Performs inplace lint fixes
 	npm run format
 
-install: clean ## install the packages
+install: clean ## Install the packages
 	npm install
