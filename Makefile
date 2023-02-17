@@ -23,7 +23,7 @@ help:
 clean: clean-test ## Removes all test coverage
 
 clean-test: ## Removes test and coverage artifacts
-  rm -fr coverage/
+  rm -fr coverage/ && rm -fr scripts/coverage/
 
 init: clean ## Initializes the environment with hooks, install, build, and audit fix 
   npm run init
