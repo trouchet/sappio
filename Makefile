@@ -50,4 +50,4 @@ lint: clean ## Performs inplace lint fixes
 	npm run format
 
 install: clean ## Install the packages
-	npm install
+	npm install --legacy-peer-deps
