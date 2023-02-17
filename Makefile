@@ -18,33 +18,36 @@ export PRINT_HELP_PYSCRIPT
 PACKAGE_NAME = "sappio"
 
 help:
-  @python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
+	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-clean: clean-test ## Removes all test coverage
+clean: clean-test clean-dist ## remove all test coverage
 
-clean-test: ## Removes test and coverage artifacts
-  rm -fr coverage/ && rm -fr scripts/coverage/
+clean-test: ## remove test and coverage artifacts
+	rm -fr coverage/
 
-init: clean ## Initializes the environment with hooks, install, build, and audit fix 
-  npm run init
+clean-dist: ## remove dist artifacts
+	rm -fr dist/
+
+init: clean ## Initializes the environment with hooks install build and audit fix 
+	npm run init
 
 start: clean ## Starts an application with nodemon
-  npm start
+	npm start
 
 update: clean ## Updates dependencies to latest and commit-push changes
-  npm run update
+	npm run update
 
 list: clean ## Lists packages used on pattern `package_name:num_occurrences:is_used` 
-  npm run list
+	npm run list
 
 test: clean-test ## Runs tests with jest
-  npm run test
+	npm run test
 
-test-watch: clean-test  ## Runs tests on watchdog mode
-  npm run test:watch
+test-watch: clean-test ## Runs tests on watchdog mode
+	npm run test:watch
 
 lint: clean ## Performs inplace lint fixes
-  npm run format
+	npm run format
 
 install: clean ## Install the packages
-  npm install
+	npm install
