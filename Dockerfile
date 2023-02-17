@@ -2,7 +2,7 @@ FROM node:19-alpine
 
 COPY . ./
 
-RUN npm ci --quiet
+RUN npm ci --legacy-peer-deps --quiet
 RUN npm install pm2 -g
 
 RUN mkdir /usr/app
