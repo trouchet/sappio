@@ -1,4 +1,4 @@
 #!/bin/bash
 
-npm run hooks:prepare && npm ci && npm run build && npm audit fix
+npm run hooks:prepare && npm install --legacy-peer-deps && npm run build && npm audit fix
 
