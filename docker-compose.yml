@@ -2,21 +2,21 @@
 version: '3.9'
 
 services:
-  sappio_db:
-    image: postgres:15.2
-    networks:
-      - backend
-    restart: always
-    env_file:
-      - ./.env.docker
-    environment:
-      POSTGRESQL_PASSWORD: ${DB_PASSWORD}
-      POSTGRESQL_USER: ${DB_USER}
-    volumes:
-      - database:/var/lib/postgresql/data
-    ports:
-      - ${DB_PORT}:${DB_PORT}
-    stop_grace_period: 1s
+  #sappio_db:
+  #  image: postgres:15.2
+  #  networks:
+  #    - backend
+  #  restart: always
+  #  env_file:
+  #    - ./.env.docker
+  #  environment:
+  #    POSTGRESQL_PASSWORD: ${DB_PASSWORD}
+  #    POSTGRESQL_USER: ${DB_USER}
+  #  volumes:
+  #    - database:/var/lib/postgresql/data
+  #  ports:
+  #    - ${DB_PORT}:${DB_PORT}
+  #  stop_grace_period: 1s
 
   sappio_app:
     image: node:16.19.0
@@ -36,5 +36,5 @@ services:
 networks:
   backend:
 
-volumes:
-  database:
+#volumes:
+#  database:
