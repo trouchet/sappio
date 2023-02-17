@@ -2,6 +2,8 @@ FROM node:19-alpine
 
 COPY . ./
 
+RUN chmod +x /scripts/
+
 RUN npm ci --legacy-peer-deps --quiet
 RUN npm install pm2 -g
 
