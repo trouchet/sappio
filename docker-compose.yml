@@ -2,39 +2,22 @@
 version: '3.9'
 
 services:
-  #sappio_db:
-  #  image: postgres:15.2
-  #  networks:
-  #    - backend
-  #  restart: always
-  #  env_file:
-  #    - ./.env.docker
-  #  environment:
-  #    POSTGRESQL_PASSWORD: ${DB_PASSWORD}
-  #    POSTGRESQL_USER: ${DB_USER}
-  #  volumes:
-  #    - database:/var/lib/postgresql/data
-  #  ports:
-  #    - ${DB_PORT}:${DB_PORT}
-  #  stop_grace_period: 1s
-
   sappio_app:
-    image: node:16.19.0
-    networks:
-      - backend
+    image: sappio_app
     container_name: sappio_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - backend    
     env_file:
       - ./.env.docker
-    restart: on-failure:10
-    depends_on:
-      - sappio_db
+    restart: unless-stopped
     ports:
-      - ${APP_PORT}:8080
-    command: bash -c "npm run docker:init --tag=sappio --from=${APP_PORT} --to=8080"
+      - ${APP_PORT}:${APP_PORT}
+    command: npm start
     stop_grace_period: 1s
 
 networks:
   backend:
 
-#volumes:
-#  database:
