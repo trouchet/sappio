@@ -13,4 +13,4 @@ COPY . /usr/app
 
 EXPOSE 3000
 
-CMD [ "pm2-runtime", "index.js" ]
+CMD [ "npm", "start" ]
