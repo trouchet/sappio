@@ -10,7 +10,7 @@ if [[ $# -eq 0 ]]; then
 
 elif [[ $(docker ps -a | grep -w "$IMAGE_NAME" | wc -l) -eq 1  ]]; then
   CONTAINER_ID="$(docker ps -a | grep -w "$IMAGE_NAME" | tail -n1 | awk '{print $1}')";
-  
+
   echo "Container image $IMAGE_NAME with ID $CONTAINER_ID already exists! Watch it below."
   bash "$(pwd)/scripts/docker-watch.sh" $CONTAINER_ID
 
