@@ -28,7 +28,7 @@ clean-test: # remove test and coverage artifacts
 clean-dist: # remove dist artifacts
 	rm -fr dist/
 
-init: clean ## Initializes the environment with hooks install build and audit fix 
+init: clean ## Initializes the environment with hooks install build and audit fix
 	npm run init
 
 start: clean ## Starts an application with nodemon
