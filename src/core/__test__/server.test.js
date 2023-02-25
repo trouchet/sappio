@@ -5,21 +5,22 @@ let appSpy;
 
 jest.mock('#utils/logger');
 
-describe(
-  'Server',
+describe('Server',
   () => {
-    beforeEach(() => {
-      appSpy = {
-        listen: spy(),
-      };
-    }
-  );
+    beforeEach(
+      () => {
+        appSpy = {
+          listen: spy(),
+        };
+      }
+    );
+  
+    it('should setup server', () => {
+      const port = 3000;
 
-  it('should setup server', () => {
-    const port = 3000;
+      startServer(appSpy, port);
 
-    startServer(appSpy, port);
-
-    assert.calledOnce(appSpy.listen);
-  });
-});
+      assert.calledOnce(appSpy.listen);
+    });
+  }
+);
