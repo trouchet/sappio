@@ -6,7 +6,7 @@ let appSpy;
 jest.mock('#utils/logger');
 
 describe(
-  'Server', 
+  'Server',
   () => {
     beforeEach(() => {
       appSpy = {
@@ -23,4 +23,3 @@ describe(
     assert.calledOnce(appSpy.listen);
   });
 });
-
