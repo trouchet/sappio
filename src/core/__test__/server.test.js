@@ -14,7 +14,7 @@ describe('Server',
         };
       }
     );
-  
+
     it('should setup server', () => {
       const port = 3000;
 
