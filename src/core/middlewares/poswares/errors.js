@@ -1,8 +1,6 @@
 import env from '#config/env_info.js';
 import { getErrorMessage, getHttpStatusCode, logErrorMessage } from '#cutils/error-handler.js';
 
-const NODE_ENVIRONMENT = env.NODE_ENV || 'development';
-
 export const errorFormatConfig = (response, errorResponse) => {
   const configObject = {
     //

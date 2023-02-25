@@ -32,7 +32,7 @@
     "hooks:prepare": "husky install",
     "init": "./scripts/npm-init.sh",
     "list": "./scripts/npm-list.sh -c .",
-    "start": "nodemon --trace-warnings --experimental-modules --es-module-specifier-resolution=node ./src/index.js",
+    "start": "nodemon --trace-warnings ./src/index.js",
     "build": "./scripts/build.sh",
     "update": "bash ./scripts/npm-update.sh",
     "test:clean": "jest  --clearCache",

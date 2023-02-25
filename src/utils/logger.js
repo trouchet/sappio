@@ -102,4 +102,29 @@ export const morganMiddleware = morgan(morgan_format, stream_channels);
 
 const log = (type, msg) => log_message(reporter, type, msg);
 
+/**
+ * @abstract throw an error with prescribed unable task message
+ *
+ * @param {String} task_msg
+ */
+export const raise = (msg, errorClass=Error) => {
+  log("error", msg);
+  throw new errorClass(msg);
+};
+
+/**
+ * @abstract throw an error with prescribed unable task message
+ *
+ * @param {String} task_msg
+ */
+export const warn = (msg) => log("warn", msg);
+
+/**
+ * @abstract throw an error with prescribed unable task message
+ *
+ * @param {String} task_msg
+ */
+export const report = (msg) => log("info", msg);
+
+
 export default log;
