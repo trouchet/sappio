@@ -6,7 +6,7 @@ const startServer = (app, port) => {
 
   const errorCallback = (err) => (err ? raise(fail_msg) : report(succ_msg));
 
-  app.listen(port, errorCallback)
+  app.listen(port, errorCallback);
 };
 
 export default startServer;
