@@ -134,18 +134,18 @@ check_forked_dist() {
     # Check if the command has exited successfully, it means we're in a forked distro
     if [ "$lsb_release_exit_code" = '0' ]; then
       #  Print info about current distro
-			cat <<-EOF
-			You're using '$lsb_dist' version '$dist_version'.
-			EOF
+      cat <<-EOF
+      You're using '$lsb_dist' version '$dist_version'.
+      EOF
 
-			# Get the upstream release info
-			lsb_dist=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'id' | cut -d ':' -f 2 | tr -d '[:space:]')
-			dist_version=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'codename' | cut -d ':' -f 2 | tr -d '[:space:]')
+      # Get the upstream release info
+      lsb_dist=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'id' | cut -d ':' -f 2 | tr -d '[:space:]')
+      dist_version=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'codename' | cut -d ':' -f 2 | tr -d '[:space:]')
 
-			# Print info about upstream distro
-			cat <<-EOF
-			Upstream release is '$lsb_dist' version '$dist_version'.
-			EOF
+      # Print info about upstream distro
+      cat <<-EOF
+      Upstream release is '$lsb_dist' version '$dist_version'.
+      EOF
     else
       if [ -r /etc/debian_version ] && [ "$lsb_dist" != 'ubuntu' ] && [ "$lsb_dist" != 'raspbian' ]; then
         if [ "$lsb_dist" = 'osmc' ]; then
@@ -338,24 +338,24 @@ os_info() {
   pkg_manager="$( get_pkg_manager )"
 
   if is_wsl; then
-		echo
+    echo
     echo "Operating system 'WSL' DETECTED."
-		echo
-		cat >&2 <<-'EOF'
+    echo
+    cat >&2 <<-'EOF'
 
-			You may press Ctrl+C now to abort this script.
-		EOF
-		( set -x; sleep 20 )
-	fi
+      You may press Ctrl+C now to abort this script.
+    EOF
+    ( set -x; sleep 20 )
+  fi
 
   if [ -z "$lsb_dist" ]; then
     if is_darwin; then
-			echo
-			echo "ERROR: Unsupported operating system 'macOS'"
-			echo "Please get Docker Desktop from https://www.docker.com/products/docker-desktop"
-			echo
-			exit 1
-		fi
+      echo
+      echo "ERROR: Unsupported operating system 'macOS'"
+      echo "Please get Docker Desktop from https://www.docker.com/products/docker-desktop"
+      echo
+      exit 1
+    fi
   fi
 
   check_forked_dist
@@ -381,10 +381,10 @@ get_if_root() {
       sh_c='su -c'
     else
       cat >&2 <<-'EOF'
-			Error: this installer needs the ability to run commands as root.
-			We are unable to find either "sudo" or "su" available to make this happen.
-			EOF
-			exit 1
+      Error: this installer needs the ability to run commands as root.
+      We are unable to find either "sudo" or "su" available to make this happen.
+      EOF
+      exit 1
     fi
   fi
 

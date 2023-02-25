@@ -107,8 +107,8 @@ const log = (type, msg) => log_message(reporter, type, msg);
  *
  * @param {String} task_msg
  */
-export const raise = (msg, errorClass=Error) => {
-  log("error", msg);
+export const raise = (msg, errorClass = Error) => {
+  log('error', msg);
   throw new errorClass(msg);
 };
 
@@ -117,14 +117,13 @@ export const raise = (msg, errorClass=Error) => {
  *
  * @param {String} task_msg
  */
-export const warn = (msg) => log("warn", msg);
+export const warn = (msg) => log('warn', msg);
 
 /**
  * @abstract throw an error with prescribed unable task message
  *
  * @param {String} task_msg
  */
-export const report = (msg) => log("info", msg);
-
+export const report = (msg) => log('info', msg);
 
 export default log;
