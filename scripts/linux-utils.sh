@@ -133,7 +133,7 @@ check_forked_dist() {
 
     # Check if the command has exited successfully, it means we're in a forked distro
     if [ "$lsb_release_exit_code" = '0' ]; then
-      #  Print info about current distro
+      # Print info about current distro
       cat <<-EOF
       You're using '$lsb_dist' version '$dist_version'.
       EOF
@@ -350,11 +350,11 @@ os_info() {
 
   if [ -z "$lsb_dist" ]; then
     if is_darwin; then
-      echo
-      echo "ERROR: Unsupported operating system 'macOS'"
-      echo "Please get Docker Desktop from https://www.docker.com/products/docker-desktop"
-      echo
-      exit 1
+        echo
+        echo "ERROR: Unsupported operating system 'macOS'"
+        echo "Please get Docker Desktop from https://www.docker.com/products/docker-desktop"
+        echo
+        exit 1
     fi
   fi
 
