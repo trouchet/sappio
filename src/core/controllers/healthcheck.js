@@ -4,7 +4,7 @@ import log from '#utils/logger';
 
 export const healthCheck = async (req, res, next) => {
   log('debug', 'Controller healthCheck called');
-  
+
   const uptime = process.uptime();
   const now = Date.now();
   const start = now - uptime;
