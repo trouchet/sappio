@@ -26,16 +26,18 @@ describe('Server', () => {
     appSpy = {
       listen: (port, errCallback) => {
         const err = {
-          "type": "fireError",
-          "message": "Fire",
-          "stack": {
-            "room": "Match on;", "curtain": "Tissue on fire.", "fire_alarm": 'alert(\'Fire!\');'
+          type: 'fireError',
+          message: 'Fire',
+          stack: {
+            room: 'Match on;',
+            curtain: 'Tissue on fire.',
+            fire_alarm: "alert('Fire!');",
           },
-        }
+        };
 
         errCallback(err);
       },
-    }
+    };
 
     startServer(appSpy, port);
 
@@ -49,7 +51,7 @@ describe('Server', () => {
       listen: (port, errCallback) => {
         errCallback();
       },
-    }
+    };
 
     startServer(appSpy, port);
 

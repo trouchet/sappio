@@ -1,7 +1,5 @@
 {
-  "ignore": [
-    "//core-js/"
-  ],
+  "ignore": ["//core-js/"],
   "sourceType": "module",
   "presets": [
     [
