@@ -22,7 +22,7 @@ describe('Server', () => {
 
   it('should call error callback with raise', () => {
     const port = 3000;
-    
+
     appSpy = {
       listen: (port, errCallback) => {
         const err = {
@@ -32,11 +32,11 @@ describe('Server', () => {
             "room": "Match on;", "curtain": "Tissue on fire.", "fire_alarm": 'alert(\'Fire!\');'
           },
         }
-        
+
         errCallback(err);
       },
     }
-    
+
     startServer(appSpy, port);
 
     expect(raise).toHaveBeenCalled();
@@ -44,13 +44,13 @@ describe('Server', () => {
 
   it('should call error callback with report', () => {
     const port = 3000;
-    
+
     appSpy = {
       listen: (port, errCallback) => {
         errCallback();
       },
     }
-    
+
     startServer(appSpy, port);
 
     expect(report).toHaveBeenCalled();
