@@ -15,7 +15,7 @@ describe('healthcheck', () => {
 
   it('must assert healthcheck', async () => {
     await healthCheck(req, res, next);
-    
+
     expect(debug).toHaveBeenCalled();
   });
 });
