@@ -1,5 +1,5 @@
 import { convertTimeDouble } from '../time';
-import log from '../logger';
+import { raise } from '../logger';
 
 const max_scaler = 60 * 60 * 24 * 7 * 30 * 12;
 
@@ -11,40 +11,40 @@ describe('time', () => {
     jest.resetAllMocks();
   });
 
-  it('should call mocked log for invalid from scaler', () => {
+  it('should call mocked raise for invalid from scaler', () => {
     convertTimeDouble(1, 'minuteS', 'second');
 
-    expect(log).toHaveBeenCalled();
+    expect(raise).toHaveBeenCalled();
   });
 
-  it('should call mocked log for invalid to scaler', () => {
+  it('should call mocked raise for invalid to scaler', () => {
     convertTimeDouble(1, 'minute', 'secondS');
 
-    expect(log).toHaveBeenCalled();
+    expect(raise).toHaveBeenCalled();
   });
 
-  it('should call mocked log for string value', () => {
+  it('should call mocked raise for string value', () => {
     convertTimeDouble('42', 'minute', 'second');
 
-    expect(log).toHaveBeenCalled();
+    expect(raise).toHaveBeenCalled();
   });
 
-  it('should call mocked log for negative nummeric value', () => {
+  it('should call mocked raise for negative nummeric value', () => {
     convertTimeDouble(-42, 'minute', 'second');
 
-    expect(log).toHaveBeenCalled();
+    expect(raise).toHaveBeenCalled();
   });
 
-  it('should call mocked log for nummeric from', () => {
+  it('should call mocked raise for nummeric from', () => {
     convertTimeDouble(1, 42, 'second');
 
-    expect(log).toHaveBeenCalled();
+    expect(raise).toHaveBeenCalled();
   });
 
-  it('should call mocked log for nummeric to', () => {
+  it('should call mocked raise for nummeric to', () => {
     convertTimeDouble(1, 'minute', 42);
 
-    expect(log).toHaveBeenCalled();
+    expect(raise).toHaveBeenCalled();
   });
 
   it('should convert minute to second', () => {
