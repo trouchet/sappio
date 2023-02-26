@@ -80,6 +80,27 @@ const errorHandlerMiddleware = (error, request, response, next) => {
   }
 };
 
-const error_middlewares = [errorHandlerMiddleware];
+const host = env.APP_HOST;
+
+const invalidRequestMiddleware = (req, res) =>  {
+  const errorPayload = {
+    error: {
+      "name": 'Error',
+      "status": 404,
+      "message": 'Invalid Request',
+      "statusCode": 404,
+      "stack": `http://${host}:${env.APP_PORT}/`
+    },
+    message: 'Hi there! You may check route /all and/or /swagger  for available routes.'
+  };
+  
+  // Invalid request
+  res.json(errorPayload);
+}
+
+const error_middlewares = [
+  errorHandlerMiddleware,
+  invalidRequestMiddleware
+];
 
 export default error_middlewares;
