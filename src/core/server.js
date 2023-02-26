@@ -1,4 +1,4 @@
-import log from '#utils/logger.js';
+import { raise, report } from '#utils/logger';
 
 const startServer = (app, port) => {
   const fail_msg = `😿 Failed to listen on PORT ${port}`;

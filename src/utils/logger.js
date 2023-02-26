@@ -126,4 +126,11 @@ export const warn = (msg) => log('warn', msg);
  */
 export const report = (msg) => log('info', msg);
 
+/**
+ * @abstract throw an error with prescribed unable task message
+ *
+ * @param {String} task_msg
+ */
+export const debug = (msg) => log('debug', msg);
+
 export default log;

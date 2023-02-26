@@ -17,7 +17,7 @@ describe('app', () => {
   });
   it('test route /healthcheck', async () => {
     const expectedStatus = 200;
-    const expectedJSONProperties = ['uptime', 'message', 'now', 'version'];
+    const expectedJSONProperties = ['start', 'uptime', 'now', 'message', 'version'];
 
     const response = await superapp.get('/healthcheck');
 
