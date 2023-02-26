@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 import { healthCheck } from '../healthcheck';
-import log from '#utils/logger';
+import { debug } from '#utils/logger';
 
 let req, res, next;
 
@@ -15,7 +15,7 @@ describe('healthcheck', () => {
 
   it('must assert healthcheck', async () => {
     await healthCheck(req, res, next);
-
-    expect(log).toHaveBeenCalled();
+    
+    expect(debug).toHaveBeenCalled();
   });
 });
