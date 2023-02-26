@@ -1,8 +1,8 @@
 import sinon from 'sinon';
 import { getToken } from '../token';
-import log from '#utils/logger';
 import { jwt_token_string, jwt_token_duration_ms } from '#config/jwt_info';
 import { generateJWToken } from '../../services/tokengen';
+import { debug } from '#utils/logger';
 
 let req, res, next;
 let data, secret, duration;
@@ -24,7 +24,7 @@ describe('token', () => {
   });
   it('must assert token', async () => {
     await getToken(req, res, next);
-    expect(log).toHaveBeenCalled();
+    expect(debug).toHaveBeenCalled();
     sinon.assert.calledOnce(next);
   });
   it('must assert token on full-available arguments', async () => {
