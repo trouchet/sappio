@@ -1,7 +1,7 @@
 import startServer from '../server';
 import { assert, spy } from 'sinon';
 import { raise } from '#utils/logger';
-import { report } from '../../utils/logger';
+import { report } from '#utils/logger';
 
 let appSpy;
 
