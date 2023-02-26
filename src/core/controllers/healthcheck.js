@@ -5,10 +5,15 @@ import log from '#utils/logger';
 export const healthCheck = async (req, res, next) => {
   log('debug', 'Controller healthCheck called');
 
+  const uptime = process.uptime();
+  const now = Date.now();
+  const start = now - uptime;
+
   const health_info = {
-    uptime: process.uptime(),
+    start: start,
+    uptime: uptime,
+    now: now,
     message: `Server ${env.APP_NAME} is running!`,
-    now: Date.now(),
     version: pkg.version,
   };
 
