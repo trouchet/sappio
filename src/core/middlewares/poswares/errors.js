@@ -93,7 +93,7 @@ const invalidRequestMiddleware = (req, res) =>  {
     },
     message: 'Hi there! You may check route /all and/or /swagger  for available routes.'
   };
-  
+
   // Invalid request
   res.json(errorPayload);
 };
