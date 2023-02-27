@@ -96,7 +96,7 @@ const invalidRequestMiddleware = (req, res) =>  {
   
   // Invalid request
   res.json(errorPayload);
-}
+};
 
 const error_middlewares = [
   errorHandlerMiddleware,
