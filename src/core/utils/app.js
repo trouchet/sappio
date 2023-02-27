@@ -54,13 +54,13 @@ const fermataApp = (app) => {
 const equipApp = (app, routers) => {
   prepareApp(app);
   routeApp(app, routers);
+  fermataApp(app);
   pospareApp(app);
 };
 
 export const buildApp = (app, routers) => {
   setupApp(app);
   equipApp(app, routers);
-  fermataApp(app);
 
   return app;
 };
