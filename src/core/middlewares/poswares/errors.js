@@ -89,15 +89,15 @@ const invalidRequestMiddleware = (req, res) => {
       status: 404,
       message: 'Invalid Request',
       statusCode: 404,
-      stack: `http://${host}:${env.APP_PORT}/`
+      stack: `http://${host}:${env.APP_PORT}/`,
     },
-    message: 'Hi there! You may check route /all and/or /swagger  for available routes.'
+    message: 'Hi there! You may check route /all and/or /swagger  for available routes.',
   };
 
   // Invalid request
   res.json(errorPayload);
 };
 
-const error_middlewares = [ errorHandlerMiddleware, invalidRequestMiddleware ];
+const error_middlewares = [errorHandlerMiddleware, invalidRequestMiddleware];
 
 export default error_middlewares;
