@@ -135,7 +135,7 @@ check_forked_dist() {
 
     # Check if the command has exited successfully, it means we're in a forked distro
     if [ "$lsb_release_exit_code" = '0' ]; then
-      # Print info about current distro      
+      # Print info about current distro
       echo "You're using '$lsb_dist' version '$dist_version'."
 
       # Get the upstream release info
@@ -144,7 +144,7 @@ check_forked_dist() {
 
       # Print info about upstream distro
       echo "Upstream release is \'$lsb_dist\' version \'$dist_version\'."
-    
+
     else
       if [ -r /etc/debian_version ] && [ "$lsb_dist" != 'ubuntu' ] && [ "$lsb_dist" != 'raspbian' ]; then
         if [ "$lsb_dist" = 'osmc' ]; then
@@ -375,7 +375,7 @@ get_if_root() {
     else
       echo "Error: this installer needs the ability to run commands as root."
       echo "We are unable to find either \"sudo\" or \"su\" available to make this happen."
-      
+
       exit 1
     fi
   fi
