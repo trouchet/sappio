@@ -10,8 +10,7 @@ load "../../node_modules/bats-assert/load"
     # we build the process by code run
     result="$(echo 2+2 | bc)"
 
-    # Then the expectet result
-    # makes assertions to ensure that
-    # the code does what it should
+    # Then makes assertions with expected result to ensure 
+    # that the code does what it should
     assert_equal "$result" 4
 }

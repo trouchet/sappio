@@ -58,7 +58,7 @@ echo_docker_as_nonroot() {
   if is_dry_run; then
     return
   fi
-  if command_exists docker && [ -e /var/run/docker.sock ]; then
+  if exists docker && [ -e /var/run/docker.sock ]; then
     (
       set -x
       $sh_c 'docker version'
@@ -91,7 +91,7 @@ echo_docker_as_nonroot() {
 }
 
 docker_installation_pre_warning () {
-  if command_exists docker; then
+  if exists docker; then
     cat >&2 <<-'EOF'
       Warning: the "docker" command appears to already exist on this system.
 

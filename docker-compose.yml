@@ -8,10 +8,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        APP_HOST: ${APP_HOST}
+        APP_NAME: ${APP_NAME}
+        APP_PORT: ${APP_PORT}
     networks:
       - backend
     env_file:
-      - ./.env.docker
+      - ./.env
     restart: unless-stopped
     ports:
       - ${APP_PORT}:${APP_PORT}
