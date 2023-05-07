@@ -1,14 +1,22 @@
-FROM node:19-alpine
-
-COPY . ./
-
-RUN chmod +x /scripts/
-
-RUN npm ci --legacy-peer-deps --quiet
-RUN npm install pm2 -g
+FROM node:14-alpine
 
 WORKDIR /usr/app
-COPY . /usr/app
+
+# Copy package.json and package-lock.json separately
+COPY package*.json ./
+
+RUN npm install -g npm@latest
+RUN npm install -g @babel/preset-env
+RUN npm cache clean --force
+
+# Install application dependencies
+RUN npm cache clean --force && npm install --legacy-peer-deps
+
+# Install pm2 globally
+RUN npm install pm2 -g
+
+# Copy the rest of the application files
+COPY . .
 
 # Set the APP_HOST environment variable
 ARG APP_HOST
@@ -17,10 +25,14 @@ ENV APP_HOST=${APP_HOST}
 # Copy the local environment file to the container
 COPY .env .env
 
-# Read the app port from the environment file
-RUN export $(grep -v '^#' .env | xargs -0)
+# Source the environment variables from the .env file
+RUN set -o allexport && \
+    source .env && \
+    set +o allexport
 
 # Expose the Node app port
-EXPOSE $APP_PORT
+ENV APP_PORT=${APP_PORT}
+EXPOSE ${APP_PORT}
 
-CMD [ "npm", "start" ]
+# Start the application using pm2
+CMD ["pm2-runtime", "start", "npm", "--", "start"]
