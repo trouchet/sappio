@@ -46,6 +46,9 @@ test: clean-test ## Runs tests with jest
 watch: clean-test ## Runs tests on watchdog mode
 	npm run test:watch
 
+deploy: ## Runs docker up
+	docker-compose up --build
+
 lint: clean ## Performs inplace lint fixes
 	npm run format
 
