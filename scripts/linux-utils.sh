@@ -11,8 +11,8 @@ VERSION="${VERSION#v}"
 # Checks command existence
 #
 # examples:
-#   >> command_exists echo # 0 (success)
-command_exists() {
+#   >> exists echo # 0 (success)
+exists() {
   command -v "$@" > /dev/null 2>&1
 }
 
@@ -20,8 +20,8 @@ command_exists() {
 #   returns 0 (success)
 #
 # examples:
-#   >> command_exists echo # 0 (success)
-listPIDsAttachedToPort () {
+#   >> exists echo # 0 (success)
+listPortPIDs () {
   portPIDs="$(lsof -i ":$1" | awk '{ print $2 }' | awk 'NR>1')"
   echo "$portPIDs"  | uniq -u
 }
@@ -122,9 +122,11 @@ get_debian_version() {
 # examples:
 #   >> check_forked # 1 (fail)
 check_forked_dist() {
+  lsb_dist="$(get_distribution)"
+  dist_version="$(get_debian_version)"
 
   # Check for lsb_release command existence, it usually exists in forked distros
-  if command_exists lsb_release; then
+  if exists lsb_release; then
     # Check if the `-u` option is supported
     set +e
     lsb_release -a -u > /dev/null 2>&1
@@ -134,18 +136,15 @@ check_forked_dist() {
     # Check if the command has exited successfully, it means we're in a forked distro
     if [ "$lsb_release_exit_code" = '0' ]; then
       # Print info about current distro
-      cat <<-EOF
-      You're using '$lsb_dist' version '$dist_version'.
-      EOF
+      echo "You're using '$lsb_dist' version '$dist_version'."
 
       # Get the upstream release info
       lsb_dist=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'id' | cut -d ':' -f 2 | tr -d '[:space:]')
       dist_version=$(lsb_release -a -u 2>&1 | tr '[:upper:]' '[:lower:]' | grep -E 'codename' | cut -d ':' -f 2 | tr -d '[:space:]')
 
       # Print info about upstream distro
-      cat <<-EOF
-      Upstream release is '$lsb_dist' version '$dist_version'.
-      EOF
+      echo "Upstream release is \'$lsb_dist\' version \'$dist_version\'."
+
     else
       if [ -r /etc/debian_version ] && [ "$lsb_dist" != 'ubuntu' ] && [ "$lsb_dist" != 'raspbian' ]; then
         if [ "$lsb_dist" = 'osmc' ]; then
@@ -155,8 +154,6 @@ check_forked_dist() {
           # We're Debian and don't even know it!
           lsb_dist='debian'
         fi
-
-        dist_version="$( get_debian_version )"
       fi
     fi
   fi
@@ -192,7 +189,7 @@ get_dist_version() {
   lsb_dist=$( get_distribution )
   case "$lsb_dist" in
     ubuntu)
-      if command_exists lsb_release; then
+      if exists lsb_release; then
         dist_version="$(lsb_release --codename | cut -f2)"
       fi
       if [ -z "$dist_version" ] && [ -r /etc/lsb-release ]; then
@@ -211,7 +208,7 @@ get_dist_version() {
     ;;
 
     *)
-      if command_exists lsb_release; then
+      if exists lsb_release; then
         dist_version="$(lsb_release --release | cut -f2)"
       fi
       if [ -z "$dist_version" ] && [ -r /etc/os-release ]; then
@@ -341,10 +338,7 @@ os_info() {
     echo
     echo "Operating system 'WSL' DETECTED."
     echo
-    cat >&2 <<-'EOF'
-
-      You may press Ctrl+C now to abort this script.
-    EOF
+    echo "You may press Ctrl+C now to abort this script."
     ( set -x; sleep 20 )
   fi
 
@@ -373,17 +367,15 @@ get_if_root() {
   user="$(id -un 2>/dev/null || true)"
   sh_c='sh -c'
 
-
   if [ "$user" != 'root' ]; then
-    if command_exists sudo; then
+    if exists sudo; then
       sh_c="sudo -E sh -c"
-    elif command_exists su; then
+    elif exists su; then
       sh_c='su -c'
     else
-      cat >&2 <<-'EOF'
-      Error: this installer needs the ability to run commands as root.
-      We are unable to find either "sudo" or "su" available to make this happen.
-      EOF
+      echo "Error: this installer needs the ability to run commands as root."
+      echo "We are unable to find either \"sudo\" or \"su\" available to make this happen."
+
       exit 1
     fi
   fi
@@ -394,13 +386,13 @@ get_if_root() {
 # Get filtered list of files
 #
 # examples:
-#   >> filtered_ls
-filtered_ls () {
+#   >> fls
+fls () {
   ls "$1" | grep "$2"
 }
 
-export -f command_exists
-export -f listPIDsAttachedToPort
+export -f exists
+export -f listPortPIDs
 export -f calver_compare
 export -f version_gte
 export -f get_distribution
@@ -414,4 +406,4 @@ export -f check_dist_deprecation
 export -f get_pkg_manager
 export -f os_info
 export -f get_if_root
-export -f filtered_ls
+export -f fls

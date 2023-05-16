@@ -43,8 +43,11 @@ list: clean ## Lists packages used on pattern `package_name:num_occurrences:is_u
 test: clean-test ## Runs tests with jest
 	npm run test
 
-test-watch: clean-test ## Runs tests on watchdog mode
+watch: clean-test ## Runs tests on watchdog mode
 	npm run test:watch
+
+deploy: ## Runs docker up
+	docker-compose up --build
 
 lint: clean ## Performs inplace lint fixes
 	npm run format
