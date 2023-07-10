@@ -25,5 +25,8 @@ jobs:
       # Install your dependencies
       - run: npm ci --legacy-peer-deps
 
+      # Install ESLint
+      - run: npm install eslint --save-dev
+
       # Run ESLint
-      - uses: eslint/github-action@v0
+      - run: npx eslint .

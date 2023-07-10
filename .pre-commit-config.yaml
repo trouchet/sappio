@@ -28,12 +28,6 @@ repos:
           - --license-filepath
           - --comment-style
 
-  - repo: https://github.com/pryorda/dockerfilelint-precommit-hooks
-    rev: v0.1.0
-    hooks:
-      - id: dockerfilelint
-        stages: [commit]
-
   - repo: https://github.com/pre-commit/mirrors-jshint
     rev: 'v2.13.6'
     hooks:
