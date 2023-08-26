@@ -7,3 +7,80 @@
 A sappio looking somewhere over rainbow. It means, a simple logging NodeJS template app.
 
 You may access the [wiki](https://github.com/web-needle/sappio/wiki/How-to-sappio) to learn about it.
+
+# How to operate
+
+Run the commands below on `sappio` root path:
+
+
+## Install
+  
+  - What: Install the required packages:
+  
+  ```
+  make install
+  ```
+
+## Prepare
+  
+  - What: updates dependencies to latest and commit-push changes:
+  
+  ```
+  make update
+  ```
+
+## Clean
+  
+  - What: remove all unnecessary assets:
+  
+  ```
+  make update
+  ```
+
+## List
+
+  - What: Lists packages used on pattern `package_name:num_occurrences:is_used`:
+
+  ```
+  make list
+  ```
+
+## Lint
+
+  - What: Performs inplace lint fixes:
+
+   ```
+   make lint
+   ```
+
+## Test
+
+  - What: run the test batch
+
+  ```
+  make test
+  ```
+  
+## Test watch
+
+  - What: watch the test batch
+
+  ```
+  make watch
+  ```
+
+## Run
+
+  - What: run the application:
+
+  ```
+  make start
+  ```
+
+## Deploy
+
+  - What: Runs docker up:
+
+  ```
+  make deploy
+  ```
