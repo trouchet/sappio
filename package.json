@@ -49,7 +49,6 @@
     "get-version": "echo $npm_package_version"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.5",
     "@babel/preset-env": "^7.23.5",
     "bats": "^1.10.0",
     "bats-assert": "github:ztombol/bats-assert",

@@ -40,6 +40,9 @@ update: clean ## Updates dependencies to latest and commit-push changes
 list: clean ## Lists packages used on pattern `package_name:num_occurrences:is_used`
 	npm run list
 
+uninstall: clean ## Uninstalls the packages
+	if [ -f .npm_clean ]; then xargs -I {} npm uninstall {} < .npm_clean; else echo ".npm_clean file not found."; fi
+
 test: clean-test ## Runs tests with jest
 	npm run test
 
