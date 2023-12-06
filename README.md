@@ -14,25 +14,25 @@ Run the commands below on `sappio` root path:
 
 
 ## Install
-  
+
   - What: Install the required packages:
-  
+
   ```
   make install
   ```
 
 ## Prepare
-  
+
   - What: updates dependencies to latest and commit-push changes:
-  
+
   ```
   make update
   ```
 
 ## Clean
-  
+
   - What: remove all unnecessary assets:
-  
+
   ```
   make update
   ```
@@ -60,7 +60,7 @@ Run the commands below on `sappio` root path:
   ```
   make test
   ```
-  
+
 ## Test watch
 
   - What: watch the test batch
