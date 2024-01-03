@@ -90,6 +90,10 @@ echo_docker_as_nonroot() {
   echo
 }
 
+command_exists() {
+  command -v "$@" > /dev/null 2>&1
+}
+
 docker_installation_pre_warning () {
   if command_exists docker; then
     cat >&2 <<-'EOF'
@@ -104,7 +108,7 @@ docker_installation_pre_warning () {
 
       You may press Ctrl+C now to abort this script.
     EOF
-    ( set -x; sleep 20 )
+    ( set -x; sleep 10 )
   fi
 }
 
