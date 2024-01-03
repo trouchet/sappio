@@ -91,25 +91,25 @@ echo_docker_as_nonroot() {
 }
 
 command_exists() {
-	command -v "$@" > /dev/null 2>&1
+  command -v "$@" > /dev/null 2>&1
 }
 
 docker_installation_pre_warning () {
   if command_exists docker; then
-		cat >&2 <<-'EOF'
-			Warning: the "docker" command appears to already exist on this system.
+    cat >&2 <<-'EOF'
+      Warning: the "docker" command appears to already exist on this system.
 
-			If you already have Docker installed, this script can cause trouble, which is
-			why we're displaying this warning and provide the opportunity to cancel the
-			installation.
+      If you already have Docker installed, this script can cause trouble, which is
+      why we're displaying this warning and provide the opportunity to cancel the
+      installation.
 
-			If you installed the current Docker package using this script and are using it
-			again to update Docker, you can safely ignore this message.
+      If you installed the current Docker package using this script and are using it
+      again to update Docker, you can safely ignore this message.
 
-			You may press Ctrl+C now to abort this script.
-		EOF
-		( set -x; sleep 10 )
-	fi
+      You may press Ctrl+C now to abort this script.
+    EOF
+    ( set -x; sleep 10 )
+  fi
 }
 
 do_docker_install() {
@@ -350,8 +350,8 @@ do_docker_install() {
             openSUSE repository (https://download.opensuse.org/repositories/security:SELinux) will be enabled now.
             Do you wish to continue?
             You may press Ctrl+C now to abort this script.
-						EOF
-						( set -x; sleep 15 )
+            EOF
+            ( set -x; sleep 15 )
         fi
         $sh_c "zypper addrepo $opensuse_repo"
         $sh_c "zypper --gpg-auto-import-keys refresh"
