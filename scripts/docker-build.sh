@@ -91,7 +91,7 @@ echo_docker_as_nonroot() {
 }
 
 command_exists() {
-	command -v "$@" > /dev/null 2>&1
+  command -v "$@" > /dev/null 2>&1
 }
 
 docker_installation_pre_warning () {
@@ -106,10 +106,10 @@ docker_installation_pre_warning () {
       If you installed the current Docker package using this script and are using it
       again to update Docker, you can safely ignore this message.
 
-			You may press Ctrl+C now to abort this script.
-		EOF
-		( set -x; sleep 10 )
-	fi
+      You may press Ctrl+C now to abort this script.
+    EOF
+    ( set -x; sleep 10 )
+  fi
 }
 
 do_docker_install() {

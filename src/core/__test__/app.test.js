@@ -39,8 +39,8 @@ describe('app', () => {
     expect(response.status).toBe(expectedStatus);
     expect(response.header['content-type']).toBe('application/json; charset=utf-8');
     expect(Object.keys(jsonBody)).toStrictEqual(expectedJSONProperties);
-    
-    // FIXME: Check if the token is valid 
+
+    // FIXME: Check if the token is valid
     // expect(jwt_decode(jsonBody.jwtToken)).toStrictEqual(payload);
   });
   it("must return available routes'", async () => {
